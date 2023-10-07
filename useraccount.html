@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste Taft</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="script.js"></script>
+</head>
+<body>
+<div class="background">
+    <div class="nav-bar">
+        <nav>
+            <div class="logo-name">
+                <i class="fi fi-sr-hamburger-soda  nav-logo-green" onclick="feed()"></i>
+                <h1>Taste Taft</h1>
+            </div>
+            <div class="user-nav">
+                <img src="images/user-example.png" alt="profile-user" onclick="userpage()">
+                <h1>Hi, Username!</h1>
+            </div>
+        </nav>
+    </div>
+    <div class="profile">
+        <div class="profile-left">
+            <img src="images/user-example.png" alt="profile-user">
+            <h1>Username</h1>
+            <!-- modal is non functional -->
+            <p onclick="openusername()" id="edit-username-button" >Edit Username</p> 
+            <p>Change Profile Picture</p>
+            <p>Change Password</p>
+            <p onclick="feedguest()">Logout</p>
+        </div>
+        <div class="profile-right">
+            <h1>Your Reviews</h1>
+            <!-- Reviews and  Restaurants are temporary rn (hard coded) -->
+            <div class="user-reviews">
+                <div class="user-rev-head">
+                    <h1>Restaurant Name 1</h1>
+                    <div class="user-ratings">
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                    </div>
+                </div>  
+                <div class="user-rev-desc">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda dolorem commodi est!</p>
+                </div>
+            </div>
+            <div class="user-reviews">
+                <div class="user-rev-head">
+                    <h1>Restaurant Name 2</h1>
+                    <div class="user-ratings">
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                    </div>
+                </div>  
+                <div class="user-rev-desc">
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit id inventore sequi officiis rem molestiae velit blanditiis, maxime dolores magnam voluptate quisquam repellendus ducimus nobis accusamus, temporibus explicabo. Quibusdam quod, fugit accusamus est possimus doloremque ab maxime consequuntur cum exercitationem? Dolorem adipisci culpa facere repellendus, quam eligendi animi nobis omnis.</p>
+                </div>
+            </div>
+            <div class="user-reviews">
+                <div class="user-rev-head">
+                    <h1>Restaurant Name 3</h1>
+                    <div class="user-ratings">
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                    </div>
+                </div>  
+                <div class="user-rev-desc">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos enim tempore, sed cum numquam ab sint impedit possimus laudantium vero tenetur aut sit nesciunt amet, rerum nam, nemo fugiat magnam?</p>
+                </div>
+            </div>
+            <div class="user-reviews">
+                <div class="user-rev-head">
+                    <h1>Restaurant Name 4</h1>
+                    <div class="user-ratings">
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                    </div>
+                </div>  
+                <div class="user-rev-desc">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium eaque laborum odit minus enim quia deserunt! Totam, fuga? Explicabo natus asperiores iste, distinctio aspernatur neque quis corrupti fuga facilis inventore unde, eligendi error recusandae!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="edit-username-modal" id="edit-username-modal">
+        <h1>Edit Username</h1>
+        <form><input type="text"placeholder="Enter New Username"></form>
+        <button type="button" onclick="closeusernamemodal()">Confirm</button>
+        <!-- modal   is  non  funcitonal -->
+    </div>
+</div>
+</body>
+</html>
