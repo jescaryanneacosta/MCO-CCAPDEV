@@ -33,3 +33,18 @@ function enableScroll() {
 }
 
 
+function openusernamemodal() {
+    var usernamemodal = document.getElementById("edit-username-modal");
+    usernamemodal.style.display = "block";
+    disableScroll();
+};
+
+function closeusernamemodal() {
+    var usernamemodal = document.getElementById("edit-username-modal");
+    usernamemodal.style.display = "none";
+    enableScroll();
+};
+
+
+
+
