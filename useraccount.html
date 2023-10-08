@@ -25,10 +25,9 @@
         <div class="profile-left">
             <img src="images/user-example.png" alt="profile-user">
             <h1>Username</h1>
-            <!-- modal is non functional -->
-            <p onclick="openusername()" id="edit-username-button" >Edit Username</p> 
-            <p>Change Profile Picture</p>
-            <p>Change Password</p>
+            <p id="edit-username-button" onclick="openusernamemodal()">Edit Username</p> 
+            <p id="change-pic-button">Change Profile Picture</p>
+            <p id="change-password button">Change Password</p>
             <p onclick="feedguest()">Logout</p>
         </div>
         <div class="profile-right">
@@ -99,9 +98,11 @@
     <div class="edit-username-modal" id="edit-username-modal">
         <h1>Edit Username</h1>
         <form><input type="text"placeholder="Enter New Username"></form>
-        <button type="button" onclick="closeusernamemodal()">Confirm</button>
-        <!-- modal   is  non  funcitonal -->
+        <button type="button" id="close-edit-username"  onclick="closeusernamemodal()">Confirm</button>
     </div>
+</div>
+</body>
+</html>
 </div>
 </body>
 </html>
