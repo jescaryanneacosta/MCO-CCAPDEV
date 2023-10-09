@@ -467,3 +467,38 @@ body{
     letter-spacing: 2px;
     font-size: 30px;
 }
+.res-full-gallery{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+}
+.res-full-gallery i{
+    font-size: 30px;
+}
+.res-full-gallery i:hover{
+    color: var(--ttgray);
+    cursor: pointer;
+}
+.res-gallery{
+    width: 600px;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.res-gallery div{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    flex: none;
+}
+.res-gallery::-webkit-scrollbar{
+    display: none;
+}
+.res-gallery img{
+    width: 100%;
+}

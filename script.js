@@ -47,4 +47,13 @@ function closeusernamemodal() {
 
 
 
+function gallerynext(){
+    var galleryContainer = document.querySelector(".res-gallery");
+    galleryContainer.scrollLeft += 600;
+}
+
+function galleryback(){
+    var galleryContainer = document.querySelector(".res-gallery");
+    galleryContainer.scrollLeft -= 600;
+}
 
