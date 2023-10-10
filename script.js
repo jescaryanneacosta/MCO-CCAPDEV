@@ -19,6 +19,9 @@ function userpage(){
 function sampleres1(){
     window.location.href="sample-res1.html"
 }
+function jollibeeres2(){
+    window.location.href="Jollibee -res2 - .html"
+}
 function tapakingres5(){
     window.location.href="tapaking-res5.html"
 }
