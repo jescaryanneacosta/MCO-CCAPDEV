@@ -25,6 +25,12 @@ function tapakingres5(){
 function bacsilogres6(){
     window.location.href="bacsilog-res6.html"
 }
+function topsideres3() {
+    window.location.href="topside-res3.html"
+}
+function zarksres4() {
+    window.location.href="zarks-res4.html"
+}
 
 function disableScroll() {
     scrollTop = window.pageYOffset || document.documentElement.scrollTop;

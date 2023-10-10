@@ -484,6 +484,7 @@ body{
 }
 .res-gallery{
     width: 600px;
+    height : 270px;
     display: flex;
     align-items: center;
     overflow-x: scroll;
