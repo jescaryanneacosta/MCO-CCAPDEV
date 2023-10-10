@@ -16,8 +16,8 @@ function feedguest(){
 function userpage(){
     window.location.href="useraccount.html"
 }
-function sampleres1(){
-    window.location.href="sample-res1.html"
+function McDores1(){
+    window.location.href="mcdo-res1.html"
 }
 function jollibeeres2(){
     window.location.href="Jollibee -res2 - .html"
