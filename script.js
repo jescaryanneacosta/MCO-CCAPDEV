@@ -20,7 +20,7 @@ function McDores1(){
     window.location.href="mcdo-res1.html"
 }
 function jollibeeres2(){
-    window.location.href="Jollibee -res2 - .html"
+    window.location.href="jollibee-res2.html"
 }
 function tapakingres5(){
     window.location.href="tapaking-res5.html"
