@@ -329,6 +329,7 @@ body{
 .feed-review-top{
     max-width: 100%;
     max-height: 70%;
+    min-height: 70%;
     overflow: hidden;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -459,7 +460,8 @@ body{
     font-size: 30px;
 }
 .res-content-reviews{
-    margin: 30px 50px 10px 50px;
+    margin: 30px 30px 10px 30px;
+    display: flex;
 }
 .res-content-reviews h1{
     font-family: "Young Serif", serif;
@@ -467,6 +469,15 @@ body{
     letter-spacing: 2px;
     font-size: 30px;
 }
+.res-page-review{
+    background-color: var(--ttwhite);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 45%;
+    height: 250px;
+    border-radius: 20px;
+    margin: 30px
+}
+
 .res-full-gallery{
     display: flex;
     align-items: center;
@@ -484,7 +495,7 @@ body{
 }
 .res-gallery{
     width: 600px;
-    height : 270px;
+    height : 300px;
     display: flex;
     align-items: center;
     overflow-x: scroll;
@@ -492,7 +503,7 @@ body{
     margin-right: 40px;
 }
 .res-gallery div{
-    width: 100%;
+    width: 600px;
     display: grid;
     grid-template-columns: auto;
     flex: none;
@@ -502,4 +513,33 @@ body{
 }
 .res-gallery img{
     width: 100%;
+}
+.review-header{
+    padding: 30px 30px 10px 30px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.review-header img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.rev-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 20px;
+}
+.rev-info h1{
+    font-size: 20px;
+    margin: 0%;
+    padding-left: 7px;
+    padding-bottom: 5px;
+}
+.review-desc{
+    margin: 0px 30px 30px 30px;
+    font-family: "Gabarito", sans-serif;
 }
