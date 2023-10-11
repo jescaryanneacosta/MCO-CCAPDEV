@@ -26,8 +26,8 @@
             <img src="images/user-example.png" alt="profile-user">
             <h1>William Anderson</h1>
             <p id="edit-username-button" onclick="openusernamemodal()">Edit Username</p> 
-            <p id="change-pic-button">Change Profile Picture</p>
-            <p id="change-password button">Change Password</p>
+            <p id="change-pic-button" onclick="openprofilepicmodal()">Change Profile Picture</p>
+            <p id="change-password button" onclick="openpasswordmodal()">Change Password</p>
             <p onclick="feedguest()">Logout</p>
         </div>
         <div class="profile-right">
@@ -35,7 +35,7 @@
             <!-- Reviews and  Restaurants are temporary rn (hard coded) -->
             <div class="user-reviews">
                 <div class="user-rev-head">
-                    <h1>Dominos Pizza</h1>
+                    <h1 onclick="tapakingres5()">Tapa King</h1>
                     <div class="user-ratings">
                         <i class="fi fi-sr-star green-icon star-user-acc"></i>
                         <i class="fi fi-sr-star green-icon star-user-acc"></i>
@@ -50,7 +50,7 @@
             </div>
             <div class="user-reviews">
                 <div class="user-rev-head">
-                    <h1>Burger King</h1>
+                    <h1 onclick="zarksres4()">Zarks Burger</h1>
                     <div class="user-ratings">
                         <i class="fi fi-sr-star green-icon star-user-acc"></i>
                         <i class="fi fi-rr-star green-icon star-user-acc"></i>
@@ -65,7 +65,7 @@
             </div>
             <div class="user-reviews">
                 <div class="user-rev-head">
-                    <h1>KFC</h1>
+                    <h1 onclick="jollibeeres2()">Jollibee</h1>
                     <div class="user-ratings">
                         <i class="fi fi-sr-star green-icon star-user-acc"></i>
                         <i class="fi fi-sr-star green-icon star-user-acc"></i>
@@ -80,7 +80,7 @@
             </div>
             <div class="user-reviews">
                 <div class="user-rev-head">
-                    <h1>BonChon</h1>
+                    <h1 onclick="topsideres3()">Topside</h1>
                     <div>
                         <i class="fi fi-sr-star green-icon star-user-acc"></i>
                         <i class="fi fi-sr-star green-icon star-user-acc"></i>
@@ -99,6 +99,25 @@
         <h1>Edit Username</h1>
         <form><input type="text"placeholder="Enter New Username"></form>
         <button type="button" id="close-edit-username"  onclick="closeusernamemodal()">Confirm</button>
+    </div>
+    <div class="edit-profilepic-modal" id="edit-profilepic-modal">
+        <h1>Change Profile Picture</h1>
+        <form>
+            <input type="file" id="newProfilePic" accept="image/*">
+            <button type="button" id="close-change-profilepic" onclick="closeprofilepicmodal()">Confirm</button>
+        </form>
+    </div>
+    <div class="edit-password-modal" id="edit-password-modal">
+        <h1>Change Password</h1>
+            <p>Input Old Password</p>
+                <form>
+                    <input type="password" id="inputPassword" placeholder="Old Password">
+                </form>
+            <p>Input New Password</p>
+                <form>
+                    <input type="password" id="inputPassword" placeholder="New Password">
+                </form>
+            <button type="button" id="close-change-profilepic" onclick="closepasswordmodal()">Confirm</button>
     </div>
 </div>
 </body>

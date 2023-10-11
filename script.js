@@ -46,6 +46,29 @@ function enableScroll() {
     window.onscroll = function() {};
 }
 
+function openprofilepicmodal (){
+    var profilepicmodal = document.getElementById("edit-profilepic-modal");
+    profilepicmodal.style.display = "block";
+    disableScroll();
+};
+
+function closeprofilepicmodal() {
+    var profilepicmodal = document.getElementById("edit-profilepic-modal");
+    profilepicmodal.style.display = "none";
+    enableScroll();
+};
+
+function openpasswordmodal (){
+    var profilepicmodal = document.getElementById("edit-password-modal");
+    profilepicmodal.style.display = "block";
+    disableScroll();
+};
+
+function closepasswordmodal() {
+    var passwordmodal = document.getElementById("edit-password-modal");
+    passwordmodal.style.display = "none";
+    enableScroll();
+};
 
 function openusernamemodal() {
     var usernamemodal = document.getElementById("edit-username-modal");
@@ -64,10 +87,10 @@ function closeusernamemodal() {
 function gallerynext(){
     var galleryContainer = document.querySelector(".res-gallery");
     galleryContainer.scrollLeft += 600;
-}
+};
 
 function galleryback(){
     var galleryContainer = document.querySelector(".res-gallery");
     galleryContainer.scrollLeft -= 600;
-}
+};
 
