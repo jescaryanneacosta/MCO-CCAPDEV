@@ -240,6 +240,7 @@ body{
     font-family: "Young Serif", serif;
     font-size: 20px;
     padding-top: 20px;
+    cursor: pointer;
 }
 .star-user-acc{
     font-size: 20px;
@@ -254,6 +255,118 @@ body{
 .user-rev-desc p{
     font-family: "Gabarito", sans-serif;
     color: var(--ttgray);
+}
+
+.edit-profilepic-modal {
+    width: 850px;
+    background: var(--ttwhite);
+    box-shadow: 0 0 0 100000px rgba(0,0,0,.4);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding-bottom: 20px;
+    display: none;
+}
+
+.edit-profilepic-modal h1{
+    font-family: "Young Serif", serif;
+    letter-spacing: 1px;
+    color: var(--ttgreen);
+}
+.edit-profilepic-modal input{
+    width: 80%;
+    background-color: #eaeaea;
+    outline: 0;
+    border: 0;
+    padding: 18px 15px;
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+}
+.edit-profilepic-modal button{
+    height: 50px;
+    background: var(--ttgreen);
+    font-family: "Young Serif", serif;
+    font-size: 15px;
+    color: var(--ttwhite);
+    border-radius: 30px;
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.edit-profilepic-modal button:hover{
+    background: #193a27;
+}
+
+.edit-password-modal input{
+    width: 80%;
+    background-color: #eaeaea;
+    outline: 0;
+    border: 0;
+    padding: 18px 15px;
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+}
+
+.edit-password-modal {
+    width: 800px;
+    background: var(--ttwhite);
+    box-shadow: 0 0 0 100000px rgba(0,0,0,.4);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding-bottom: 20px;
+    display: none;
+}
+
+.edit-password-modal h1 {
+    font-family: "Young Serif", serif;
+    letter-spacing: 1px;
+    color: var(--ttgreen);
+}
+
+.edit-password-modal p {
+    font-family: "Young Serif", serif;
+    letter-spacing: 1px;
+    color: black; 
+}
+
+.edit-password-modal button{
+    height: 50px;
+    background: var(--ttgreen);
+    font-family: "Young Serif", serif;
+    font-size: 15px;
+    color: var(--ttwhite);
+    border-radius: 30px;
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.edit-password-modal button:hover{
+    background: #193a27;
+}
+
+.edit-profilepic-modal input{
+    width: 80%;
+    background-color: #eaeaea;
+    outline: 0;
+    border: 0;
+    padding: 18px 15px;
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
 }
 
 .edit-username-modal{
@@ -329,6 +442,7 @@ body{
 .feed-review-top{
     max-width: 100%;
     max-height: 70%;
+    min-height: 70%;
     overflow: hidden;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -459,7 +573,8 @@ body{
     font-size: 30px;
 }
 .res-content-reviews{
-    margin: 30px 50px 10px 50px;
+    margin: 30px 30px 10px 30px;
+    display: flex;
 }
 .res-content-reviews h1{
     font-family: "Young Serif", serif;
@@ -467,6 +582,15 @@ body{
     letter-spacing: 2px;
     font-size: 30px;
 }
+.res-page-review{
+    background-color: var(--ttwhite);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 45%;
+    height: 250px;
+    border-radius: 20px;
+    margin: 30px
+}
+
 .res-full-gallery{
     display: flex;
     align-items: center;
@@ -484,7 +608,7 @@ body{
 }
 .res-gallery{
     width: 600px;
-    height : 270px;
+    height : 300px;
     display: flex;
     align-items: center;
     overflow-x: scroll;
@@ -492,7 +616,7 @@ body{
     margin-right: 40px;
 }
 .res-gallery div{
-    width: 100%;
+    width: 600px;
     display: grid;
     grid-template-columns: auto;
     flex: none;
@@ -502,4 +626,33 @@ body{
 }
 .res-gallery img{
     width: 100%;
+}
+.review-header{
+    padding: 30px 30px 10px 30px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.review-header img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.rev-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 20px;
+}
+.rev-info h1{
+    font-size: 20px;
+    margin: 0%;
+    padding-left: 7px;
+    padding-bottom: 5px;
+}
+.review-desc{
+    margin: 0px 30px 30px 30px;
+    font-family: "Gabarito", sans-serif;
 }
