@@ -424,6 +424,48 @@ body{
     letter-spacing: 1px;
     padding-bottom: 30px;
 }
+
+.suggestionPage-header {
+    display: flex;
+    justify-content: center;
+} 
+
+.suggestionPage-header h1{
+    font-family: "Young Serif", serif;
+    color: var(--ttgreen);
+    letter-spacing: 1px;
+    padding-bottom: 30px;
+}
+
+.suggestionAbout {
+    display: flex;
+    justify-content: center;
+}
+
+.suggestionAbout h3{
+    font-family: "Young Serif", serif;
+    color: var(--ttgreen);
+    letter-spacing: 1px;
+    padding-bottom: 30px;
+}
+
+.suggestion-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 30px 10px 30px;
+}
+
+.suggestion-header h2{
+    font-family: "Gabarito", sans-serif;
+    color: var(--ttgreen);
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-left: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
 .feed-body{
     display: flex;
     flex-wrap: wrap;
