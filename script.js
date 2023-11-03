@@ -1,6 +1,9 @@
 function signinpage(){
     window.location.href="signin.html"
 }
+function openSuggestion() {
+    window.location.href="suggestion-page.html"
+}
 function signuppage(){
     window.location.href="signup.html"
 }
