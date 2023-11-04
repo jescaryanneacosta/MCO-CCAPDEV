@@ -698,3 +698,20 @@ body{
     margin: 0px 30px 30px 30px;
     font-family: "Gabarito", sans-serif;
 }
+.res-rev-header{
+    display: flex;
+    justify-content: space-between;
+}
+.sort-by{
+    display: flex;
+    align-items: center;
+}
+.sort-by p{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.sort-by select{
+    border: 0px;
+    font-family: "Gabarito", sans-serif;
+    color: var(--ttgreen);
+}
