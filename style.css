@@ -802,3 +802,118 @@ body{
     font-family: "Gabarito", sans-serif;
     color: var(--ttgreen);
 }
+
+.adminPage-header {
+    display: flex;
+    justify-content: center;
+} 
+
+.adminPage-header h1{
+    font-family: "Young Serif", serif;
+    color: var(--ttgreen);
+    letter-spacing: 1px;
+    padding-bottom: 30px;
+}
+
+.adminPage-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 30px 10px 30px;
+}
+
+.adminPage-header h2{
+    font-family: "Gabarito", sans-serif;
+    color: var(--ttgreen);
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-left: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.admin-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-container h2, .admin-container h3 {
+    font-family: 'Young Serif', serif;
+    color: var(--ttgreen);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.admin-container .input-name, .admin-container .input-address, .admin-container .additional-comments {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.admin-container .input-name input, .admin-container .input-address input, .admin-container .additional-comments textarea {
+    width: calc(100% - 36px); 
+    background-color: #eaeaea;
+    outline: none;
+    border: none;
+    padding: 18px;
+    font-family: 'Gabarito', sans-serif;
+    letter-spacing: 1px;
+    border-radius: 5px;
+}
+
+.admin-container .admin-submit {
+    display: block;
+    flex-wrap: wrap;
+    margin-left: 60px;
+    margin-right: 60px;
+    justify-content: center;
+}
+
+.admin-container .admin-submit button {
+    height: 50px;
+    background: var(--ttgreen);
+    font-family: "Young Serif", serif;
+    font-size: 15px;
+    color: var(--ttwhite);
+    border-radius: 30px;
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.admin-container .admin-submit button:hover {
+    background-color: #193a27;
+}
+
+label[for="user-id"] {
+    font-family: "Young Serif", serif;
+}
+
+label[for="restaurant-name"] {
+    font-family: "Young Serif", serif;
+}
+
+label[for="restaurant-location"] {
+    font-family: "Young Serif", serif;
+}
+
+label[for="restaurant-cuisine"] {
+    font-family: "Young Serif", serif;
+}
+
+.admin-functions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-functions-left {
+    width: 45%; 
+}
+
+.admin-functions-right {
+    width: 45%; 
+}
