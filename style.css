@@ -972,10 +972,19 @@ label[for="restaurant-cuisine"] {
     justify-content: space-between;
 }
 
-.admin-functions-left {
-    width: 45%; 
+
+.admin-functions-first {
+    width: 20%; 
 }
 
-.admin-functions-right {
-    width: 45%; 
+.admin-functions-second {
+    width: 20%; 
+}
+
+.admin-functions-third {
+    width: 20%; 
+}
+
+.admin-functions-fourth {
+    width: 20%; 
 }
