@@ -802,6 +802,40 @@ body{
     font-family: "Gabarito", sans-serif;
     color: var(--ttgreen);
 }
+.feed-lowerheader{
+    font-family: "Gabarito", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 60px 0px 60px;
+    font-size: 20px;
+}
+.feed-lowerheader select{
+    font-size: 20px;
+    margin-left: 10px;
+}
+.search-bar input{
+    font-family: "Gabarito", sans-serif;
+    border-radius: 20px;
+    border-color: var(--ttgreen);
+    font-size: 20px;
+    padding: 5px 5px 5px 5px;
+    width: 300px;
+}
+.search-bar i{
+    color: white;
+    font-size: large;
+}
+.search-bar button{
+    border: 0px;
+    background-color: var(--ttgreen);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+.search-bar button:hover{
+    background-color: var(--ttgray);
+}
 
 .adminPage-header {
     display: flex;
