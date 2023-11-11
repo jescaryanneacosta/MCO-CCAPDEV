@@ -1,15 +1,15 @@
-const express = require('express')
-const mongoose = require('mongoose')
+const express = require('express');
+const mongoose = require('mongoose');
 
 
-const app = express()
-const port = 3000
-const url = "mongodb://localhost:27017/persons"
+const app = express();
+const port = 3000;
+const url = "mongodb://localhost:27017/persons";
 mongoose.connect(url, {})
     .then(result => console.log("database connected"))
     .catch(err => console.log(err))
 
-
+mongoose.connect(url)
 app.listen(port, () =>
 {console.log("server is running at port" + port)}
 )
@@ -24,3 +24,4 @@ import mongoose from 'mongoose';
 import User from './mongo models/user.model.js';
 import Resto from './mongo models/resto.model.js';
 import Review from './src/models/review.model.js';*/
+
