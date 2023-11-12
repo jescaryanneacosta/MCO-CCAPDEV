@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const establishmentSchema = new mongoose.Schema({
-  name: {
+  name : {
     type: String,
     required: true
   },
@@ -23,7 +23,7 @@ const establishmentSchema = new mongoose.Schema({
   },
   profileDescription: {
     type: String,
-    rquired: true
+    required: true
   },
   description: {
     type: String,
