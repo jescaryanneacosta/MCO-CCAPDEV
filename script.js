@@ -7,6 +7,12 @@ function openSuggestion() {
 function signuppage(){
     window.location.href="signup.html"
 }
+function adminpage(){
+    window.location.href="adminpage.html"
+}
+function adminfeed (){
+    window.location.href="feed-admin.html"
+}
 function signupalert(){
     alert("Sign-up Successful! Welcome to Taste Taft")
 }

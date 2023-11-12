@@ -237,6 +237,41 @@ body{
 .profile-left p:hover{
     color: #dadada;
 }
+
+.admin-profile{
+     background-color: var(--ttgreen);
+    width: 1000px;
+    height: 600px;
+    margin-left: 100px;
+    margin-top: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.admin-profile img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: 50px;
+}
+.admin-profile h1{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 60px;
+}
+.admin-profile p{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.admin-profile p:hover{
+    color: #dadada;
+}
+
+
 .profile-right{
     margin-left: 100px;
     margin-top: 30px;
@@ -972,19 +1007,78 @@ label[for="restaurant-cuisine"] {
     justify-content: space-between;
 }
 
+.admin-functions p{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
 
+.admin-functions h3{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
+
+.admin-functions label{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
+
+.admin-functions button {
+    flex-basis: 45%;
+    height: 50px;
+    background: var(--ttwhite);
+    font-family: "Young Serif", serif;
+    font-size: 18px;
+    color: var(--ttgreen);
+    border-radius: 30px;
+    margin: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
 .admin-functions-first {
+    background-color: var(--ttgreen);
+    height: 400px;
+    margin-left: 100px;
+    margin-top: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 20%; 
 }
 
 .admin-functions-second {
+    background-color: var(--ttgreen);
+    height: 400px;
+    margin-left: 100px;
+    margin-top: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 20%; 
 }
 
 .admin-functions-third {
+    background-color: var(--ttgreen);
+    height: 400px;
+    margin-left: 100px;
+    margin-top: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 20%; 
 }
 
 .admin-functions-fourth {
+    background-color: var(--ttgreen);
+    height: 400px;
+    margin-left: 100px;
+    margin-top: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 20%; 
 }

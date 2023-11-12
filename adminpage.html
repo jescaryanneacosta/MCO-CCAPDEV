@@ -14,11 +14,11 @@
         <div class="nav-bar">
             <nav>
                 <div class="logo-name">
-                    <i class="fi fi-sr-hamburger-soda nav-logo-green" onclick="feed()"></i>
+                    <i class="fi fi-sr-hamburger-soda nav-logo-green" onclick="adminfeed()"></i>
                     <h1>Taste Test</h1>
                 </div>
                 <div class="user-nav">
-                    <img src="images/user-example.png" alt="profile-user" onclick="userpage()">
+                    <img src="images/user-example.png" alt="profile-user">
                     <h1>Hi, Admin!</h1>
                 </div>
             </nav>
@@ -28,6 +28,39 @@
                 <h1>Admin Dashboard<br></h1>
             </div>
             <div class="admin-container">
+                    <div class="admin-profile">
+                        <img src="images/user-example.png" alt="profile-user">
+                        <h1>William Anderson</h1>
+                        <p id="edit-username-button" onclick="openusernamemodal()">Edit Username</p> 
+                        <p id="change-pic-button" onclick="openprofilepicmodal()">Change Profile Picture</p>
+                        <p id="change-password button" onclick="openpasswordmodal()">Change Password</p>
+                        <p onclick="feedguest()">Logout</p>
+                    </div>
+                </div>
+                <div class="edit-username-modal" id="edit-username-modal">
+                    <h1>Edit Username</h1>
+                    <form><input type="text"placeholder="Enter New Username"></form>
+                    <button type="button" id="close-edit-username"  onclick="closeusernamemodal()">Confirm</button>
+                </div>
+                <div class="edit-profilepic-modal" id="edit-profilepic-modal">
+                    <h1>Change Profile Picture</h1>
+                    <form>
+                        <input type="file" id="newProfilePic" accept="image/*">
+                        <button type="button" id="close-change-profilepic" onclick="closeprofilepicmodal()">Confirm</button>
+                    </form>
+                </div>
+                <div class="edit-password-modal" id="edit-password-modal">
+                    <h1>Change Password</h1>
+                        <p>Input Old Password</p>
+                            <form>
+                                <input type="password" id="inputPassword" placeholder="Old Password">
+                            </form>
+                        <p>Input New Password</p>
+                            <form>
+                                <input type="password" id="inputPassword" placeholder="New Password">
+                            </form>
+                        <button type="button" id="close-change-profilepic" onclick="closepasswordmodal()">Confirm</button>
+                </div>
                 <div class="admin-functions">
                     <div class="admin-functions-first"> 
                         <section class="add-restaurant-section">
