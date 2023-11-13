@@ -14,29 +14,29 @@
             <i class="fi fi-sr-hamburger-soda  nav-logo-green" onclick="feed()"></i>
         </div>
         <h1>Sign-Up</h1>
-        <form>
+        <form action="/signup" method="POST">
             <div class="log-group">
                 <div class="log-field">
                     <i class="fi fi-rr-user log-icon  green-icon"></i>
-                    <input type="text" placeholder="Username" class="log-input">
+                    <input type="text" name="username" placeholder="Username" class="log-input">
                 </div>
                 <div class="log-field">
                     <i class="fi fi-rr-envelope log-icon green-icon"></i>
-                    <input type="email" placeholder="Email" class="log-input">
+                    <input type="email" name="email" placeholder="Email" class="log-input">
                 </div>
                 <div class="log-field">
                     <i class="fi fi-rr-lock log-icon green-icon"></i>
-                    <input type="password" placeholder="Password" class="log-input">
+                    <input type="password" name="password" placeholder="Password" class="log-input">
                 </div>
+            </div>
+            <div class="log-signup">
+                <input type="submit" value = "Sign-Up">
             </div>
         </form>
         <div class="log-btn">
-            <button type="button" onclick="feed(), signupalert()">Sign-Up</button>
             <button type="button" class="disable-btn" onclick="signinpage()">Sign-In</button>
         </div>
-
     </div>
-
 </div>    
 
 </body>

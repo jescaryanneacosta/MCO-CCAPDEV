@@ -93,6 +93,29 @@ body{
 .log-btn button.disable-btn:hover{
     background: #6e6866;
 }
+
+.log-signup{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.log-signup input{
+    flex-basis: 45%;
+    height: 50px;
+    background: var(--ttgreen);
+    font-family: "Young Serif", serif;
+    font-size: 18px;
+    color: var(--ttwhite);
+    border-radius: 30px;
+    margin: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+.log-signup input:hover{
+    background: #193a27;
+}
 .background{
     background-color: var(--ttwhite);
 }
