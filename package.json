@@ -2,15 +2,19 @@
     "name": "your-project-name",
     "version": "1.0.0",
     "description": "Your project description",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
-      "test": "mocha"
+        "test": "mocha"
     },
     "keywords": [],
     "author": "Group 3",
     "license": "ISC",
     "dependencies": {
-      "chai": "^4.3.4",
-      "mocha": "^9.0.0"
+        "chai": "^4.3.4",
+        "express": "^4.18.2",
+        "mocha": "^9.0.0",
+        "mongo": "^0.1.0",
+        "mongodb": "^6.2.0",
+        "mongoose": "^8.0.0"
     }
-  }
+}
