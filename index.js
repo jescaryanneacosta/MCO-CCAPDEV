@@ -3,8 +3,30 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-//Memory server thing so data doesnt get saved
+//This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
+// since we have to adjust various small details to get it to work. 
+// Look to signin html and sign up for the changes
 
+//Memory server thing so data doesnt get saved
+/* 
+    What this does basically is create a temporary server where the data we use during a specific session
+    is only stored on that temporary server so its like a temporary database and once we are done it erases the stuff 
+    and resets the values. However we should delete this before submitting since sir wants a working databases that actually
+    stores so we just use this memory server stuff for tests.
+
+
+    Go to command prompt then make sure you have all the dependencies installed, check in package.json
+
+    Then after that change the path to the root depository 
+
+    After, type in the line "npm test", this opens the server and database (KEEP IN MIND THIS IS JUST FOR THE TEMPORARY SERVER)
+
+    go to ur web and type http://localhost:3000 and theres the start of the 
+    
+
+    Once we are done with this temporary stuff, we run the command prompt again with the same path but use "node index.js"
+
+*/
 const { describe, before, after, it } = require('mocha');
 const assert = require('assert');
 const { MongoMemoryServer } = require('mongodb-memory-server');
@@ -19,6 +41,7 @@ before(async () => {
 });
 
 after(async () => {
+  await mongoose.connection.dropDatabase();
   await mongoose.disconnect();
   await mongoServer.stop();
 });
