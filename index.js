@@ -67,11 +67,9 @@ const User = require('./mongo model/user.model')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
 
-
-app.get('/profilepage', (req, res) => {                                    // opens useraccount
+app.get('/useraccount', (req, res) => {                                    // opens useraccount
     //res.sendFile(path.join(__dirname, 'public', 'useraccount.html'));
     res.render('useraccount');
-
 });
 
 app.get('/', (req, res) => {                                    // opens guest feed
@@ -96,6 +94,7 @@ let loggedInUser = null;
 
   app.post('/logout', (req, res) => {
         loggedInUser = null;
+        console.log("Logged In User:", loggedInUser);
         res.redirect('/');
     });
 
@@ -112,12 +111,33 @@ let loggedInUser = null;
       if (user.password !== password) {
         return res.send('Incorrect password');
       }
-  
 
       loggedInUser = user; 
       // Redirect to the main page on successful login
       //res.redirect('/feed');
-      res.render('feed', { username: user.username, avatar: user.avatar});
+
+      console.log("Logged in User:", loggedInUser);
+      res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
+  app.post('/changeUsername', async (req, res) => {
+    const {username} = req.body;
+  
+    try {
+      const existingUser = await User.findOne({username});  
+      if (existingUser) {
+        return res.send('Username already exists');
+      }
+
+      loggedInUser.username = username;
+
+      console.log(loggedInUser)
+
+      res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
