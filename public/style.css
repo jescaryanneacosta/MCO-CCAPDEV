@@ -267,6 +267,13 @@ body{
     color: #dadada;
 }
 
+#close-edit-username {
+    color: var(--ttgreen);
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
 .admin-profile{
      background-color: var(--ttgreen);
     width: 1000px;
@@ -488,6 +495,7 @@ body{
     font-family: "Gabarito", sans-serif;
     letter-spacing: 1px;
 }
+
 
 .input-name p {
     font-family: "Young Serif", serif;

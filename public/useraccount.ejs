@@ -17,7 +17,7 @@
             </div>
             <div class="user-nav">
                 <img src="<%=avatar%>" alt="profile-user" onclick="userpage()">
-                <h1>Hi, <%=username>!</h1>
+                <h1>Hi, <%=username%>!</h1>
             </div>
         </nav>
     </div>
@@ -99,8 +99,10 @@
     </div>
     <div class="edit-username-modal" id="edit-username-modal">
         <h1>Edit Username</h1>
-        <form><input type="text"placeholder="Enter New Username"></form>
-        <button type="button" id="close-edit-username"  onclick="closeusernamemodal()">Confirm</button>
+        <form action="/changeUsername" method="POST">
+            <input type="text" name="username" placeholder="Enter New Username">
+            <input type="submit" id="close-edit-username" value="Confirm">
+        </form>
     </div>
     <div class="edit-profilepic-modal" id="edit-profilepic-modal">
         <h1>Change Profile Picture</h1>
