@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const adminSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     default: 'Admin'
   },
   avatar: {
-    type: String, // You can store the URL of the image
+    type: String, 
     default: '/static/images/default-avatar.jpg' 
   }
 });
