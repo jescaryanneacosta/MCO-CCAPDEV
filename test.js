@@ -36,7 +36,7 @@ describe('User Model', () => {
     assert.strictEqual(result.role, 'User');
     assert.strictEqual(result.avatar, '/static/images/default-avatar.jpg');
     assert.strictEqual(result.profileDescription, "");
-    assert.strictEqual(result.establishmentPhotos.length, 0);
+    assert.strictEqual(result.establishmentPhotos.length, 0); 
     assert.strictEqual(result.likes.length, 0); 
     assert.strictEqual(result.dislikes.length, 0); 
 
@@ -45,5 +45,7 @@ describe('User Model', () => {
     assert(storedUser, 'User not found in the database');
     assert.strictEqual(storedUser.username, testData.username);
     assert.strictEqual(storedUser.password, testData.password);
+
+    console.log('Stored User:', storedUser.toObject());
   });
 });
