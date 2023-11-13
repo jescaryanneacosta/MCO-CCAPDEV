@@ -76,7 +76,7 @@ app.get('/feed', (req, res) => {                              // opens feed html
     res.sendFile(path.join(__dirname, 'public', 'feed.html'));
 });
 
-  app.post('/login', async (req, res) => {
+  app.post('/login', async (req, res) => {          //log in function
     const { username, password } = req.body;
   
     try {
@@ -98,7 +98,7 @@ app.get('/feed', (req, res) => {                              // opens feed html
     }
   });
 
-  app.post('/signup', async (req, res) => {
+  app.post('/signup', async (req, res) => {            //signup function
     const { username, email, password } = req.body;
   
     try {
