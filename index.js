@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
+const ejs = require('ejs');
 
 //This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
 // since we have to adjust various small details to get it to work. 
@@ -21,9 +22,8 @@ const bodyParser = require('body-parser');
 
     After, type in the line "npm test", this opens the server and database (KEEP IN MIND THIS IS JUST FOR THE TEMPORARY SERVER)
 
-    go to ur web and type http://localhost:3000 and theres the start of the 
+    go to ur web and type http://localhost:3000 and theres the start of the website
     
-
     Once we are done with this temporary stuff, we run the command prompt again with the same path but use "node index.js"
 
 */
@@ -54,6 +54,9 @@ const url = "mongodb://localhost:27017/persons";
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('view engine', 'ejs'); // Set EJS as the view engine
+app.set('views', path.join(__dirname, 'public'));
+
 mongoose.connect(url, {})
     .then(result => console.log("database connected"))
     .catch(err => console.log(err))
@@ -64,17 +67,37 @@ const User = require('./mongo model/user.model')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
 
+
+app.get('/profilepage', (req, res) => {                                    // opens useraccount
+    //res.sendFile(path.join(__dirname, 'public', 'useraccount.html'));
+    res.render('useraccount');
+
+});
+
 app.get('/', (req, res) => {                                    // opens guest feed
-    res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
+    //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
+    res.render('feed-guest');
+
 });
 
 app.get('/signin', (req, res) => {                         
-    res.sendFile(path.join(__dirname, 'public', 'signin.html'));
+    //res.sendFile(path.join(__dirname, 'public', 'signin.html'));
+    res.render('signin');
+
 });
 
 app.get('/feed', (req, res) => {                              // opens feed html
-    res.sendFile(path.join(__dirname, 'public', 'feed.html'));
+    //res.sendFile(path.join(__dirname, 'public', 'feed.html'));
+    res.render('feed');
 });
+
+let loggedInUser = null;
+
+
+  app.post('/logout', (req, res) => {
+        loggedInUser = null;
+        res.redirect('/');
+    });
 
   app.post('/login', async (req, res) => {          //log in function
     const { username, password } = req.body;
@@ -90,8 +113,11 @@ app.get('/feed', (req, res) => {                              // opens feed html
         return res.send('Incorrect password');
       }
   
+
+      loggedInUser = user; 
       // Redirect to the main page on successful login
-      res.redirect('/feed');
+      //res.redirect('/feed');
+      res.render('feed', { username: user.username, avatar: user.avatar});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -117,7 +143,9 @@ app.get('/feed', (req, res) => {                              // opens feed html
       await newUser.save();
   
       // Redirect to the main page on successful signup
-      res.redirect('/signin');
+      //res.redirect('/signin');
+      res.render('signin');
+      console.log(newUser);
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');

@@ -257,6 +257,12 @@ body{
     letter-spacing: 1px;
     cursor: pointer;
 }
+.profile-left input{
+    color: var(--ttgreen);
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
 .profile-left p:hover{
     color: #dadada;
 }

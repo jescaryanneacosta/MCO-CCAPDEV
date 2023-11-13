@@ -28,7 +28,9 @@
             <p id="edit-username-button" onclick="openusernamemodal()">Edit Username</p> 
             <p id="change-pic-button" onclick="openprofilepicmodal()">Change Profile Picture</p>
             <p id="change-password button" onclick="openpasswordmodal()">Change Password</p>
-            <p onclick="feedguest()">Logout</p>
+            <form action="/logout" method="POST" id="logoutForm">
+                <input type="submit" value="Logout">
+            </form>
         </div>
         <div class="profile-right">
             <h1>Your Reviews</h1>
@@ -102,9 +104,9 @@
     </div>
     <div class="edit-profilepic-modal" id="edit-profilepic-modal">
         <h1>Change Profile Picture</h1>
-        <form>
-            <input type="file" id="newProfilePic" accept="image/*">
-            <button type="button" id="close-change-profilepic" onclick="closeprofilepicmodal()">Confirm</button>
+        <form action="/updateProfilePic" method="POST" enctype="multipart/form-data">
+            <input type="file" name="profilePic" id ="newProfilePic"accept="image/*">
+            <button type="submit" id ="close-change-profilepic">Change Profile Picture</button>
         </form>
     </div>
     <div class="edit-password-modal" id="edit-password-modal">
