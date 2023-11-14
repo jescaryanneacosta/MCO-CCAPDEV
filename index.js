@@ -82,7 +82,6 @@ mongoose.connect(url, {})
 
 const User = require('./mongo model/user.model')    
 
-const Establishment = require("./mongo model/resto.model")
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
@@ -106,6 +105,7 @@ const createAdminUser = async () => {          //     <------ Follow this style
 
 createAdminUser();
 
+<<<<<<< Updated upstream
 
 const createEstablishments = async () => {
   try { 
@@ -124,12 +124,36 @@ const createEstablishments = async () => {
 
     const existingEstablishment = await Establishment.findOne({ name: newEstablishment.name });
 
+=======
+//Do it here 
+
+const Establishment = require("./mongo model/resto.model");
+
+
+async function saveEstablishment() {
+  const newEstablishment = new Establishment({
+    name: 'Ate Ricas',
+    popularitems: [ 'Bacon (BacSiLog)', 'Hotdog (HotSiLog)', 'Footlong (FootSiLog)', 'Tapa (TapSilog)' ],
+    avatar: '/static/images/default-avatar.jpg',
+    images: [],
+    category: 'Fast Food',
+    cuisine: ['Filipino'],
+    description: 'Ate Rica’s BACSILOG on-the-go is best known for serving tasty, quality, fast, and clean superior-silog meals in schools, commercial spaces, and supermarkets. his includes our anchor offering – the bacsilog or bacon silog – an innovative and alternative variant on the Filipino silog fare. With our efficient and friendly service partners, we offer all-day breakfast combo meals-in-a-bowl giving value for money for students, young professionals, office workers, mothers, and people on-the-go',
+    location: '2305 Fidel A.Reyes, Malate, Manila, 1004 Metro Manila',
+    rating: 0,
+  });
+
+  try {
+    const existingEstablishment = await Establishment.findOne({ name: newEstablishment.name });
+
+>>>>>>> Stashed changes
     if (!existingEstablishment) {
       await newEstablishment.save();
       console.log('Establishment created:', newEstablishment);
     } else {
       console.log('Establishment with the same name already exists:', existingEstablishment);
     }
+<<<<<<< Updated upstream
 
     //then do it again for the remaining restos we hard coded
   }catch (error) {
@@ -138,6 +162,18 @@ const createEstablishments = async () => {
 };
 
 createEstablishments(); 
+=======
+  } catch (error) {
+    console.error('Error creating or checking establishment:', error);
+  }
+ 
+}
+
+saveEstablishment();
+
+
+
+>>>>>>> Stashed changes
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

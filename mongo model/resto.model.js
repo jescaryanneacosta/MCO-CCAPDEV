@@ -5,8 +5,8 @@ const establishmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  role: {
-    type: String,
+  popularitems: {
+    type: [String],
     default: 'Resto'
   },
   avatar: {
@@ -22,7 +22,7 @@ const establishmentSchema = new mongoose.Schema({
     required: true
   },
   cuisine: {
-    type: String,
+    type: [String],
     required: true
   },
   description: {
