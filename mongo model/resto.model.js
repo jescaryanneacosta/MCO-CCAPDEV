@@ -21,7 +21,7 @@ const establishmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  profileDescription: {
+  cuisine: {
     type: String,
     required: true
   },
