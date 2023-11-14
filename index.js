@@ -65,7 +65,7 @@ after(async () => {
 });
 */
 // Here end Delete after tests
-/*
+
 const app = express();
 const port = 3000;
 const url = "mongodb://localhost:27017/persons";
@@ -84,13 +84,6 @@ const User = require('./mongo model/user.model')
 
 const Establishment = require("./mongo model/resto.model")
 
-newEstablishment.save((err, savedEstablishment) => {
-  if (err) {
-    console.error('Error saving establishment:', err);
-  } else {
-    console.log('Establishment saved successfully:', savedEstablishment);
-  }
-});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
 
@@ -113,42 +106,38 @@ const createAdminUser = async () => {          //     <------ Follow this style
 
 createAdminUser();
 
-//Do it here 
 
-const newEstablishment = new Establishment({
-  name: 'McDonalds',
-  role: 'Resto',
-  avatar: '/static/images/default-avatar.jpg',
-  images: [],
-  category: 'Fast Food',
-  cuisine: 'American',
-  description: 'McDonalds is a globally renowned fast-food restaurant chain known for its iconic golden arches logo and its wide range of fast-food offerings. McDonalds menu typically includes items such as hamburgers, cheeseburgers, chicken sandwiches, french fries, and breakfast items like the Egg McMuffin.',
-  location: '2399 Taft Ave, Malate, Manila, 1004 Metro Manila',
-  rating: 0,
-});
+const createEstablishments = async () => {
+  try { 
+  const newEstablishment = new Establishment({
+    name: 'McDonalds',
+    role: 'Resto',
+    avatar: '/static/images/default-avatar.jpg',
+    images: [],
+    category: 'Fast Food',
+    cuisine: 'American',
+    description: 'McDonalds is a globally renowned fast-food restaurant chain known for its iconic golden arches logo and its wide range of fast-food offerings. McDonalds menu typically includes items such as hamburgers, cheeseburgers, chicken sandwiches, french fries, and breakfast items like the Egg McMuffin.',
+    location: '2399 Taft Ave, Malate, Manila, 1004 Metro Manila',
+    rating: 0,
+  });
 
-try {
-  const existingEstablishment = await Establishment.findOne({ name: newEstablishment.name });
 
-  if (!existingEstablishment) {
-    await newEstablishment.save();
-    console.log('Establishment created:', newEstablishment);
-  } else {
-    console.log('Establishment with the same name already exists:', existingEstablishment);
+    const existingEstablishment = await Establishment.findOne({ name: newEstablishment.name });
+
+    if (!existingEstablishment) {
+      await newEstablishment.save();
+      console.log('Establishment created:', newEstablishment);
+    } else {
+      console.log('Establishment with the same name already exists:', existingEstablishment);
+    }
+
+    //then do it again for the remaining restos we hard coded
+  }catch (error) {
+    console.error('Error creating admin user:', error);
   }
-
-  //then do it again for the remaining restos we hard coded
 };
 
-try {
-
-  do it again for the rest of the establishments
-
-}
-
 createEstablishments(); 
-
-*/
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
