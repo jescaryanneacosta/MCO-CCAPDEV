@@ -1,5 +1,5 @@
 function signinpage(){
-    window.location.href="signin.html"
+    window.location.href="/signin"
 }
 function openSuggestion() {
     window.location.href="suggestion-page.html"
@@ -20,7 +20,7 @@ function feed(){
     window.location.href="/feed";
 }
 function feedguest(){
-    window.location.href="feed-guest.html";
+    window.location.href="/";
 }
 function userpage(){
     window.location.href="/useraccount"
