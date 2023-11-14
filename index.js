@@ -81,11 +81,12 @@ mongoose.connect(url, {})
 
 
 const User = require('./mongo model/user.model')    
+const Establishment = require("./mongo model/resto.model")
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
 
-const createAdminUser = async () => {
+const createAdminUser = async () => {          //     <------ Follow this style
   const adminUsername = 'admin';
   const adminPassword = '123';
 
@@ -104,6 +105,35 @@ const createAdminUser = async () => {
 
 createAdminUser();
 
+//Do it here 
+/*
+const createEstablishments = async () => {   
+  try {
+  //First restos
+    //const name = 'Mcdo';
+    //const role  = 'Resto';
+    //const Address = 'Insert here';
+  // and so one for the rest of the attributes then
+
+//const name = await Establishment.findOne({ name: name }); This checks if it exists na
+
+
+if (!name) {
+      const newEstablishment = new Establishment({ **put the attributes** });
+      await newEstablishment.save();
+      console.log('Establishment created:', newEstablishment);
+    } catch (error) {
+    console.error('Error creating establishment:', error);
+  }
+
+  //then do it again for the remaining restos we hard coded
+
+
+//INSERT
+
+
+};
+*/
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
