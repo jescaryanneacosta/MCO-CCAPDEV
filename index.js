@@ -29,7 +29,7 @@ const ejs = require('ejs');
 */
 
 // Here Start 
-
+/*
 const { describe, before, after, it } = require('mocha');
 const assert = require('assert');
 const { MongoMemoryServer } = require('mongodb-memory-server');
@@ -62,7 +62,7 @@ after(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
 });
-
+*/
 // Here end Delete after tests
 
 const app = express();
@@ -156,9 +156,9 @@ let loggedInUser = null;
       }
 
       loggedInUser.username = username;
+      await loggedInUser.save();
 
       console.log(loggedInUser)
-
       res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
     } catch (error) {
       console.error(error);
