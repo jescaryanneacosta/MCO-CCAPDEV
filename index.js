@@ -79,7 +79,8 @@ app.get('/', async (req, res) => {
 app.get('/adminpage', async (req, res) => {                                    // opens guest feed
   try {
     const establishments = await Establishment.find();
-    res.render('feed-admin', { establishments });
+    const users = await User.find();
+    res.render('adminpage', { establishments, users, username:loggedInUser.username,avatar:loggedInUser.avatar});
   } catch (error) {
     console.error('Error getting establishments:', error);
     res.status(500).send('Internal Server Error');
@@ -182,7 +183,7 @@ let loggedInUser = null;
       await loggedInUser.save();
 
       console.log(loggedInUser)
-      res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+        res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -204,8 +205,12 @@ let loggedInUser = null;
     
       console.log(loggedInUser)
 
-      res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
-      console.log(loggedInUser);
+      console.log(loggedInUser)
+      if (loggedInUser.role == 'User'){
+        res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+      } else if (loggedInUser.role == 'Admin') {
+        res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+      }
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -223,7 +228,11 @@ let loggedInUser = null;
         await loggedInUser.save();
 
         console.log(loggedInUser)
-        res.render('useraccount', { username: loggedInUser.username, avatar: loggedInUser.avatar });
+        if (loggedInUser.role == 'User'){
+          res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+        } else if (loggedInUser.role == 'Admin') {
+          res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+        }
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');

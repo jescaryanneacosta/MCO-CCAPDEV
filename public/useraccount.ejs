@@ -103,6 +103,7 @@
             <input type="text" name="username" placeholder="Enter New Username">
             <input type="submit" id="close-edit-username" value="Confirm">
         </form>
+        <button type="button" id="close-change-profilepic" onclick="closeusernamemodal()">Cancel</button>
     </div>
     <div class="edit-profilepic-modal" id="edit-profilepic-modal">
         <h1>Change Profile Picture</h1>
@@ -110,6 +111,7 @@
             <input type="file" name="profilePic" id ="newProfilePic"accept="image/*">
             <input type="submit" id ="close-change-profilepic" value="Change Profile Picture">
         </form>
+        <button type="button" id="close-change-profilepic" onclick="closeprofilepicmodal()">Cancel</button>
     </div>
     <div class="edit-password-modal" id="edit-password-modal">
         <form action="/changePassword" method="POST">
@@ -118,8 +120,9 @@
                     <input type="password" name = "oldPassword" id="inputPassword" placeholder="Old Password">
             <p>Input New Password</p>
                     <input type="password" name = "newPassword" id="inputPassword" placeholder="New Password">
-            <input type="submit" id="close-change-profilepic" onclick="closepasswordmodal()">Confirm</button>
+            <input type="submit" id="close-change-profilepic" onclick="closepasswordmodal()" value="Confirm">
         </form>
+        <button type="button" id="close-change-profilepic" onclick="closepasswordmodal()">Cancel</button>
     </div>
 </div>
 </body>

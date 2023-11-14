@@ -18,7 +18,7 @@
                     <h1>Taste Test</h1>
                 </div>
                 <div class="user-nav">
-                    <img src="images/user-example.png" alt="profile-user">
+                    <img src="<%=avatar.replace('/static', '')%>" alt="profile-user">
                     <h1>Hi, Admin!</h1>
                 </div>
             </nav>
@@ -29,42 +29,45 @@
             </div>
             <div class="admin-container">
                     <div class="admin-profile">
-                        <img src="images/user-example.png" alt="profile-user">
+                        <img src="<%=avatar.replace('/static', '')%>" alt="profile-user">
                         <h1>Admin</h1>
-                        <p id="edit-username-button" onclick="openusernamemodal()">Edit Username</p> 
                         <p id="change-pic-button" onclick="openprofilepicmodal()">Change Profile Picture</p>
                         <p id="change-password button" onclick="openpasswordmodal()">Change Password</p>
-                        <p onclick="feedguest()">Logout</p>
+                        <form action="/logout" method="POST" id="logoutForm">
+                            <input type="submit" value="Logout">
+                        </form>
                     </div>
                 </div>
                 <div class="edit-profilepic-modal" id="edit-profilepic-modal">
                     <h1>Change Profile Picture</h1>
-                    <form>
-                        <input type="file" id="newProfilePic" accept="image/*">
-                        <button type="button" id="close-change-profilepic" onclick="closeprofilepicmodal()">Confirm</button>
+                    <form action="/changeProfilePic" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="profilePic" id ="newProfilePic"accept="image/*">
+                        <input type="submit" id ="close-change-profilepic" value="Change Profile Picture">
                     </form>
+                    <button type="button" id="close-change-profilepic" onclick="closeprofilepicmodal()">Cancel</button>
                 </div>
                 <div class="edit-password-modal" id="edit-password-modal">
+                    <form action="/changePassword" method="POST">
                     <h1>Change Password</h1>
                         <p>Input Old Password</p>
-                            <form>
-                                <input type="password" id="inputPassword" placeholder="Old Password">
-                            </form>
+                                <input type="password" name = "oldPassword" id="inputPassword" placeholder="Old Password">
                         <p>Input New Password</p>
-                            <form>
-                                <input type="password" id="inputPassword" placeholder="New Password">
-                            </form>
-                        <button type="button" id="close-change-profilepic" onclick="closepasswordmodal()">Confirm</button>
+                                <input type="password" name = "newPassword" id="inputPassword" placeholder="New Password">
+                        <input type="submit" id="close-change-profilepic" onclick="closepasswordmodal()" value="Confirm">
+                    </form>
+                    <button type="button" id="close-change-profilepic" onclick="closepasswordmodal()">Cancel</button>
                 </div>
                 <div class="admin-functions">
                     <div class="admin-functions-first"> 
                         <section class="add-restaurant-section">
                             <h3>Delete Review</h3>
-                            <form id="delete-review-form">
+                            <form id="delete-name-form">
                                 <div class="input-name"> 
                                     <label for="user-id">User ID:</label>
                                     <input type="text" id="user-id" name="user-id" required placeholder="Input Name of User">
-                                </div>                
+                                </div>    
+                            </form>
+                            <form id="delete-post-form">           
                                 <div class="input-name"> 
                                     <label for="user-id">Post: </label>
                                     <input list="posts" placeholder="Choose review to delete">
