@@ -86,9 +86,10 @@ app.get('/adminpage', async (req, res) => {                                    /
   }
 });
 
-app.get('/feed-admin', (req, res) => {                                    // opens guest feed
+app.get('/feed-admin', async (req, res) => {                                    // opens guest feed
   //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
-  const establishments = getAllEstablishments();
+  const establishments = await Establishment.find();
+
   res.render('feed-admin', { username : loggedInUser.username, avatar : loggedInUser.avatar, establishments});
 });
 
@@ -99,17 +100,17 @@ app.get('/signin', (req, res) => {
 
 });
 
-app.get('/feed', (req, res) => {                              // opens feed html  
-    res.render('feed' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
+app.get('/feed', async (req, res) => {                              // opens feed html  
+
+  const establishments = await Establishment.find();
+
+
+    res.render('feed' , { username : loggedInUser.username, avatar : loggedInUser.avatar, establishments});
 });
 
 
 app.get('/establishment', (req,res) => {
-  res.render('establishment',
-  {
-    username: loggedInUser.username, 
-    avatar: loggedInUser.avatar
-  })
+  res.render('establishment')
 });
 
 app.get('/establishments/:id', async (req, res) => {
@@ -118,7 +119,7 @@ app.get('/establishments/:id', async (req, res) => {
       const establishment = await Establishment.findById(establishmentId);
       const reviews = await Review.find({ establishment: establishmentId });
 
-      res.render('establishment', { establishment, reviews });
+      res.render('establishment', { establishment, reviews,  baseUrl: '/MCO-CCAPDEV/public', loggedInUser});
   } catch (error) {
       console.error(error);
       res.status(500).send('Server error');

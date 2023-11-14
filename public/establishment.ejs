@@ -12,8 +12,12 @@
         <div class="nav-bar-green">
             <nav>
                 <div class="logo-name-white">
-                    <i class="fi fi-sr-hamburger-soda nav-logo-white" onclick="feed()"></i>
-                    <h1>Taste Test</h1>
+                    <% if (!loggedInUser) { %>
+                        <i class="fi fi-sr-hamburger-soda nav-logo-white" onclick="feedguest()"></i>
+                      <% } else { %>
+                        <i class="fi fi-sr-hamburger-soda nav-logo-white" onclick="feed()"></i>
+                      <% } %>
+                      <h1>Taste Test</h1>
                 </div>
             </nav>
         </div>
