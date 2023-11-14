@@ -25,6 +25,9 @@ function feedguest(){
 function userpage(){
     window.location.href="/useraccount"
 }
+function resto(){
+    window.location.href="/establishment"
+}
 function McDores1(){
     window.location.href="mcdo-res1.html"
 }
