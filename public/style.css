@@ -503,6 +503,15 @@ body{
     letter-spacing: 1px;
 }
 
+.edit-password-modal input {
+    width: 80%;
+    background-color: #eaeaea;
+    outline: 0;
+    border: 0;
+    padding: 18px 15px;
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+}
 
 .input-name p {
     font-family: "Young Serif", serif;

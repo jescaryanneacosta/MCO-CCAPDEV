@@ -250,6 +250,27 @@ let loggedInUser = null;
   });
 
 
+  app.post('/changePassword', async (req, res) => {          //log in function
+    const { username, oldPassword, newPassword } = req.body;
+  
+    try {
+  
+      if (loggedInUser.password !== oldPassword) {
+        return res.send('Incorrect password');
+      } else {
+        loggedInUser.password = newPassword;
+        await loggedInUser.save();
+      }
+    
+      console.log(loggedInUser)
+      res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
+
   app.post('/changeProfilePic', upload.single('profilePic'), async (req, res) => {
 
     console.log('Uploaded File:', req.file);

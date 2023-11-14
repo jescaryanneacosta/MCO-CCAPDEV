@@ -113,15 +113,13 @@
     </div>
     <div class="edit-password-modal" id="edit-password-modal">
         <h1>Change Password</h1>
-            <p>Input Old Password</p>
-                <form>
-                    <input type="password" id="inputPassword" placeholder="Old Password">
-                </form>
-            <p>Input New Password</p>
-                <form>
-                    <input type="password" id="inputPassword" placeholder="New Password">
-                </form>
-            <button type="button" id="close-change-profilepic" onclick="closepasswordmodal()">Confirm</button>
+        <form action="/changePassword" method="POST">
+                <p>Input Old Password</p>
+                        <input type="password" name = "oldPassword" id="inputPassword" placeholder="Old Password">
+                <p>Input New Password</p>
+                        <input type="password" name = "newPassword" id="inputPassword" placeholder="New Password">
+                <input type="submit" id="close-change-profilepic" value="Confirm">
+        </form>
     </div>
 </div>
 </body>
