@@ -925,6 +925,7 @@ body{
 .search-bar i{
     color: white;
     font-size: large;
+    margin: 1px;
 }
 .search-bar button{
     border: 0px;
