@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
+const multer = require('multer'); 
 
 //This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
 // since we have to adjust various small details to get it to work. 
@@ -103,6 +104,21 @@ const createAdminUser = async () => {
 
 createAdminUser();
 
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+
+//ROUTINGS
+
 app.get('/useraccount', (req, res) => {                                    // opens useraccount
     //res.sendFile(path.join(__dirname, 'public', 'useraccount.html'));
     res.render('useraccount' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
@@ -141,6 +157,8 @@ app.get('/feed', (req, res) => {                              // opens feed html
 app.get('/establishment', (req,res) => {
   res.render('establishment')
 });
+
+// END ROUTES
 
 let loggedInUser = null;
 
@@ -198,6 +216,24 @@ let loggedInUser = null;
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
+    }
+  });
+
+
+  app.post('/changeProfilePic', upload.single('profilePic'), async (req, res) => {
+
+    console.log('Uploaded File:', req.file);
+
+    const avatar = 'images/' + req.file.filename;
+    try {
+        loggedInUser.avatar = avatar;
+        await loggedInUser.save();
+
+        console.log(loggedInUser)
+        res.render('useraccount', { username: loggedInUser.username, avatar: loggedInUser.avatar });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
   });
 
