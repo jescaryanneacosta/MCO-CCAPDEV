@@ -81,8 +81,16 @@ mongoose.connect(url, {})
 
 
 const User = require('./mongo model/user.model')    
+
 const Establishment = require("./mongo model/resto.model")
 
+newEstablishment.save((err, savedEstablishment) => {
+  if (err) {
+    console.error('Error saving establishment:', err);
+  } else {
+    console.log('Establishment saved successfully:', savedEstablishment);
+  }
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
 
@@ -106,6 +114,7 @@ const createAdminUser = async () => {          //     <------ Follow this style
 createAdminUser();
 
 //Do it here 
+<<<<<<< Updated upstream
 /*
 
 const createEstablishments = async () => {   
@@ -117,17 +126,31 @@ const createEstablishments = async () => {
     //const Address = 'Insert here';
     //const ....
   // and so one for the rest of the attributes then
+=======
+>>>>>>> Stashed changes
 
-//const name = await Establishment.findOne({ name: name }); This checks if it exists na
+const newEstablishment = new Establishment({
+  name: 'McDonalds',
+  role: 'Resto',
+  avatar: '/static/images/default-avatar.jpg',
+  images: [],
+  category: 'Fast Food',
+  cuisine: 'American',
+  description: 'McDonalds is a globally renowned fast-food restaurant chain known for its iconic golden arches logo and its wide range of fast-food offerings. McDonalds menu typically includes items such as hamburgers, cheeseburgers, chicken sandwiches, french fries, and breakfast items like the Egg McMuffin.',
+  location: '2399 Taft Ave, Malate, Manila, 1004 Metro Manila',
+  rating: 0,
+});
 
+try {
+  const existingEstablishment = await Establishment.findOne({ name: newEstablishment.name });
 
-if (!name) {
-      const newEstablishment = new Establishment({ **put the attributes** });
-      await newEstablishment.save();
-      console.log('Establishment created:', newEstablishment);
-    } catch (error) {
-    console.error('Error creating establishment:', error);
+  if (!existingEstablishment) {
+    await newEstablishment.save();
+    console.log('Establishment created:', newEstablishment);
+  } else {
+    console.log('Establishment with the same name already exists:', existingEstablishment);
   }
+<<<<<<< Updated upstream
 
   //then do it again for the remaining restos we hard coded
 };
@@ -141,6 +164,16 @@ try {
 createEstablishments(); 
 
 */
+=======
+} catch (error) {
+  console.error('Error creating or checking establishment:', error);
+}
+saveEstablishment();
+
+
+
+
+>>>>>>> Stashed changes
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
