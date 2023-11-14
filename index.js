@@ -27,6 +27,9 @@ const ejs = require('ejs');
     Once we are done with this temporary stuff, we run the command prompt again with the same path but use "node index.js"
 
 */
+
+// Here Start 
+
 const { describe, before, after, it } = require('mocha');
 const assert = require('assert');
 const { MongoMemoryServer } = require('mongodb-memory-server');
@@ -87,6 +90,11 @@ app.get('/signin', (req, res) => {
 app.get('/feed', (req, res) => {                              // opens feed html
     //res.sendFile(path.join(__dirname, 'public', 'feed.html'));
     res.render('feed');
+});
+
+
+app.get('/establishment', (req,res) => {
+  res.render('establishment')
 });
 
 let loggedInUser = null;
