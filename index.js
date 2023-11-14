@@ -133,6 +133,9 @@ if (!name) {
 
 
 };
+
+createEstablishments(); 
+
 */
 
 const storage = multer.diskStorage({
