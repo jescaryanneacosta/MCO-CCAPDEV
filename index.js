@@ -81,7 +81,8 @@ mongoose.connect(url, {})
 
 
 const User = require('./mongo model/user.model')    
-
+const Establishment = require("./mongo model/resto.model")
+const Review = require('./mongo model/review.model');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
@@ -193,7 +194,25 @@ app.get('/feed', (req, res) => {                              // opens feed html
 
 
 app.get('/establishment', (req,res) => {
-  res.render('establishment')
+  res.render('establishment',
+  {
+    username:
+    loggedInUser.username, avatar: 
+    loggedInUser.avatar
+  })
+});
+
+app.get('/establishments/:id', async (req, res) => {
+  try {
+      const establishmentId = req.params.id;
+      const establishment = await Establishment.findById(establishmentId);
+      const reviews = await Review.find({ establishment: establishmentId });
+
+      res.render('establishment', { establishment, reviews });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+  }
 });
 
 // END ROUTES
@@ -321,6 +340,27 @@ let loggedInUser = null;
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
+    }
+app.post('/establishments/:id/reviews', async (req, res) => {
+    const { rating, title, body } = req.body;
+    const establishmentId = req.params.id;
+    // Additional validation can be added here
+
+    try {
+        const newReview = new Review({
+            establishment: establishmentId,
+            // Include user details, e.g., from session or logged-in user
+            rating,
+            title,
+            body,
+            datePosted: new Date()
+        });
+
+        await newReview.save();
+        res.render('/establishments/' + establishmentId); // Redirect back to establishment page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error submitting review');
     }
   });
 
