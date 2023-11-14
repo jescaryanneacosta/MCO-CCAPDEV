@@ -102,3 +102,55 @@ function galleryback(){
     var galleryContainer = document.querySelector(".res-gallery");
     galleryContainer.scrollLeft -= 600;
 };
+
+function sortRestaurants() {
+    var sortBy = document.getElementById("sortSelect").value;
+
+    var feedBody = document.getElementById("establishments-feed");
+
+    var feedReviews = feedBody.getElementsByClassName("feed-review");
+
+    var feedArray = Array.from(feedReviews);
+
+    if (sortBy === "recommended") {
+        feedArray.sort(function() {
+            return 0.5 - Math.random();
+        });
+    } else if (sortBy === "most-stars") {
+        feedArray.sort(function (a, b) {
+            var starsA = a.querySelectorAll(".star-feed.fi-sr-star").length;
+            var starsB = b.querySelectorAll(".star-feed.fi-sr-star").length;
+            return starsB - starsA;
+        });
+    } else if (sortBy === "least-stars") {
+        feedArray.sort(function (a, b) {
+            var starsA = a.querySelectorAll(".star-feed.fi-sr-star").length;
+            var starsB = b.querySelectorAll(".star-feed.fi-sr-star").length;
+            return starsA - starsB;
+        });
+    } else if (sortBy === "alphabetical") {
+        feedArray.sort(function (a, b) {
+            var nameA = a.querySelector("h1").innerText.toLowerCase();
+            var nameB = b.querySelector("h1").innerText.toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+    }
+
+    feedArray.forEach(function (element) {
+        feedBody.removeChild(element);
+    });
+
+    feedArray.forEach(function (element) {
+        feedBody.appendChild(element);
+    });
+}
+function filterRestaurants() {
+    var searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    var feedReviews = document.getElementsByClassName("feed-review");
+
+    for (var i = 0; i < feedReviews.length; i++) {
+        var restaurantName = feedReviews[i].querySelector("h1").innerText.toLowerCase();
+        var display = restaurantName.includes(searchTerm) ? "block" : "none";
+        feedReviews[i].style.display = display;
+    }
+}

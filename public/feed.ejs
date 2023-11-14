@@ -27,19 +27,18 @@
         </div> 
         <div class="feed-lowerheader">
             <div class="search-bar">
-                <input type="text" placeholder=" Search Restaurant...">
-                <button type="submit"><i class="fi fi-rr-search"></i></button>
+                <input type="text" id="searchInput" placeholder=" Search Restaurant...">
+                <button type="button" onclick="filterRestaurants()"><i class="fi fi-rr-search"></i></button>
             </div>
             <div class="green-icon sort-by">
                 <i class="fi fi-rr-bars-sort"></i>
                 <p>Sort By:</p>
-                <select>
+                <select id="sortSelect" onchange="sortRestaurants()">
                     <option value="recommended">Recommended</option>
                     <option value="most-stars">Most Stars</option>
                     <option value="least-stars">Least Stars</option>
-                    <option value="new-reviews">Newest Review</option>
-                    <option value="old-reviews">Oldest Review</option>
-                </select>
+                    <option value="alphabetical">Alphabetical</option>
+                </select>  
             </div>
         </div>
         <div class="suggestion-header">
