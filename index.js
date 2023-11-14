@@ -4,14 +4,23 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const multer = require('multer'); 
+const csrf = require('csurf');
+
 
 //This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
 
 const app = express();
 const port = 3000;
 const url = "mongodb://localhost:27017/persons";
+const csrfProtection = csrf({ cookie: true });
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(csrfProtection);
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
 
 app.set('view engine', 'ejs'); // Set EJS as the view engine
 app.set('views', path.join(__dirname, 'public'));
