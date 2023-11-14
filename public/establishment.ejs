@@ -2,210 +2,177 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taste Test</title>
+    <title>Taste Test - <%= establishment.name %></title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <script src="script.js"></script>
 </head>
 <body>
-<div class="background">
-    <div class="nav-bar-green">
-        <nav>
-            <div class="logo-name-white">
-                <i class="fi fi-sr-hamburger-soda nav-logo-white" onclick="feed()"></i>
-                <h1>Taste Test</h1>
-            </div>
-        </nav>
-    </div>
-    <div class="res-content">
-        <div class="res-content-top">
-            <div class="overlay-green"></div>
-            <h1>McDonald's</h1>               <!--Change this to ejs-->
-            <div class="res-top-info">
-                <div class="res-page-loc">
-                    <i class="fi fi-sr-marker green-icon loc-feed"></i>
-                    <p>2399 Taft Ave, Malate, Manila, 1004 Metro Manila</p>  <!--Change this to ejs-->
-                </div> 
-                <div class="res-full-gallery">
-                    <i class="fi fi-rr-angle-left white-icon" onclick="galleryback()"></i>    <!--Change this to ejs so that the images is taken from the object-->
-                    <div class="res-gallery">
-                       <div><img src="images/mcdo1-res1.jpg"></div>
-                       <div><img src="images/mcdo2-res1.png"></div>
-                       <div><img src="images/mcdo3-res1.jpg"></div>
-                       <div><img src="images/mcdo4-res1.jpg"></div>
-                       <div><img src="images/mcdo5-res1.jpg"></div>
-                       <div><img src="images/mcdo6-res1.jpg">  </div>
-                    </div>
-                    <i class="fi fi-rr-angle-right white-icon" onclick="gallerynext()"></i>      <!--Change this to ejs-->
+    <div class="background">
+        <div class="nav-bar-green">
+            <nav>
+                <div class="logo-name-white">
+                    <i class="fi fi-sr-hamburger-soda nav-logo-white" onclick="feed()"></i>
+                    <h1>Taste Test</h1>
                 </div>
-                <div class="res-page-rating">
-                    <i class="fi fi-sr-star white-icon"></i>
-                    <i class="fi fi-sr-star white-icon"></i>
-                    <i class="fi fi-sr-star white-icon"></i>
-                    <i class="fi fi-rr-star white-icon"></i>
-                    <i class="fi fi-rr-star white-icon"></i>
-                </div>
-            </div>         
+            </nav>
         </div>
-        <div class="res-content-bottom">
-            <h1>About</h1>         <!--Change this to ejs-->
-            <p>McDonald's is a globally renowned fast-food restaurant chain known for its iconic golden arches logo and its wide range of fast-food offerings. McDonald's menu typically includes items such as hamburgers, cheeseburgers, chicken sandwiches, french fries, and breakfast items like the Egg McMuffin.</p>
-            <h1>Cuisine</h1>            <!--Change this to ejs-->
-            <ul>
-                <li>American</li>
-            </ul>
-            <h1>Popular Menu Items</h1>           <!--Change this to ejs-->
-            <ul>
-                <li>Big Mac</li>
-                <li>McChicken</li>
-                <li>Burger</li>
-            </ul>
-            <br>
-            <div class="res-rev-header">
-                <h1>Reviews</h1>           <!--Change all the reviews to ejs values-->
-                <div class="green-icon sort-by">
-                    <i class="fi fi-rr-bars-sort"></i>
-                    <p>Sort By: </p>
-                    <select>
-                        <option value="recommended">Recommended</option>
-                        <option value="most-stars">Most Stars</option>
-                        <option value="least-stars">Least Stars</option>
-                        <option value="new-reviews">Newest Review</option>
-                        <option value="old-reviews">Oldest Review</option>
+        <div class="res-content">
+            <div class="res-content-top">
+                <div class="overlay-green"></div>
+                <h1><%= establishment.name %></h1>
+                <div class="res-top-info">
+                    <div class="res-page-loc">
+                        <i class="fi fi-sr-marker green-icon loc-feed"></i>
+                        <p><%= establishment.location %></p>
+                    </div> 
+                    <div class="res-full-gallery">
+                        <i class="fi fi-rr-angle-left white-icon" onclick="galleryback()"></i>
+                        <div class="res-gallery">
+                            <% establishment.images.forEach(function(image) { %>
+                                <div><img src="<%= image %>" alt="Gallery Image"></div>
+                            <% }); %>
+                        </div>
+                        <i class="fi fi-rr-angle-right white-icon" onclick="gallerynext()"></i>
+                    </div>
+                    <!-- Dynamic Rating Display Here -->
+                </div>         
+            </div>
+            <div class="res-content-bottom">
+                <h1>About</h1>
+                <p><%= establishment.about %></p>
+                <h1>Cuisine</h1>
+                <ul>
+                    <% establishment.cuisine.forEach(function(type) { %>
+                        <li><%= type %></li>
+                    <% }); %>
+                </ul>
+                <h1>Popular Menu Items</h1>
+                <ul>
+                    <% establishment.popularItems.forEach(function(item) { %>
+                        <li><%= item %></li>
+                    <% }); %>
+                </ul>
+                <br>
+                <div class="res-rev-header">
+                    <h1>Reviews</h1>
+                    <!-- Sort By Functionality (requires JavaScript implementation) -->
+                </div>
+                <form action="/establishments/<%= establishment._id %>/reviews" method="POST">
+                    <label for="rating">Rating:</label>
+                    <select name="rating" id="rating" required>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="2">2 Stars</option>
+                        <option value="1">1 Star</option>
                     </select>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                    <label for="body">Review:</label>
+                    <textarea id="body" name="body" required></textarea>
+                    <button type="submit">Submit Review</button>
+                </form>
+                <div class="reviews">
+                    <% reviews.forEach(function(review) { %>
+                        <div class="review">
+                            <h3><%= review.title %></h3>
+                            <p>Rating: <%= review.rating %></p>
+                            <p><%= review.body %></p>
+                        </div>
+                    <% }); %>
                 </div>
-            </div>  
-        </div>
-        <div>
-            <div class="res-content-reviews">
-                <div class="res-page-review">
-                    <div class="review-header">
-                        <img src="images/fake-user1.jpg">
-                        <div class="rev-info">
-                            <h1>John Smith</h1>
-                            <div>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                            </div>    
-                        </div>
-                        <div class="vote-system">
-                            <div class="arrows">
-                                <div class="up"></div>
-                                <div class="down"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-desc">
-                        <p>The food was excellent, and the service was great. The only downside was the noise level.</p>
-                    </div>
-                </div>
-                <div class="res-page-review">
-                    <div class="review-header">
-                        <img src="images/fake-user2.jpg">
-                        <div class="rev-info">
-                            <h1>Michael Davis</h1>
-                            <div>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                            </div>    
-                        </div>
-                        <div class="vote-system">
-                            <div class="arrows">
-                                <div class="up"></div>
-                                <div class="down"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-desc">
-                        <p>The restaurant showed promise, but it fell short in terms of consistency and execution. With some improvements in the kitchen and more efficient service, this place has the potential to be a great dining destination. Despite my mixed experience, I might consider returning to give it another try, hoping for a more satisfying meal next time.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="res-content-reviews">
-                <div class="res-page-review">
-                    <div class="review-header">
-                        <img src="images/fake-user3.jpg">
-                        <div class="rev-info">
-                            <h1>Emily Wilson</h1>
-                            <div>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                            </div>    
-                        </div>
-                        <div class="vote-system">
-                            <div class="arrows">
-                                <div class="up"></div>
-                                <div class="down"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-desc">
-                        <p>I absolutely loved this place. The ambiance, food, and service were all top-notch. I'll definitely be coming back.</p>
-                    </div>
-                </div>
-                <div class="res-page-review">
-                    <div class="review-header">
-                        <img src="images/fake-user4.jpg">
-                        <div class="rev-info">
-                            <h1>Sarah Johnson</h1>
-                            <div>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                            </div>    
-                        </div>
-                        <div class="vote-system">
-                            <div class="arrows">
-                                <div class="up"></div>
-                                <div class="down"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-desc">
-                        <p>I had high hopes, but the food was disappointing. The staff was friendly, but I won't be returning.</p>
-                    </div>
-                </div>
-            </div> 
-            <div class="res-content-reviews">
-                <div class="res-page-review">
-                    <div class="review-header">
-                        <img src="images/fake-user5.jpg">
-                        <div class="rev-info">
-                            <h1>Robert Brown</h1>
-                            <div>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                                <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                            </div>    
-                        </div>
-                        <div class="vote-system">
-                            <div class="arrows">
-                                <div class="up"></div>
-                                <div class="down"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-desc">
-                        <p>The restaurant had a cozy atmosphere, and the food was delicious. A minor hiccup with the wait time, but overall, a good experience.</p>
-                    </div>
-                </div>
-                
             </div>
         </div>
     </div>
-</div>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste Test - <%= establishment.name %></title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="background">
+        <div class="nav-bar-green">
+            <nav>
+                <div class="logo-name-white">
+                    <i class="fi fi-sr-hamburger-soda nav-logo-white" onclick="feed()"></i>
+                    <h1>Taste Test</h1>
+                </div>
+            </nav>
+        </div>
+        <div class="res-content">
+            <div class="res-content-top">
+                <div class="overlay-green"></div>
+                <h1><%= establishment.name %></h1>
+                <div class="res-top-info">
+                    <div class="res-page-loc">
+                        <i class="fi fi-sr-marker green-icon loc-feed"></i>
+                        <p><%= establishment.location %></p>
+                    </div> 
+                    <div class="res-full-gallery">
+                        <i class="fi fi-rr-angle-left white-icon" onclick="galleryback()"></i>
+                        <div class="res-gallery">
+                            <% establishment.images.forEach(function(image) { %>
+                                <div><img src="<%= image %>" alt="Gallery Image"></div>
+                            <% }); %>
+                        </div>
+                        <i class="fi fi-rr-angle-right white-icon" onclick="gallerynext()"></i>
+                    </div>
+                    <!-- Dynamic Rating Display Here -->
+                </div>         
+            </div>
+            <div class="res-content-bottom">
+                <h1>About</h1>
+                <p><%= establishment.about %></p>
+                <h1>Cuisine</h1>
+                <ul>
+                    <% establishment.cuisine.forEach(function(type) { %>
+                        <li><%= type %></li>
+                    <% }); %>
+                </ul>
+                <h1>Popular Menu Items</h1>
+                <ul>
+                    <% establishment.popularItems.forEach(function(item) { %>
+                        <li><%= item %></li>
+                    <% }); %>
+                </ul>
+                <br>
+                <div class="res-rev-header">
+                    <h1>Reviews</h1>
+                    <!-- Sort By Functionality (requires JavaScript implementation) -->
+                </div>
+                <form action="/establishments/<%= establishment._id %>/reviews" method="POST">
+                    <label for="rating">Rating:</label>
+                    <select name="rating" id="rating" required>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="2">2 Stars</option>
+                        <option value="1">1 Star</option>
+                    </select>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                    <label for="body">Review:</label>
+                    <textarea id="body" name="body" required></textarea>
+                    <button type="submit">Submit Review</button>
+                </form>
+                <div class="reviews">
+                    <% reviews.forEach(function(review) { %>
+                        <div class="review">
+                            <h3><%= review.title %></h3>
+                            <p>Rating: <%= review.rating %></p>
+                            <p><%= review.body %></p>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
