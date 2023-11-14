@@ -23,10 +23,10 @@ function feedguest(){
     window.location.href="/";
 }
 function userpage(){
-    window.location.href="/useraccount"
+    window.location.href="/useraccount";
 }
 function resto(establishmentId){
-    window.location.href="/establishments/" + establishmentId
+    window.location.href="/establishments/" + establishmentId;
 }
 function McDores1(){
     window.location.href="mcdo-res1.html"
