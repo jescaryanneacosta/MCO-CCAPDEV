@@ -170,11 +170,11 @@ let loggedInUser = null;
       //res.redirect('/feed');
 
       console.log("Logged in User:", loggedInUser);
-      if(loggedInUser.role = 'User')
+      if(loggedInUser.role == 'User')
         res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar});
       else 
-        if(loggedInUser.role = 'Admin')
-        res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar});
+        if(loggedInUser.role == 'Admin')
+          res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
