@@ -109,6 +109,7 @@ createAdminUser();
 /*
 
 const createEstablishments = async () => {   
+  
   try {
   //First resto
     //const name = 'Mcdo';
