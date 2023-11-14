@@ -107,12 +107,14 @@ createAdminUser();
 
 //Do it here 
 /*
+
 const createEstablishments = async () => {   
   try {
-  //First restos
+  //First resto
     //const name = 'Mcdo';
     //const role  = 'Resto';
     //const Address = 'Insert here';
+    //const ....
   // and so one for the rest of the attributes then
 
 //const name = await Establishment.findOne({ name: name }); This checks if it exists na
@@ -127,12 +129,13 @@ if (!name) {
   }
 
   //then do it again for the remaining restos we hard coded
-
-
-//INSERT
-
-
 };
+
+try {
+
+  do it again for the rest of the establishments
+
+}
 
 createEstablishments(); 
 
