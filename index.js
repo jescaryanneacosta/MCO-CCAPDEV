@@ -6,65 +6,6 @@ const ejs = require('ejs');
 const multer = require('multer'); 
 
 //This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
-// since we have to adjust various small details to get it to work. 
-// Look to signin html and sign up for the changes
-
-//Memory server thing so data doesnt get saved
-/* 
-    What this does basically is create a temporary server where the data we use during a specific session
-    is only stored on that temporary server so its like a temporary database and once we are done it erases the stuff 
-    and resets the values. However we should delete this before submitting since sir wants a working databases that actually
-    stores so we just use this memory server stuff for tests.
-
-
-    Go to command prompt then make sure you have all the dependencies installed, check in package.json
-
-    Then after that change the path to the root depository 
-
-    After, type in the line "npm test", this opens the server and database (KEEP IN MIND THIS IS JUST FOR THE TEMPORARY SERVER)
-
-    go to ur web and type http://localhost:3000 and theres the start of the website
-    
-    Once we are done with this temporary stuff, we run the command prompt again with the same path but use "node index.js"
-
-*/
-
-// Here Start 
-/*
-const { describe, before, after, it } = require('mocha');
-const assert = require('assert');
-const { MongoMemoryServer } = require('mongodb-memory-server');
-
-let mongoServer;
-
-before(async () => {
-  mongoServer = new MongoMemoryServer();
-  await mongoServer.start(); 
-  const mongoUri = await mongoServer.getUri();
-  await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-
-  const adminUsername = 'admin';
-  const adminPassword = '123';
-
-  const adminUser = await User.findOne({ username: adminUsername });
-
-  if (!adminUser) {
-    const newAdmin = new User({ username: adminUsername, password: adminPassword, role: 'Admin'});
-    await newAdmin.save();
-    console.log('Admin user created:', newAdmin);
-  }
-
-
-});
-
-after(async () => {
-  await mongoose.connection.dropDatabase();
-  await mongoose.disconnect();
-  await mongoServer.stop();
-});
-*/
-// Here end Delete after tests
 
 const app = express();
 const port = 3000;
@@ -98,51 +39,14 @@ const createAdminUser = async () => {          //     <------ Follow this style
       const newAdmin = new User({ username: adminUsername, password: adminPassword, email: "admin@gmail.com", role: 'Admin' });
       await newAdmin.save();
       console.log('Admin user created:', newAdmin);
-    }
+    } else 
+      console.log("Admin has been made");
   } catch (error) {
     console.error('Error creating admin user:', error);
   }
 };
 
 createAdminUser();
-
-//Do it here 
-
-const Establishment = require("./mongo model/resto.model");
-
-
-async function saveEstablishment() {
-  const newEstablishment = new Establishment({
-    name: 'Ate Ricas',
-    popularitems: [ 'Bacon (BacSiLog)', 'Hotdog (HotSiLog)', 'Footlong (FootSiLog)', 'Tapa (TapSilog)' ],
-    avatar: '/static/images/default-avatar.jpg',
-    images: [],
-    category: 'Fast Food',
-    cuisine: ['Filipino'],
-    description: 'Ate Rica’s BACSILOG on-the-go is best known for serving tasty, quality, fast, and clean superior-silog meals in schools, commercial spaces, and supermarkets. his includes our anchor offering – the bacsilog or bacon silog – an innovative and alternative variant on the Filipino silog fare. With our efficient and friendly service partners, we offer all-day breakfast combo meals-in-a-bowl giving value for money for students, young professionals, office workers, mothers, and people on-the-go',
-    location: '2305 Fidel A.Reyes, Malate, Manila, 1004 Metro Manila',
-    rating: 0,
-  });
-
-  try {
-    const existingEstablishment = await Establishment.findOne({ name: newEstablishment.name });
-
-    if (!existingEstablishment) {
-      await newEstablishment.save();
-      console.log('Establishment created:', newEstablishment);
-    } else {
-      console.log('Establishment with the same name already exists:', existingEstablishment);
-    }
-  } catch (error) {
-    console.error('Error creating or checking establishment:', error);
-  }
- 
-}
-
-saveEstablishment();
-
-
-
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -155,7 +59,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
 //ROUTINGS
 
 app.get('/useraccount', (req, res) => {                                    // opens useraccount
@@ -163,21 +66,30 @@ app.get('/useraccount', (req, res) => {                                    // op
     res.render('useraccount' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
 });
 
-app.get('/', (req, res) => {                                    // opens guest feed
-    //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
-    res.render('feed-guest');
-
+app.get('/', async (req, res) => {
+  try {
+    const establishments = await Establishment.find();
+    res.render('feed-guest', { establishments });
+  } catch (error) {
+    console.error('Error getting establishments:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
-app.get('/adminpage', (req, res) => {                                    // opens guest feed
-  //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
-  res.render('adminpage', { username : loggedInUser.username, avatar : loggedInUser.avatar });
-
+app.get('/adminpage', async (req, res) => {                                    // opens guest feed
+  try {
+    const establishments = await Establishment.find();
+    res.render('feed-admint', { establishments });
+  } catch (error) {
+    console.error('Error getting establishments:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 app.get('/feed-admin', (req, res) => {                                    // opens guest feed
   //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
-  res.render('feed-admin', { username : loggedInUser.username, avatar : loggedInUser.avatar });
+  const establishments = getAllEstablishments();
+  res.render('feed-admin', { username : loggedInUser.username, avatar : loggedInUser.avatar, establishments});
 });
 
 
@@ -187,8 +99,7 @@ app.get('/signin', (req, res) => {
 
 });
 
-app.get('/feed', (req, res) => {                              // opens feed html
-    //res.sendFile(path.join(__dirname, 'public', 'feed.html'));
+app.get('/feed', (req, res) => {                              // opens feed html  
     res.render('feed' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
 });
 
@@ -196,9 +107,8 @@ app.get('/feed', (req, res) => {                              // opens feed html
 app.get('/establishment', (req,res) => {
   res.render('establishment',
   {
-    username:
-    loggedInUser.username, avatar: 
-    loggedInUser.avatar
+    username: loggedInUser.username, 
+    avatar: loggedInUser.avatar
   })
 });
 
@@ -244,12 +154,14 @@ let loggedInUser = null;
       // Redirect to the main page on successful login
       //res.redirect('/feed');
 
-      console.log("Logged in User:", loggedInUser);
+      const establishments = await Establishment.find();
+
+      console.log("Logged in User:", loggedInUser, establishments);
       if(loggedInUser.role == 'User')
-        res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar});
+        res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
       else 
         if(loggedInUser.role == 'Admin')
-          res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar});
+          res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -290,7 +202,9 @@ let loggedInUser = null;
       }
     
       console.log(loggedInUser)
+
       res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+      console.log(loggedInUser);
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -341,6 +255,8 @@ let loggedInUser = null;
       console.error(error);
       res.status(500).send('Internal Server Error');
     }
+  });
+
 app.post('/establishments/:id/reviews', async (req, res) => {
     const { rating, title, body } = req.body;
     const establishmentId = req.params.id;

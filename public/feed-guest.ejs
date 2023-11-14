@@ -46,128 +46,28 @@
             <h2 onclick = "signinpage()">Make a suggestion!</h2>
         </div>
         <div class="feed-body">
-            <div class="feed-review">
-                <div class="feed-review-top">
-                    <img src="images/mcdo1-res1.jpg" alt="sample-res1">
-
-                    <div class="overlay-black" onclick="McDores1()"></div>
-
-                    <h1>McDonald's</h1>
-                </div>
-                <div class="feed-review-btm">
-                    <div class="feed-review-loc">
-                        <i class="fi fi-sr-marker green-icon loc-feed"></i>
-                        <p>2399 Taft Ave, Malate, Manila, 1004 Metro Manila</p>
+            <% establishments.forEach(function(establishment) { %>
+                <div class="feed-review">
+                    <div class="feed-review-top">
+                        <img src="<%=establishment.avatar.replace('/static', '')%>" alt="<%= establishment.name %>">
+                        <div class="overlay-black" onclick="resto(establishment._id)"></div>
+                        <h1><%= establishment.name %></h1>
                     </div>
-                    <div class="feed-review-rating">
-                        <i class="fi fi-sr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="feed-review">
-                <div class="feed-review-top">
-                    <img src="images\Jollibee\jollibee1-res2.jpg" alt="sample-res2">
-                    <div class="overlay-black" onclick="jollibeeres2()"></div>
-                    <h1>Jollibee</h1>
-                </div>
-                <div class="feed-review-btm">
-                    <div class="feed-review-loc">
-                        <i class="fi fi-sr-marker green-icon loc-feed"></i>
-                        <p>2284 Taft Ave, Malate, Manila, 1004 Metro Manila</p>
-                    </div>
-                    <div class="feed-review-rating">
-                        <i class="fi fi-sr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
+                    <div class="feed-review-btm">
+                        <div class="feed-review-loc">
+                            <i class="fi fi-sr-marker green-icon loc-feed"></i>
+                            <p><%=establishment.location%></p>
+                        </div>
+                        <div class="feed-review-rating">
+                            <i class="fi fi-sr-star green-icon star-feed"></i>
+                            <i class="fi fi-rr-star green-icon star-feed"></i>
+                            <i class="fi fi-rr-star green-icon star-feed"></i>
+                            <i class="fi fi-rr-star green-icon star-feed"></i>
+                            <i class="fi fi-rr-star green-icon star-feed"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="feed-review">
-                <div class="feed-review-top">
-                    <img src="images/Topside/topside.jpg" alt="sample-res3">
-                    <div class="overlay-black" onclick="topsideres3()"></div>
-                    <h1>Topside Diner</h1>
-                </div>
-                <div class="feed-review-btm">
-                    <div class="feed-review-loc">
-                        <i class="fi fi-sr-marker green-icon loc-feed"></i>
-                        <p>2589 Leon Guinto St, Ocampo St, Malate, Manila, 1004</p>
-                    </div>
-                    <div class="feed-review-rating">
-                        <i class="fi fi-sr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="feed-review">
-                <div class="feed-review-top">
-                    <img src="images/Zarks/zarks.JPG" alt="sample-res4">
-                    <div class="overlay-black" onclick="zarksres4()"></div>
-                    <h1>Zarks Burger</h1>
-                </div>
-                <div class="feed-review-btm">
-                    <div class="feed-review-loc">
-                        <i class="fi fi-sr-marker green-icon loc-feed"></i>
-                        <p>2464 Taft Ave, Malate, Manila, 1000 Metro Manila</p>
-                    </div>
-                    <div class="feed-review-rating">
-                        <i class="fi fi-sr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="feed-review">
-                <div class="feed-review-top">
-                    <img src="images/TapaKing/tapaking-res5.jpg" alt="sample-res5">
-                    <div class="overlay-black" onclick="tapakingres5()"></div>
-                    <h1>Tapa King</h1>
-                </div>
-                <div class="feed-review-btm">
-                    <div class="feed-review-loc">
-                        <i class="fi fi-sr-marker green-icon loc-feed"></i>
-                        <p>1st Flr., Commercial Unit No. 5, One Archers Place, Taft Ave, Manila</p>
-                    </div>
-                    <div class="feed-review-rating">
-                        <i class="fi fi-sr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="feed-review">
-                <div class="feed-review-top">
-                    <img src="images/Ate Ricas/bacsilog-res6.jpg" alt="sample-res6">
-                    <div class="overlay-black" onclick="bacsilogres6()"></div>
-                    <h1>Ate Rica's Bacsilog</h1>
-                </div>
-                <div class="feed-review-btm">
-                    <div class="feed-review-loc">
-                        <i class="fi fi-sr-marker green-icon loc-feed"></i>
-                        <p>2305 Fidel A.Reyes, Malate, Manila, 1004 Metro Manila</p>
-                    </div>
-                    <div class="feed-review-rating">
-                        <i class="fi fi-sr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                        <i class="fi fi-rr-star green-icon star-feed"></i>
-                    </div>
-                </div>
-            </div>
+            <% }); %>
         </div>
     </div>
 </div>
