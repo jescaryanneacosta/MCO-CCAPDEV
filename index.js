@@ -84,6 +84,25 @@ const User = require('./mongo model/user.model')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
 
+const createAdminUser = async () => {
+  const adminUsername = 'admin';
+  const adminPassword = '123';
+
+  try {
+    const adminUser = await User.findOne({ username: adminUsername });
+
+    if (!adminUser) {
+      const newAdmin = new User({ username: adminUsername, password: adminPassword, email: "admin@gmail.com", role: 'Admin' });
+      await newAdmin.save();
+      console.log('Admin user created:', newAdmin);
+    }
+  } catch (error) {
+    console.error('Error creating admin user:', error);
+  }
+};
+
+createAdminUser();
+
 app.get('/useraccount', (req, res) => {                                    // opens useraccount
     //res.sendFile(path.join(__dirname, 'public', 'useraccount.html'));
     res.render('useraccount' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
@@ -94,6 +113,18 @@ app.get('/', (req, res) => {                                    // opens guest f
     res.render('feed-guest');
 
 });
+
+app.get('/adminpage', (req, res) => {                                    // opens guest feed
+  //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
+  res.render('adminpage', { username : loggedInUser.username, avatar : loggedInUser.avatar });
+
+});
+
+app.get('/feed-admin', (req, res) => {                                    // opens guest feed
+  //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
+  res.render('feed-admin', { username : loggedInUser.username, avatar : loggedInUser.avatar });
+});
+
 
 app.get('/signin', (req, res) => {                         
     //res.sendFile(path.join(__dirname, 'public', 'signin.html'));
@@ -139,7 +170,11 @@ let loggedInUser = null;
       //res.redirect('/feed');
 
       console.log("Logged in User:", loggedInUser);
-      res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar});
+      if(loggedInUser.role = 'User')
+        res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar});
+      else 
+        if(loggedInUser.role = 'Admin')
+        res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');

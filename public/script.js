@@ -8,10 +8,10 @@ function signuppage(){
     window.location.href="signup.html"
 }
 function adminpage(){
-    window.location.href="adminpage.html"
+    window.location.href="/adminpage"
 }
 function adminfeed (){
-    window.location.href="feed-admin.html"
+    window.location.href="/feed-admin"
 }
 function signupalert(){
     alert("Sign-up Successful! Welcome to Taste Taft")

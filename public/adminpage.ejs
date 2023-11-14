@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Taste Test</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico"> 
+    <script src="script.js"></script> 
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&family=Young+Serif&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background">
+        <div class="nav-bar">
+            <nav>
+                <div class="logo-name">
+                    <i class="fi fi-sr-hamburger-soda nav-logo-green" onclick="adminfeed()"></i>
+                    <h1>Taste Test</h1>
+                </div>
+                <div class="user-nav">
+                    <img src="images/user-example.png" alt="profile-user">
+                    <h1>Hi, Admin!</h1>
+                </div>
+            </nav>
+        </div>
+        <div class="adminPage"> 
+            <div class="adminPage-header"> 
+                <h1>Admin Dashboard<br></h1>
+            </div>
+            <div class="admin-container">
+                    <div class="admin-profile">
+                        <img src="images/user-example.png" alt="profile-user">
+                        <h1>Admin</h1>
+                        <p id="edit-username-button" onclick="openusernamemodal()">Edit Username</p> 
+                        <p id="change-pic-button" onclick="openprofilepicmodal()">Change Profile Picture</p>
+                        <p id="change-password button" onclick="openpasswordmodal()">Change Password</p>
+                        <p onclick="feedguest()">Logout</p>
+                    </div>
+                </div>
+                <div class="edit-profilepic-modal" id="edit-profilepic-modal">
+                    <h1>Change Profile Picture</h1>
+                    <form>
+                        <input type="file" id="newProfilePic" accept="image/*">
+                        <button type="button" id="close-change-profilepic" onclick="closeprofilepicmodal()">Confirm</button>
+                    </form>
+                </div>
+                <div class="edit-password-modal" id="edit-password-modal">
+                    <h1>Change Password</h1>
+                        <p>Input Old Password</p>
+                            <form>
+                                <input type="password" id="inputPassword" placeholder="Old Password">
+                            </form>
+                        <p>Input New Password</p>
+                            <form>
+                                <input type="password" id="inputPassword" placeholder="New Password">
+                            </form>
+                        <button type="button" id="close-change-profilepic" onclick="closepasswordmodal()">Confirm</button>
+                </div>
+                <div class="admin-functions">
+                    <div class="admin-functions-first"> 
+                        <section class="add-restaurant-section">
+                            <h3>Delete Review</h3>
+                            <form id="delete-review-form">
+                                <div class="input-name"> 
+                                    <label for="user-id">User ID:</label>
+                                    <input type="text" id="user-id" name="user-id" required placeholder="Input Name of User">
+                                </div>                
+                                <div class="input-name"> 
+                                    <label for="user-id">Post: </label>
+                                    <input list="posts" placeholder="Choose review to delete">
+                                        <datalist id="posts">
+                                            <option value="Post 1"></option>
+                                            <option value="Post 2"></option>
+                                            <option value="Post 3"></option>
+                                            <option value="Post 4"></option>
+                                            <option value="Post 5"></option>
+                                        </datalist>
+                                </div>                
+                                <div class="admin-submit"> 
+                                    <button type="submit">Delete Review</button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                    <div class="admin-functions-second">
+                        <section class="ban-user-section">
+                            <h3>Ban User</h3>
+                            <form id="ban-user-form">
+                                <div class="input-name"> 
+                                    <label for="user-id">User ID:</label>
+                                    <input type="text" id="user-id" name="user-id" required placeholder="Input Name of User">
+                                </div>                
+                                <div class="admin-submit">
+                                    <button type="submit">Ban User</button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                    <div class="admin-functions-third"> 
+                        <section class="add-restaurant-section">
+                            <h3>Add Restaurant</h3>
+                            <form id="add-restaurant-form">
+                                <div class="input-name">
+                                    <label for="restaurant-name">Name:</label>
+                                    <input type="text" id="restaurant-name" name="restaurant-name" required placeholder="Input Restaurant Name">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-location">Address:</label>
+                                    <input type="text" id="restaurant-location" name="restaurant-location" required placeholder="Input Address">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-cuisine">Cuisine:</label>
+                                    <input type="text" id="restaurant-cuisine" name="restaurant-cuisine" placeholder="Input Cuisine">
+                                </div>
+                                <div class="admin-submit"> 
+                                    <button type="submit">Add Restaurant</button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                    <div class="admin-functions-fourth"> 
+                        <section class="delete-restaurant-section">
+                            <h3>Delete Restaurant</h3>
+                            <form id="add-restaurant-form">
+                                <div class="input-name">
+                                    <label for="restaurant-name">Name:</label>
+                                    <input type="text" id="restaurant-name" name="restaurant-name" required placeholder="Input Restaurant Name">
+                                </div>
+                                <div class="admin-submit"> 
+                                    <button type="submit">Delete Restaurant</button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
