@@ -65,7 +65,7 @@ after(async () => {
 });
 */
 // Here end Delete after tests
-
+/*
 const app = express();
 const port = 3000;
 const url = "mongodb://localhost:27017/persons";
@@ -114,20 +114,6 @@ const createAdminUser = async () => {          //     <------ Follow this style
 createAdminUser();
 
 //Do it here 
-<<<<<<< Updated upstream
-/*
-
-const createEstablishments = async () => {   
-  
-  try {
-  //First resto
-    //const name = 'Mcdo';
-    //const role  = 'Resto';
-    //const Address = 'Insert here';
-    //const ....
-  // and so one for the rest of the attributes then
-=======
->>>>>>> Stashed changes
 
 const newEstablishment = new Establishment({
   name: 'McDonalds',
@@ -150,7 +136,6 @@ try {
   } else {
     console.log('Establishment with the same name already exists:', existingEstablishment);
   }
-<<<<<<< Updated upstream
 
   //then do it again for the remaining restos we hard coded
 };
@@ -164,16 +149,6 @@ try {
 createEstablishments(); 
 
 */
-=======
-} catch (error) {
-  console.error('Error creating or checking establishment:', error);
-}
-saveEstablishment();
-
-
-
-
->>>>>>> Stashed changes
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
