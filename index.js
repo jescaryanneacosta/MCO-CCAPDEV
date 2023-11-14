@@ -61,9 +61,8 @@ const createAdminUser = async () => {          //     <------ Follow this style
       const newAdmin = new User({ username: adminUsername, password: adminPassword, email: "admin@gmail.com", role: 'Admin' });
       await newAdmin.save();
       console.log('Admin user created:', newAdmin);
-    } else {
-      console.log("Admin has been made:", newAdmin);
-    }
+    } else 
+      console.log("Admin has been made");
   } catch (error) {
     console.error('Error creating admin user:', error);
   }
@@ -123,9 +122,8 @@ app.get('/feed', (req, res) => {                              // opens feed html
 app.get('/establishment', (req,res) => {
   res.render('establishment',
   {
-    username:
-    loggedInUser.username, avatar: 
-    loggedInUser.avatar
+    username: loggedInUser.username, 
+    avatar: loggedInUser.avatar
   })
 });
 
@@ -268,6 +266,8 @@ let loggedInUser = null;
       console.error(error);
       res.status(500).send('Internal Server Error');
     }
+  });
+
 app.post('/establishments/:id/reviews', async (req, res) => {
     const { rating, title, body } = req.body;
     const establishmentId = req.params.id;
