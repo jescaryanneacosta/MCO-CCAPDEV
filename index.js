@@ -29,43 +29,6 @@ const multer = require('multer');
 
 */
 
-// Here Start 
-/*
-const { describe, before, after, it } = require('mocha');
-const assert = require('assert');
-const { MongoMemoryServer } = require('mongodb-memory-server');
-
-let mongoServer;
-
-before(async () => {
-  mongoServer = new MongoMemoryServer();
-  await mongoServer.start(); 
-  const mongoUri = await mongoServer.getUri();
-  await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-
-  const adminUsername = 'admin';
-  const adminPassword = '123';
-
-  const adminUser = await User.findOne({ username: adminUsername });
-
-  if (!adminUser) {
-    const newAdmin = new User({ username: adminUsername, password: adminPassword, role: 'Admin'});
-    await newAdmin.save();
-    console.log('Admin user created:', newAdmin);
-  }
-
-
-});
-
-after(async () => {
-  await mongoose.connection.dropDatabase();
-  await mongoose.disconnect();
-  await mongoServer.stop();
-});
-*/
-// Here end Delete after tests
-
 const app = express();
 const port = 3000;
 const url = "mongodb://localhost:27017/persons";
@@ -97,6 +60,8 @@ const createAdminUser = async () => {          //     <------ Follow this style
       const newAdmin = new User({ username: adminUsername, password: adminPassword, email: "admin@gmail.com", role: 'Admin' });
       await newAdmin.save();
       console.log('Admin user created:', newAdmin);
+    } else {
+      console.log("Admin has been made:", newAdmin);
     }
   } catch (error) {
     console.error('Error creating admin user:', error);
@@ -104,44 +69,6 @@ const createAdminUser = async () => {          //     <------ Follow this style
 };
 
 createAdminUser();
-
-//Do it here 
-
-const Establishment = require("./mongo model/resto.model");
-
-
-async function saveEstablishment() {
-  const newEstablishment = new Establishment({
-    name: 'Ate Ricas',
-    popularitems: [ 'Bacon (BacSiLog)', 'Hotdog (HotSiLog)', 'Footlong (FootSiLog)', 'Tapa (TapSilog)' ],
-    avatar: '/static/images/default-avatar.jpg',
-    images: [],
-    category: 'Fast Food',
-    cuisine: ['Filipino'],
-    description: 'Ate Rica’s BACSILOG on-the-go is best known for serving tasty, quality, fast, and clean superior-silog meals in schools, commercial spaces, and supermarkets. his includes our anchor offering – the bacsilog or bacon silog – an innovative and alternative variant on the Filipino silog fare. With our efficient and friendly service partners, we offer all-day breakfast combo meals-in-a-bowl giving value for money for students, young professionals, office workers, mothers, and people on-the-go',
-    location: '2305 Fidel A.Reyes, Malate, Manila, 1004 Metro Manila',
-    rating: 0,
-  });
-
-  try {
-    const existingEstablishment = await Establishment.findOne({ name: newEstablishment.name });
-
-    if (!existingEstablishment) {
-      await newEstablishment.save();
-      console.log('Establishment created:', newEstablishment);
-    } else {
-      console.log('Establishment with the same name already exists:', existingEstablishment);
-    }
-  } catch (error) {
-    console.error('Error creating or checking establishment:', error);
-  }
- 
-}
-
-saveEstablishment();
-
-
-
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
