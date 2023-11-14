@@ -55,9 +55,13 @@
                 </ul>
                 <h1>Popular Menu Items</h1>
                 <ul>
-                    <% establishment.popularItems.forEach(function(item) { %>
-                        <li><%= item %></li>
-                    <% }); %>
+                    <% if (establishment && establishment.popularItems && establishment.popularItems.length > 0) { %>
+                        <% establishment.popularItems.forEach(function(item) { %>
+                            <li><%= item %></li>
+                        <% }); %>
+                    <% } else { %>
+                        <li> </li>
+                    <% } %>
                 </ul>
                 <br>
                 <div class="res-rev-header">
