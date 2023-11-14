@@ -92,6 +92,11 @@ app.get('/feed', (req, res) => {                              // opens feed html
     res.render('feed');
 });
 
+
+app.get('/establishment', (req,res) => {
+  res.render('establishment')
+});
+
 let loggedInUser = null;
 
 
