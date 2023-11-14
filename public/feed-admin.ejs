@@ -46,7 +46,7 @@
                 <div class="feed-review">
                     <div class="feed-review-top">
                         <img src="<%=establishment.avatar.replace('/static', '')%>" alt="<%= establishment.name %>">
-                        <div class="overlay-black" onclick="resto(establishment._id)"></div>
+                        <div class="overlay-black" onclick="resto('<%=establishment._id%>')"></div>
                         <h1><%= establishment.name %></h1>
                     </div>
                     <div class="feed-review-btm">

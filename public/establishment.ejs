@@ -14,7 +14,7 @@
                 <div class="logo-name-white">
                     <% if (!loggedInUser) { %>
                         <i class="fi fi-sr-hamburger-soda nav-logo-white" onclick="feedguest()"></i>
-                      <% } else { %>
+                      <% } else if (loggedInUser.role == 'User){ %>
                         <i class="fi fi-sr-hamburger-soda nav-logo-white" onclick="feed()"></i>
                       <% } %>
                       <h1>Taste Test</h1>

@@ -79,7 +79,7 @@ app.get('/', async (req, res) => {
 app.get('/adminpage', async (req, res) => {                                    // opens guest feed
   try {
     const establishments = await Establishment.find();
-    res.render('feed-admint', { establishments });
+    res.render('feed-admin', { establishments });
   } catch (error) {
     console.error('Error getting establishments:', error);
     res.status(500).send('Internal Server Error');
