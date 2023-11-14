@@ -41,6 +41,20 @@ before(async () => {
   await mongoServer.start(); 
   const mongoUri = await mongoServer.getUri();
   await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+
+  const adminUsername = 'admin';
+  const adminPassword = '123';
+
+  const adminUser = await User.findOne({ username: adminUsername });
+
+  if (!adminUser) {
+    const newAdmin = new User({ username: adminUsername, password: adminPassword, role: 'Admin'});
+    await newAdmin.save();
+    console.log('Admin user created:', newAdmin);
+  }
+
+
 });
 
 after(async () => {
@@ -72,7 +86,7 @@ app.use(express.static('public'));
 
 app.get('/useraccount', (req, res) => {                                    // opens useraccount
     //res.sendFile(path.join(__dirname, 'public', 'useraccount.html'));
-    res.render('useraccount');
+    res.render('useraccount' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
 });
 
 app.get('/', (req, res) => {                                    // opens guest feed
@@ -89,7 +103,7 @@ app.get('/signin', (req, res) => {
 
 app.get('/feed', (req, res) => {                              // opens feed html
     //res.sendFile(path.join(__dirname, 'public', 'feed.html'));
-    res.render('feed');
+    res.render('feed' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
 });
 
 

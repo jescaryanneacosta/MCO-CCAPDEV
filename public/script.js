@@ -17,13 +17,13 @@ function signupalert(){
     alert("Sign-up Successful! Welcome to Taste Taft")
 }
 function feed(){
-    window.location.href="feed.html";
+    window.location.href="/feed";
 }
 function feedguest(){
     window.location.href="feed-guest.html";
 }
 function userpage(){
-    window.location.href="useraccount.html"
+    window.location.href="/useraccount"
 }
 function McDores1(){
     window.location.href="mcdo-res1.html"
@@ -102,4 +102,3 @@ function galleryback(){
     var galleryContainer = document.querySelector(".res-gallery");
     galleryContainer.scrollLeft -= 600;
 };
-
