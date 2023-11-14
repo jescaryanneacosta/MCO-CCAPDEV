@@ -6,28 +6,6 @@ const ejs = require('ejs');
 const multer = require('multer'); 
 
 //This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
-// since we have to adjust various small details to get it to work. 
-// Look to signin html and sign up for the changes
-
-//Memory server thing so data doesnt get saved
-/* 
-    What this does basically is create a temporary server where the data we use during a specific session
-    is only stored on that temporary server so its like a temporary database and once we are done it erases the stuff 
-    and resets the values. However we should delete this before submitting since sir wants a working databases that actually
-    stores so we just use this memory server stuff for tests.
-
-
-    Go to command prompt then make sure you have all the dependencies installed, check in package.json
-
-    Then after that change the path to the root depository 
-
-    After, type in the line "npm test", this opens the server and database (KEEP IN MIND THIS IS JUST FOR THE TEMPORARY SERVER)
-
-    go to ur web and type http://localhost:3000 and theres the start of the website
-    
-    Once we are done with this temporary stuff, we run the command prompt again with the same path but use "node index.js"
-
-*/
 
 const app = express();
 const port = 3000;
@@ -81,7 +59,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
 //ROUTINGS
 
 app.get('/useraccount', (req, res) => {                                    // opens useraccount
@@ -89,21 +66,30 @@ app.get('/useraccount', (req, res) => {                                    // op
     res.render('useraccount' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
 });
 
-app.get('/', (req, res) => {                                    // opens guest feed
-    //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
-    res.render('feed-guest');
-
+app.get('/', async (req, res) => {
+  try {
+    const establishments = await Establishment.find();
+    res.render('feed-guest', { establishments });
+  } catch (error) {
+    console.error('Error getting establishments:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
-app.get('/adminpage', (req, res) => {                                    // opens guest feed
-  //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
-  res.render('adminpage', { username : loggedInUser.username, avatar : loggedInUser.avatar });
-
+app.get('/adminpage', async (req, res) => {                                    // opens guest feed
+  try {
+    const establishments = await Establishment.find();
+    res.render('feed-admint', { establishments });
+  } catch (error) {
+    console.error('Error getting establishments:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 app.get('/feed-admin', (req, res) => {                                    // opens guest feed
   //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
-  res.render('feed-admin', { username : loggedInUser.username, avatar : loggedInUser.avatar });
+  const establishments = getAllEstablishments();
+  res.render('feed-admin', { username : loggedInUser.username, avatar : loggedInUser.avatar, establishments});
 });
 
 
@@ -113,8 +99,7 @@ app.get('/signin', (req, res) => {
 
 });
 
-app.get('/feed', (req, res) => {                              // opens feed html
-    //res.sendFile(path.join(__dirname, 'public', 'feed.html'));
+app.get('/feed', (req, res) => {                              // opens feed html  
     res.render('feed' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
 });
 
@@ -169,12 +154,14 @@ let loggedInUser = null;
       // Redirect to the main page on successful login
       //res.redirect('/feed');
 
-      console.log("Logged in User:", loggedInUser);
+      const establishments = await Establishment.find();
+
+      console.log("Logged in User:", loggedInUser, establishments);
       if(loggedInUser.role == 'User')
-        res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar});
+        res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
       else 
         if(loggedInUser.role == 'Admin')
-          res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar});
+          res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -215,7 +202,9 @@ let loggedInUser = null;
       }
     
       console.log(loggedInUser)
+
       res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+      console.log(loggedInUser);
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
