@@ -16,14 +16,14 @@
                 <h1>Taste Test</h1>
             </div>
             <div class="user-nav">
-                <img src="<%=avatar%>" alt="profile-user" onclick="userpage()">
+                <img src="<%=avatar.replace('/static', '')%>" alt="profile-user" onclick="userpage()">
                 <h1>Hi, <%=username%>!</h1>
             </div>
         </nav>
     </div>
     <div class="profile">
         <div class="profile-left">
-            <img src="images/user-example.png" alt="profile-user">
+            <img src="<%=avatar.replace('/static', '')%>" alt="profile-user">
             <h1><%=username%></h1>
             <p id="edit-username-button" onclick="openusernamemodal()">Edit Username</p> 
             <p id="change-pic-button" onclick="openprofilepicmodal()">Change Profile Picture</p>
