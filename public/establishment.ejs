@@ -70,7 +70,7 @@
                 </div>
                 
                 <form id="reviewForm" action="/establishments/<%= establishment._id %>/reviews" method="POST">
-                <!-- <input type="hidden" name="_csrf" value="<%= csrfToken %>"> -->
+                <!-- <input type="hidden" name="_csrf" value=" csrfToken "> --> <!--I removed muna the < % % > tags-->
                 <label for="rating">Rating:</label>
                     <select name="rating" id="rating" required>
                         <option value="5">5 Stars</option>
@@ -90,18 +90,18 @@
        document.getElementById('reviewForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const form = event.target;
-    const formData = new FormData(form);
-    const actionUrl = form.getAttribute('action');
+            const form = event.target;
+            const formData = new FormData(form);
+            const actionUrl = form.getAttribute('action');
 
-    fetch(actionUrl, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'CSRF-Token': formData.get('_csrf'), // Update this line
-        },
-        credentials: 'same-origin',
-    })
+            fetch(actionUrl, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'CSRF-Token': formData.get('_csrf'), // Update this line
+                },
+                credentials: 'same-origin',
+            })
 
     .then(response => {
         if (!response.ok) {
