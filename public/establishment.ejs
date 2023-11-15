@@ -55,8 +55,8 @@
                 </ul>
                 <h1>Popular Menu Items</h1>
                 <ul>
-                    <% if (establishment && establishment.popularItems && establishment.popularItems.length > 0) { %>
-                        <% establishment.popularItems.forEach(function(item) { %>
+                    <% if (establishment && establishment.popularitems && establishment.popularitems.length > 0) { %>
+                        <% establishment.popularitems.forEach(function(item) { %>
                             <li><%= item %></li>
                         <% }); %>
                     <% } else { %>
