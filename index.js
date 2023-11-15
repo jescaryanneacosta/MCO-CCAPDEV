@@ -12,15 +12,8 @@ const csrf = require('csurf');
 const app = express();
 const port = 3000;
 const url = "mongodb://localhost:27017/persons";
-const csrfProtection = csrf({ cookie: true });
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(csrfProtection);
-app.use((req, res, next) => {
-  res.locals.csrfToken = req.csrfToken();
-  next();
-});
 
 app.set('view engine', 'ejs'); // Set EJS as the view engine
 app.set('views', path.join(__dirname, 'public'));
@@ -36,6 +29,14 @@ const Review = require('./mongo model/review.model');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
+
+const csrfProtection = csrf({ cookie: true });
+
+app.use(csrfProtection);
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
 
 const createAdminUser = async () => {          //     <------ Follow this style
   const adminUsername = 'admin';
