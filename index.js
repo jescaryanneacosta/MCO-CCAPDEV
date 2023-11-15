@@ -273,6 +273,40 @@ let loggedInUser = null;
     }
   });
 
+  app.post('/addestablishment', upload.single('avatar'), async (req,res) => {
+
+    const {name, location, cuisine, popularitems, category, description} = req.body;
+
+    const avatar = 'images/' + req.file.filename;
+
+    try {
+
+      const existingResto = await Establishment.findOne({name});
+      if (existingResto) {
+        return res.send('Establishment already exists');
+      }
+
+      const newResto = new Establishment ({
+        name: name,
+        popularitems: popularitems,
+        avatar: avatar,
+        images: [],
+        category: category,
+        cuisine: cuisine,
+        description: description,
+        location: location
+      })
+      await newResto.save();
+
+      console.log(newResto);
+
+      res.render('adminpage',{avatar: loggedInUser.avatar, users});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+  }
+  });
+
   app.post('/signup', async (req, res) => {            //signup function
     const { username, email, password } = req.body;
   

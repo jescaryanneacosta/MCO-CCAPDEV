@@ -1056,6 +1056,47 @@ label[for="restaurant-cuisine"] {
     font-family: "Young Serif", serif;
 }
 
+.admin-functions2 {
+    background-color: var(--ttgreen);
+    width: 1000px;
+    height: 1000px;
+    margin-left: 320px;
+    margin-top: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.admin-functions2 p{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
+
+.admin-functions2 h3{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
+
+.admin-functions2 label{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
+
+.admin-functions2 button {
+    flex-basis: 45%;
+    height: 50px;
+    background: var(--ttwhite);
+    font-family: "Young Serif", serif;
+    font-size: 18px;
+    color: var(--ttgreen);
+    border-radius: 30px;
+    margin: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
 .admin-functions {
     display: flex;
     justify-content: space-between;
