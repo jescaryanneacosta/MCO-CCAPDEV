@@ -320,6 +320,7 @@ body{
     height: 400px;
     border-radius: 20px;
     margin: 30px;
+    overflow: auto;
 }
 .user-rev-head{
     padding-right: 30px;
