@@ -108,18 +108,22 @@ function galleryback(){
 
 function sortRestaurants() {
     var sortBy = document.getElementById("sortSelect").value;
-    var feedBody = document.getElementById("establishments-feed");
-    var feedReviews = feedBody.getElementsByClassName("feed-review");
+    var feedBody = document.querySelector(".feed-body");
+    var feedReviews = feedBody.querySelectorAll(".feed-review");
     var feedArray = Array.from(feedReviews);
 
-    feedArray.sort(function(a, b) {
+    feedArray.sort(function (a, b) {
         switch (sortBy) {
             case "recommended":
                 return 0.5 - Math.random();
             case "most-stars":
-                return parseFloat(b.querySelector(".feed-review-rating").getAttribute("data-rating")) - parseFloat(a.querySelector(".feed-review-rating").getAttribute("data-rating"));
+                var ratingA = parseFloat(a.querySelector(".feed-review-rating").getAttribute("data-rating"));
+                var ratingB = parseFloat(b.querySelector(".feed-review-rating").getAttribute("data-rating"));
+                return ratingB - ratingA;
             case "least-stars":
-                return parseFloat(a.querySelector(".feed-review-rating").getAttribute("data-rating")) - parseFloat(b.querySelector(".feed-review-rating").getAttribute("data-rating"));
+                var ratingA = parseFloat(a.querySelector(".feed-review-rating").getAttribute("data-rating"));
+                var ratingB = parseFloat(b.querySelector(".feed-review-rating").getAttribute("data-rating"));
+                return ratingA - ratingB;
             case "alphabetical":
                 var nameA = a.querySelector("h1").innerText.toLowerCase();
                 var nameB = b.querySelector("h1").innerText.toLowerCase();
@@ -133,12 +137,10 @@ function sortRestaurants() {
     feedBody.innerHTML = "";
 
     // Append the sorted elements to feedBody
-    feedArray.forEach(function(element) {
+    feedArray.forEach(function (element) {
         feedBody.appendChild(element);
     });
 }
-
-
 
 function filterRestaurants() {
     var searchTerm = document.getElementById("searchInput").value.toLowerCase();
