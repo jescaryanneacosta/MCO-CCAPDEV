@@ -201,9 +201,10 @@ let loggedInUser = null;
       }
 
       const users = await User.find();
+      const establishments = await Establishment.find();
 
 
-      res.render('adminpage',{avatar: loggedInUser.avatar, users});
+      res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -381,6 +382,11 @@ app.post('/establishments/:id', async (req, res) => {
 
         if(!loggedInUser){
           return res.status(404).send('You are not logged in');
+        }
+
+        if(loggedInUser.role == 'Admin') {
+          return res.status(404).send('Admins cannot make reviews');
+
         }
 
         const newReview = new Review({
