@@ -70,8 +70,7 @@
                 </div>
                 
                 <form id="reviewForm" action="/establishments/<%= establishment._id %>/reviews" method="POST">
-                <!-- <input type="hidden" name="_csrf" value=" csrfToken "> --> <!--I removed muna the < % % > tags-->
-                <label for="rating">Rating:</label>
+                    <label for="rating">Rating:</label>
                     <select name="rating" id="rating" required>
                         <option value="5">5 Stars</option>
                         <option value="4">4 Stars</option>
@@ -85,38 +84,65 @@
                     <textarea id="body" name="body" required></textarea>
                     <button type="submit">Submit Review</button>
                 </form>
-
-   <!-- <script>
-       document.getElementById('reviewForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-            const form = event.target;
-            const formData = new FormData(form);
-            const actionUrl = form.getAttribute('action');
-
-            fetch(actionUrl, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'CSRF-Token': formData.get('_csrf'), // Update this line
-                },
-                credentials: 'same-origin',
-            })
-
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Server responded with an error');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Success:', data);
-        refreshReviews();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
-    </script> -->
+            
+                <div class="reviews-container">
+                    <% reviews.forEach(function(review) { %>
+                        <div class="res-page-review">
+                            <div class="review-header">
+                                <img src="<%= review.userAvatar %>" alt="User Avatar">
+                                <div class="rev-info">
+                                    <h1><%= review.userName %></h1>
+                                    <div>
+                                        <% for (let i = 0; i < review.rating; i++) { %>
+                                            <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                                        <% } %>
+                                        <% for (let i = review.rating; i < 5; i++) { %>
+                                            <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="vote-system">
+                                    <div class="arrows">
+                                        <div class="up"></div>
+                                        <div class="down"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-desc">
+                                <p><%= review.body %></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            
+                <script>
+                    document.getElementById('reviewForm').addEventListener('submit', function (event) {
+                        event.preventDefault();
+            
+                        const form = event.target;
+                        const formData = new FormData(form);
+                        const actionUrl = form.getAttribute('action');
+            
+                        fetch(actionUrl, {
+                            method: 'POST',
+                            body: formData,
+                            credentials: 'same-origin',
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Server responded with an error');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Success:', data);
+                            // Refresh the page or update the reviews dynamically
+                            location.reload();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    });
+                </script>
 </body>
-</html>        
+</html>

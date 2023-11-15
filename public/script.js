@@ -108,45 +108,38 @@ function galleryback(){
 
 function sortRestaurants() {
     var sortBy = document.getElementById("sortSelect").value;
-
     var feedBody = document.getElementById("establishments-feed");
-
     var feedReviews = feedBody.getElementsByClassName("feed-review");
-
     var feedArray = Array.from(feedReviews);
 
-    if (sortBy === "recommended") {
-        feedArray.sort(function() {
-            return 0.5 - Math.random();
-        });
-    } else if (sortBy === "most-stars") {
-        feedArray.sort(function (a, b) {
-            var starsA = a.querySelectorAll(".star-feed.fi-sr-star").length;
-            var starsB = b.querySelectorAll(".star-feed.fi-sr-star").length;
-            return starsB - starsA;
-        });
-    } else if (sortBy === "least-stars") {
-        feedArray.sort(function (a, b) {
-            var starsA = a.querySelectorAll(".star-feed.fi-sr-star").length;
-            var starsB = b.querySelectorAll(".star-feed.fi-sr-star").length;
-            return starsA - starsB;
-        });
-    } else if (sortBy === "alphabetical") {
-        feedArray.sort(function (a, b) {
-            var nameA = a.querySelector("h1").innerText.toLowerCase();
-            var nameB = b.querySelector("h1").innerText.toLowerCase();
-            return nameA.localeCompare(nameB);
-        });
-    }
-
-    feedArray.forEach(function (element) {
-        feedBody.removeChild(element);
+    feedArray.sort(function(a, b) {
+        switch (sortBy) {
+            case "recommended":
+                return 0.5 - Math.random();
+            case "most-stars":
+                return parseFloat(b.querySelector(".feed-review-rating").getAttribute("data-rating")) - parseFloat(a.querySelector(".feed-review-rating").getAttribute("data-rating"));
+            case "least-stars":
+                return parseFloat(a.querySelector(".feed-review-rating").getAttribute("data-rating")) - parseFloat(b.querySelector(".feed-review-rating").getAttribute("data-rating"));
+            case "alphabetical":
+                var nameA = a.querySelector("h1").innerText.toLowerCase();
+                var nameB = b.querySelector("h1").innerText.toLowerCase();
+                return nameA.localeCompare(nameB);
+            default:
+                return 0;
+        }
     });
 
-    feedArray.forEach(function (element) {
+    // Clear the feedBody
+    feedBody.innerHTML = "";
+
+    // Append the sorted elements to feedBody
+    feedArray.forEach(function(element) {
         feedBody.appendChild(element);
     });
 }
+
+
+
 function filterRestaurants() {
     var searchTerm = document.getElementById("searchInput").value.toLowerCase();
     var feedReviews = document.getElementsByClassName("feed-review");

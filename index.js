@@ -278,11 +278,7 @@ let loggedInUser = null;
 app.post('/establishments/:id/reviews', async (req, res) => {
     const { rating, title, body } = req.body;
     const establishmentId = req.params.id;
-    const csrfToken = req.body._csrf || req.headers['csrf-token'];
-    if (!csrfToken || !csurf.verify(csrfToken, req)) {
-            // If the CSRF token is missing or invalid, handle accordingly
-            return res.status(403).send('Invalid CSRF token');
-        }
+    
     try {
         const newReview = new Review({
             establishment: establishmentId,
