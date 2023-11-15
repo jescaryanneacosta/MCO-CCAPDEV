@@ -62,9 +62,13 @@ const upload = multer({ storage: storage });
 
 //ROUTINGS
 
-app.get('/useraccount', (req, res) => {                                    // opens useraccount
+app.get('/useraccount', async (req, res) => {                                    // opens useraccount
     //res.sendFile(path.join(__dirname, 'public', 'useraccount.html'));
-    res.render('useraccount' , { username : loggedInUser.username, avatar : loggedInUser.avatar });
+
+    const reviews = await Review.find({ username: loggedInUser.username });
+
+
+    res.render('useraccount' , { username : loggedInUser.username, avatar : loggedInUser.avatar, reviews });
 });
 
 app.get('/', async (req, res) => {

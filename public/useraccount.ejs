@@ -35,65 +35,36 @@
         <div class="profile-right">
             <h1>Your Reviews</h1>
             <!-- Reviews and  Restaurants are temporary rn (hard coded) -->
-            <div class="user-reviews">
-                <div class="user-rev-head">
-                    <h1 onclick="tapakingres5()">Tapa King</h1>
-                    <div class="user-ratings">
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+            <div class="reviews-container">
+                <% reviews.forEach(function(review) { %>
+                    <div class="res-page-review">
+                        <div class="review-header">
+                            <img src="<%= review.userAvatar.replace('/static', '') %>" alt="User Avatar">
+                            <div class="rev-info">
+                                <h1><%= review.username %></h1>
+                                <div>
+                                    <% for (let i = 0; i < review.rating; i++) { %>
+                                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
+                                    <% } %>
+                                    <% for (let i = review.rating; i < 5; i++) { %>
+                                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="vote-system">
+                                <div class="arrows">
+                                    <i class="fi fi-sr-up green-icon"></i>
+                                    <i class="fi fi-sr-down green-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-desc">
+                            <h2><%= review.title %></h2>
+                            <p><%= review.body %></p>
+                            <p><%= review.datePosted %></p>
+                        </div>
                     </div>
-                </div>  
-                <div class="user-rev-desc">
-                    <p>The prices, they were reasonable, which was a plus. The wine list had some good selections, and it paired well with our meal.</p>
-                </div>
-            </div>
-            <div class="user-reviews">
-                <div class="user-rev-head">
-                    <h1 onclick="zarksres4()">Zarks Burger</h1>
-                    <div class="user-ratings">
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                    </div>
-                </div>  
-                <div class="user-rev-desc">
-                    <p>Service was friendly, but a tad slow. We had to wait longer than we would have liked for our dishes to arrive, and it took a while to get our drink orders. Our server, however, was attentive and polite, making an effort to ensure we were comfortable.</p>
-                </div>
-            </div>
-            <div class="user-reviews">
-                <div class="user-rev-head">
-                    <h1 onclick="jollibeeres2()">Jollibee</h1>
-                    <div class="user-ratings">
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                    </div>
-                </div>  
-                <div class="user-rev-desc">
-                    <p>We ordered a variety of dishes, and while some were quite good, others fell short of our expectations. The appetizers were the highlight of the meal. Unfortunately, the main courses didn't quite live up to that standard.</p>
-                </div>
-            </div>
-            <div class="user-reviews">
-                <div class="user-rev-head">
-                    <h1 onclick="topsideres3()">Topside</h1>
-                    <div>
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-sr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                        <i class="fi fi-rr-star green-icon star-user-acc"></i>
-                    </div>
-                </div>  
-                <div class="user-rev-desc">
-                    <p>I recently dined at this restaurant with a group of friends, and my experience was a bit mixed. The atmosphere was pleasant, with cozy lighting and comfortable seating, creating a nice ambiance for an evening out. However, I have to say the overall experience left me somewhat underwhelmed.</p>
-                </div>
+                <% }); %>
             </div>
         </div>
     </div>
