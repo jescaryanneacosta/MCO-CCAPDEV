@@ -206,6 +206,17 @@
             </div>
         </div>
     </div>
+    <div class="review-button">
+        <i class="fi fi-rr-edit" onclick="openreviewmodal()"></i>
+    </div>
+    <div class="edit-review-modal" id="review-modal">
+        <h1>Write a Review</h1>
+        <form action="/write-review" method="POST">
+            <input type="text" name="title" placeholder="Title">
+            <input type="text" name="title" placeholder="Review">
+            <input type="submit" id="close-review" value="Confirm">
+        </form>
+    </div>
 </div>
 </body>
 </html>
