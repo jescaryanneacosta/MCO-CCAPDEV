@@ -177,6 +177,32 @@ let loggedInUser = null;
       res.status(500).send('Internal Server Error');
     }
   });
+  
+  app.post('/banuser', async (req, res) => {          //log in function
+    const {user} = req.body;
+    console.log(user)
+  
+    try {
+      const userToDelete = await User.findOne({username : user});
+      console.log("User to delete:", userToDelete);
+
+  
+      if (!userToDelete) {
+        return res.send('User does not exist');
+      }
+      if (userToDelete) {
+        await User.deleteOne({ _id: userToDelete._id });
+      }
+
+      const users = await User.find();
+
+
+      res.render('adminpage',{avatar: loggedInUser.avatar, users});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
   app.post('/changeUsername', async (req, res) => {
     const {username} = req.body;

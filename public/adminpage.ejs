@@ -88,14 +88,21 @@
                     <div class="admin-functions-second">
                         <section class="ban-user-section">
                             <h3>Ban User</h3>
-                            <form id="ban-user-form">
+                            <form action = "/banuser" method="POST">
                                 <div class="input-name"> 
                                     <label for="user-id">User ID:</label>
-                                    <input type="text" id="user-id" name="user-id" required placeholder="Input Name of User">
-                                </div>                
+                                    <input list="users" name = "user" placeholder="Choose user">
+                                        <datalist id="users">
+                                                <% users.forEach(function(user) { %>
+                                                    <% if (user.role == 'User') {%>
+                                                    <option value = "<%=user.username%>"></option>
+                                                    <% } %>
+                                                <% }); %>
+                                        </datalist>
                                 <div class="admin-submit">
-                                    <button type="submit">Ban User</button>
+                                    <input type="submit" value="Ban User">
                                 </div>
+                                </div>                
                             </form>
                         </section>
                     </div>
