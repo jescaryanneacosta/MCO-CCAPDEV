@@ -47,51 +47,34 @@ function zarksres4() {
     window.location.href="zarks-res4.html"
 }
 
-function disableScroll() {
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-        window.onscroll = function() {
-            window.scrollTo(scrollLeft, scrollTop);
-        };
-}
-function enableScroll() {
-    window.onscroll = function() {};
-}
-
 function openprofilepicmodal (){
     var profilepicmodal = document.getElementById("edit-profilepic-modal");
     profilepicmodal.style.display = "block";
-    disableScroll();
 };
 
 function closeprofilepicmodal() {
     var profilepicmodal = document.getElementById("edit-profilepic-modal");
     profilepicmodal.style.display = "none";
-    enableScroll();
 };
 
 function openpasswordmodal (){
     var profilepicmodal = document.getElementById("edit-password-modal");
     profilepicmodal.style.display = "block";
-    disableScroll();
 };
 
 function closepasswordmodal() {
     var passwordmodal = document.getElementById("edit-password-modal");
     passwordmodal.style.display = "none";
-    enableScroll();
 };
 
 function openusernamemodal() {
     var usernamemodal = document.getElementById("edit-username-modal");
     usernamemodal.style.display = "block";
-    disableScroll();
 };
 
 function closeusernamemodal() {
     var usernamemodal = document.getElementById("edit-username-modal");
     usernamemodal.style.display = "none";
-    enableScroll();
 };
 
 function openreviewmodal() {
