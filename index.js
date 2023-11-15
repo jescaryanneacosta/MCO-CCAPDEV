@@ -218,7 +218,6 @@ let loggedInUser = null;
     try {
       const establishmentToDelete = await Establishment.findOne({name : name});
       console.log("User to delete:", establishmentToDelete);
-
   
       if (!establishmentToDelete) {
         return res.send('Establishment does not exist');
@@ -246,11 +245,14 @@ let loggedInUser = null;
         return res.send('Username already exists');
       }
 
+      const reviews = await Review.find({ username: loggedInUser.username });
+
+    
       loggedInUser.username = username;
-      await loggedInUser.save();
+      await loggedInUser.save();      
 
       console.log(loggedInUser)
-        res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+      res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar, reviews});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -270,6 +272,9 @@ let loggedInUser = null;
         await loggedInUser.save();
       }
     
+      const reviews = await Review.find({ username: loggedInUser.username });
+
+
       console.log(loggedInUser)
 
       console.log(loggedInUser)
@@ -294,9 +299,11 @@ let loggedInUser = null;
         loggedInUser.avatar = avatar;
         await loggedInUser.save();
 
+
+        const reviews = await Review.find({ username: loggedInUser.username });
         console.log(loggedInUser)
         if (loggedInUser.role == 'User'){
-          res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+          res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar, reviews});
         } else if (loggedInUser.role == 'Admin') {
           res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
         }
@@ -332,7 +339,7 @@ let loggedInUser = null;
       await newResto.save();
 
       console.log(newResto);
-      
+
       const users = await User.find();
       const establishments = await Establishment.find();
 
