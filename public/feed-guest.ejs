@@ -39,8 +39,8 @@
                     <option value="most-stars">Most Stars</option>
                     <option value="least-stars">Least Stars</option>
                     <option value="alphabetical">Alphabetical</option>
-                </select>  
-            </div>
+                </select>
+            </div>                      
         </div>
         <div class="suggestion-header">
             <h2 onclick = "signinpage()">Make a suggestion!</h2>
@@ -58,13 +58,15 @@
                             <i class="fi fi-sr-marker green-icon loc-feed"></i>
                             <p><%=establishment.location%></p>
                         </div>
-                        <div class="feed-review-rating">
-                            <i class="fi fi-sr-star green-icon star-feed"></i>
-                            <i class="fi fi-rr-star green-icon star-feed"></i>
-                            <i class="fi fi-rr-star green-icon star-feed"></i>
-                            <i class="fi fi-rr-star green-icon star-feed"></i>
-                            <i class="fi fi-rr-star green-icon star-feed"></i>
-                        </div>
+                    <div class="feed-review-rating" data-rating="<%= establishment.rating %>">
+                        <% for (let i = 1; i <= 5; i++) { %>
+                            <% if (i <= establishment.rating) { %>
+                                <i class="fi fi-sr-star green-icon star-feed"></i>
+                            <% } else { %>
+                                <i class="fi fi-rr-star green-icon star-feed"></i>
+                            <% } %>
+                        <% } %>
+                    </div>
                     </div>
                 </div>
             <% }); %>

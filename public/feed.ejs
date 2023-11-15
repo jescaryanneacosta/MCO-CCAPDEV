@@ -57,12 +57,14 @@
                                 <i class="fi fi-sr-marker green-icon loc-feed"></i>
                                 <p><%=establishment.location%></p>
                             </div>
-                            <div class="feed-review-rating">
-                                <i class="fi fi-sr-star green-icon star-feed"></i>
-                                <i class="fi fi-rr-star green-icon star-feed"></i>
-                                <i class="fi fi-rr-star green-icon star-feed"></i>
-                                <i class="fi fi-rr-star green-icon star-feed"></i>
-                                <i class="fi fi-rr-star green-icon star-feed"></i>
+                            <div class="feed-review-rating" data-rating="<%= establishment.rating %>">
+                                <% for (let i = 1; i <= 5; i++) { %>
+                                    <% if (i <= establishment.rating) { %>
+                                        <i class="fi fi-sr-star green-icon star-feed"></i>
+                                    <% } else { %>
+                                        <i class="fi fi-rr-star green-icon star-feed"></i>
+                                    <% } %>
+                                <% } %>
                             </div>
                         </div>
                     </div>
