@@ -36,7 +36,7 @@
             <h1>Your Reviews</h1>
             <!-- Reviews and  Restaurants are temporary rn (hard coded) -->
                 <% reviews.forEach(function(review) { %>
-                    <div class="res-page-review">
+                    <div class="user-reviews">
                         <div class="review-header">
                             <img src="<%= review.userAvatar.replace('/static', '') %>" alt="User Avatar">
                             <div class="rev-info">
@@ -64,6 +64,7 @@
                         </div>
                     </div>
                 <% }); %>
+
         </div>
     </div>
     <div class="edit-username-modal" id="edit-username-modal">
