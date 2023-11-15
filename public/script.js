@@ -94,6 +94,15 @@ function closeusernamemodal() {
     enableScroll();
 };
 
+function openreviewmodal() {
+    var usernamemodal = document.getElementById("review-modal");
+    usernamemodal.style.display = "block";
+};
+
+function closereviewmodal() {
+    var usernamemodal = document.getElementById("review-modal");
+    usernamemodal.style.display = "none";
+};
 
 
 function gallerynext(){
