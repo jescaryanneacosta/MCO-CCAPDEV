@@ -110,6 +110,18 @@ app.get('/feed', async (req, res) => {                              // opens fee
     res.render('feed' , { username : loggedInUser.username, avatar : loggedInUser.avatar, establishments});
 });
 
+app.get('/establishments/:id/reviews', async (req, res) => {
+  try {
+    const establishmentId = req.params.id;
+    const establishment = await Establishment.findById(establishmentId);
+    const reviews = await Review.find({ establishment: establishmentId });
+
+    res.render('establishment', { establishment, reviews, baseUrl: '/MCO-CCAPDEV/public', loggedInUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
 
 app.get('/establishment', (req,res) => {
   res.render('establishment')
@@ -153,9 +165,7 @@ let loggedInUser = null;
       }
 
       loggedInUser = user; 
-      // Redirect to the main page on successful login
-      //res.redirect('/feed');
-
+      
       const establishments = await Establishment.find();
 
       console.log("Logged in User:", loggedInUser, establishments);
@@ -358,20 +368,34 @@ app.post('/establishments/:id/reviews', async (req, res) => {
     const establishmentId = req.params.id;
     
     try {
+
+        const establishment = await Establishment.findById(establishmentId);
+
+        if (!establishment) {
+            return res.status(404).send('Establishment not found');
+        }
+
+        if(!loggedInUser){
+          return res.status(404).send('You are not logged in');
+        }
+
         const newReview = new Review({
-            establishment: establishmentId,
-            // Include user details, e.g., from session or logged-in user
-            rating,
-            title,
-            body,
-            datePosted: new Date()
+            user : loggedInUser._id,
+            username : loggedInUser.username,
+            establishment: establishment,
+            rating : rating,
+            title : title,
+            body : body,
+            datePosted: new Date(),
+            userAvatar: loggedInUser.avatar
         });
 
         await newReview.save();
-        res.render('/establishments/' + establishmentId); // Redirect back to establishment page
+        loggedInUser.likes = newReview;
+        res.render('/establishments/:id',{establishment}); // Redirect back to establishment page
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error submitting review');
+        res.status(500).send('Error submitting review, Check if you are logged in');
     }
   });
 

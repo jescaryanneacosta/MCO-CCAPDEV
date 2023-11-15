@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
-  username: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  username: {
+    type: String,
     ref: 'User',
     required: true
   },
@@ -40,6 +45,9 @@ const reviewSchema = new mongoose.Schema({
   dislikes: {
     type: Number,
     default: 0
+  },
+  userAvatar: {
+    type: String
   }
 });
 

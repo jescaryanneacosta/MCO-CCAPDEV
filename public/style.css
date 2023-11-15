@@ -938,6 +938,11 @@ body{
     margin: 0px 30px 30px 30px;
     font-family: "Gabarito", sans-serif;
 }
+.review-desc h2{
+    font-family: "Young Serif", serif;
+    color: var(--ttgreen);
+    letter-spacing: 2px;
+}
 .res-rev-header{
     display: flex;
     justify-content: space-between;

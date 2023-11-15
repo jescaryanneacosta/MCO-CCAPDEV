@@ -92,16 +92,16 @@
                     <input type="text" id="title" name="title" required>
                     <label for="body">Review:</label>
                     <textarea id="body" name="body" required></textarea>
-                    <button type="submit">Submit Review</button>
+                    <input type="submit" value="Submit Review">
                 </form>
             
                 <div class="reviews-container">
                     <% reviews.forEach(function(review) { %>
                         <div class="res-page-review">
                             <div class="review-header">
-                                <img src="<%= review.userAvatar %>" alt="User Avatar">
+                                <img src="<%= review.userAvatar.replace('/static', '') %>" alt="User Avatar">
                                 <div class="rev-info">
-                                    <h1><%= review.userName %></h1>
+                                    <h1><%= review.username %></h1>
                                     <div>
                                         <% for (let i = 0; i < review.rating; i++) { %>
                                             <i class="fi fi-sr-star green-icon star-user-acc"></i>
@@ -119,40 +119,12 @@
                                 </div>
                             </div>
                             <div class="review-desc">
+                                <h2><%= review.title %></h2>
                                 <p><%= review.body %></p>
+                                <p><%= review.datePosted %></p>
                             </div>
                         </div>
                     <% }); %>
                 </div>
-            
-                <script>
-                    document.getElementById('reviewForm').addEventListener('submit', function (event) {
-                        event.preventDefault();
-            
-                        const form = event.target;
-                        const formData = new FormData(form);
-                        const actionUrl = form.getAttribute('action');
-            
-                        fetch(actionUrl, {
-                            method: 'POST',
-                            body: formData,
-                            credentials: 'same-origin',
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Server responded with an error');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            console.log('Success:', data);
-                            // Refresh the page or update the reviews dynamically
-                            location.reload();
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                    });
-                </script>
 </body>
 </html>
