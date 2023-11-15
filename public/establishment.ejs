@@ -87,36 +87,36 @@
                 </form>
 
     <script>
-        document.getElementById('reviewForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+       document.getElementById('reviewForm').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-            const form = event.target;
-            const formData = new FormData(form);
-            const actionUrl = form.getAttribute('action');
+    const form = event.target;
+    const formData = new FormData(form);
+    const actionUrl = form.getAttribute('action');
 
-            fetch(actionUrl, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'CSRF-Token': formData.get('_csrf'),
-                },
-                credentials: 'same-origin',
-            })
+    fetch(actionUrl, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'CSRF-Token': formData.get('_csrf'), // Update this line
+        },
+        credentials: 'same-origin',
+    })
 
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Server responded with an error');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-                refreshReviews();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Server responded with an error');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        refreshReviews();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
     </script>
 </body>
 </html>        
