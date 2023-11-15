@@ -218,7 +218,6 @@ let loggedInUser = null;
     try {
       const establishmentToDelete = await Establishment.findOne({name : name});
       console.log("User to delete:", establishmentToDelete);
-
   
       if (!establishmentToDelete) {
         return res.send('Establishment does not exist');
@@ -277,8 +276,6 @@ let loggedInUser = null;
 
 
       console.log(loggedInUser)
-
-      reviews = await Review.find({ username: loggedInUser.username });
 
       console.log(loggedInUser)
       if (loggedInUser.role == 'User'){
