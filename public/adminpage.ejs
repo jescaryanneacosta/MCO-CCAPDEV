@@ -109,13 +109,18 @@
                     <div class="admin-functions-fourth"> 
                         <section class="delete-restaurant-section">
                             <h3>Delete Restaurant</h3>
-                            <form id="add-restaurant-form">
+                            <form id="add-restaurant-form" action = '/deleteestablishment' method="POST">
                                 <div class="input-name">
-                                    <label for="restaurant-name">Name:</label>
-                                    <input type="text" id="restaurant-name" name="restaurant-name" required placeholder="Input Restaurant Name">
-                                </div>
-                                <div class="admin-submit"> 
-                                    <button type="submit">Delete Restaurant</button>
+                                    <label for="name">Restaurants:</label>
+                                    <input list="restaurants" name = "name" placeholder="Choose Res">
+                                        <datalist id="restaurants">
+                                                <% establishments.forEach(function(establishment) { %>                                
+                                                    <option value = "<%=establishment.name%>"></option>
+                                                <% }); %>
+                                        </datalist>
+                                        <div class="admin-submit"> 
+                                            <input type="submit" value="Delete Restaurant">
+                                        </div>
                                 </div>
                             </form>
                         </section>

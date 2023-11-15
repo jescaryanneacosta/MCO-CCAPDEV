@@ -196,6 +196,32 @@ let loggedInUser = null;
     }
   });
 
+  app.post('/deleteestablishment', async (req, res) => {          //log in function
+    const {name} = req.body;
+    console.log(name)
+  
+    try {
+      const establishmentToDelete = await Establishment.findOne({name : name});
+      console.log("User to delete:", establishmentToDelete);
+
+  
+      if (!establishmentToDelete) {
+        return res.send('Establishment does not exist');
+      }
+      if (establishmentToDelete) {
+        await Establishment.deleteOne({ _id: establishmentToDelete._id });
+      }
+
+      const users = await User.find();
+      const establishments = await Establishment.find();
+
+      res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
   app.post('/changeUsername', async (req, res) => {
     const {username} = req.body;
   
