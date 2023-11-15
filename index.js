@@ -26,6 +26,7 @@ const User = require('./mongo model/user.model')
 const Establishment = require("./mongo model/resto.model")
 const Review = require('./mongo model/review.model');
 
+app.use(express.static('public')); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(csrf({ cookie: true }));
@@ -34,7 +35,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static('public')); 
 
 const createAdminUser = async () => {          //     <------ Follow this style
   const adminUsername = 'admin';
