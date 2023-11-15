@@ -134,7 +134,6 @@ app.get('/establishments/:id', async (req, res) => {
       res.status(500).send('Server error');
   }
 });
-
 // END ROUTES
 
 let loggedInUser = null;
