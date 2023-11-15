@@ -70,8 +70,8 @@
                 </div>
                 
                 <form id="reviewForm" action="/establishments/<%= establishment._id %>/reviews" method="POST">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <label for="rating">Rating:</label>
+                <!-- <input type="hidden" name="_csrf" value="<%= csrfToken %>"> -->
+                <label for="rating">Rating:</label>
                     <select name="rating" id="rating" required>
                         <option value="5">5 Stars</option>
                         <option value="4">4 Stars</option>
@@ -86,7 +86,7 @@
                     <button type="submit">Submit Review</button>
                 </form>
 
-    <script>
+   <!-- <script>
        document.getElementById('reviewForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -117,6 +117,6 @@
         console.error('Error:', error);
     });
 });
-    </script>
+    </script> -->
 </body>
 </html>        

@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const multer = require('multer'); 
-const csrf = require('csurf');
+//const csrf = require('csurf');
 
 //This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
 
@@ -29,11 +29,11 @@ const Review = require('./mongo model/review.model');
 app.use(express.static('public')); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(csrf({ cookie: true }));
-app.use((req, res, next) => {
-  res.locals.csrfToken = req.csrfToken();
-  next();
-});
+// app.use(csrf({ cookie: true }));
+// app.use((req, res, next) => {
+//   res.locals.csrfToken = req.csrfToken();
+//   next();
+// });
 
 
 const createAdminUser = async () => {          //     <------ Follow this style
