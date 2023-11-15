@@ -186,25 +186,13 @@ body{
 
 }
 
-.up {
-    display: inline-block;
-    overflow: hidden;
-    width: 23px;
-    height: 25px;
-    cursor: pointer;
-    background: url('images/up-arrow.png');
-    background-position: 0 -25px;
-  } 
-  
-  .down {
-    display: inline-block;
-    overflow: hidden;
-    width: 23px;
-    height: 25px;
-    cursor: pointer;
-    background: url('images/down-arrow.png');
-    background-position: 0 -25px;
-  } 
+.arrows i{
+    font-size: 22px;
+}
+.arrows i:hover{
+   cursor: pointer; 
+   color: #193a27;
+}
 .nav-bar nav{
     display: flex;
     justify-content: space-between;

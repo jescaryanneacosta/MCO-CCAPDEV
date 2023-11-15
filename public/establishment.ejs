@@ -66,7 +66,17 @@
                 <br>
                 <div class="res-rev-header">
                     <h1>Reviews</h1>
-                    <!-- Sort By Functionality (requires JavaScript implementation) -->
+                    <div class="green-icon sort-by">
+                        <i class="fi fi-rr-bars-sort"></i>
+                        <p>Sort By: </p>
+                        <select>
+                            <option value="recommended">Recommended</option>
+                            <option value="most-stars">Most Stars</option>
+                            <option value="least-stars">Least Stars</option>
+                            <option value="new-reviews">Newest Review</option>
+                            <option value="old-reviews">Oldest Review</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <form id="reviewForm" action="/establishments/<%= establishment._id %>/reviews" method="POST">
@@ -103,8 +113,8 @@
                                 </div>
                                 <div class="vote-system">
                                     <div class="arrows">
-                                        <div class="up"></div>
-                                        <div class="down"></div>
+                                        <i class="fi fi-sr-up green-icon"></i>
+                                        <i class="fi fi-sr-down green-icon"></i>
                                     </div>
                                 </div>
                             </div>
