@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 
-                <form id="reviewForm" action="/establishments/<%= establishment._id %>/reviews" method="POST">
+                <form id="reviewForm" action="http://localhost:3000/establishments/<%= establishment._id %>" method="POST">
                     <label for="rating">Rating:</label>
                     <select name="rating" id="rating" required>
                         <option value="5">5 Stars</option>

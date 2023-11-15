@@ -116,7 +116,7 @@ app.get('/establishments/:id/reviews', async (req, res) => {
     const establishment = await Establishment.findById(establishmentId);
     const reviews = await Review.find({ establishment: establishmentId });
 
-    res.render('establishment', { establishment, reviews, baseUrl: '/MCO-CCAPDEV/public', loggedInUser });
+    res.render('/establishments/${establishmentId}', { establishment, reviews, baseUrl: '/MCO-CCAPDEV/public', loggedInUser });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
@@ -133,7 +133,7 @@ app.get('/establishments/:id', async (req, res) => {
       const establishment = await Establishment.findById(establishmentId);
       const reviews = await Review.find({ establishment: establishmentId });
 
-      res.render('establishment', {establishment, reviews, loggedInUser});
+      res.render('establishment', {establishment, reviews, loggedInUser, baseUrl: '/MCO-CCAPDEV/public'});
   } catch (error) {
       console.error(error);
       res.status(500).send('Server error');
@@ -363,7 +363,7 @@ let loggedInUser = null;
     }
   });
 
-app.post('/establishments/:id/reviews', async (req, res) => {
+app.post('/establishments/:id', async (req, res) => {
     const { rating, title, body } = req.body;
     const establishmentId = req.params.id;
     
@@ -391,8 +391,11 @@ app.post('/establishments/:id/reviews', async (req, res) => {
         });
 
         await newReview.save();
-        loggedInUser.likes = newReview;
-        res.render('/establishments/:id',{establishment}); // Redirect back to establishment page
+        loggedInUser.likes.push(newReview);
+        loggedInUser.save();
+
+        console.log(loggedInUser.likes)
+        res.render('/establishments/' + establishment._id, {establishment}); // Redirect back to establishment page
     } catch (error) {
         console.error(error);
         res.status(500).send('Error submitting review, Check if you are logged in');
