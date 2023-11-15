@@ -26,6 +26,6 @@ stars that are in the design of the DLSU star. The user is then able to upload
 images or videos as they like to show what the products look like or if they want
 a video to show their review</li>
 <h1>Running through node js<h1>
-<p>To run the website, open your command prompt firstly. Change the path to the main folder. After that run server file by inputting "node index.js". Make sure to install all the needed dependencies such as express, npm, and mongoose. The file should say that it has connected to the port and database. After that open the link "http://localhost:3000" to get started on the signin page<p>
+<p>To run the website, open your command prompt firstly. Change the path to the main folder. After that run server file by inputting "node index.js". Make sure to install all the needed dependencies such as express, npm, and mongoose. The file should say that it has connected to the port and database. THen dont forget to install the premade json files with the starting restaurants called persons.establishment.json and upload it in the mongodb database. After that open the link "http://localhost:3000" to get started on the signin page<p>
 </ul>
 

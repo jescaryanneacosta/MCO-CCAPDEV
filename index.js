@@ -332,8 +332,11 @@ let loggedInUser = null;
       await newResto.save();
 
       console.log(newResto);
+      
+      const users = await User.find();
+      const establishments = await Establishment.find();
 
-      res.render('adminpage',{avatar: loggedInUser.avatar, users});
+      res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
