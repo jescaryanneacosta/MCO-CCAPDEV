@@ -120,7 +120,7 @@ app.get('/establishments/:id', async (req, res) => {
       const establishment = await Establishment.findById(establishmentId);
       const reviews = await Review.find({ establishment: establishmentId });
 
-      res.render('establishment', { establishment, reviews,  baseUrl: '/MCO-CCAPDEV/public', loggedInUser});
+      res.render('establishment', {establishment, reviews, loggedInUser});
   } catch (error) {
       console.error(error);
       res.status(500).send('Server error');

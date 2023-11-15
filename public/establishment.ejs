@@ -36,7 +36,7 @@
                         <i class="fi fi-rr-angle-left white-icon" onclick="galleryback()"></i>
                         <div class="res-gallery">
                             <% establishment.images.forEach(function(image) { %>
-                                <div><img src="<%= image %>" alt="Gallery Image"></div>
+                                <div><img src="<%= image.replace('/static', '') %>" alt="Gallery Image"></div>
                             <% }); %>
                         </div>
                         <i class="fi fi-rr-angle-right white-icon" onclick="gallerynext()"></i>
@@ -46,7 +46,7 @@
             </div>
             <div class="res-content-bottom">
                 <h1>About</h1>
-                <p><%= establishment.about %></p>
+                <p><%= establishment.description %></p>
                 <h1>Cuisine</h1>
                 <ul>
                     <% establishment.cuisine.forEach(function(type) { %>
@@ -55,7 +55,7 @@
                 </ul>
                 <h1>Popular Menu Items</h1>
                 <ul>
-                    <% establishment.popularItems.forEach(function(item) { %>
+                    <% establishment.popularitems.forEach(function(item) { %>
                         <li><%= item %></li>
                     <% }); %>
                 </ul>
