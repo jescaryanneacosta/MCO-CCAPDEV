@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const multer = require('multer'); 
+const csrf = require('csurf');
 
 //This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
 
@@ -25,8 +26,15 @@ const User = require('./mongo model/user.model')
 const Establishment = require("./mongo model/resto.model")
 const Review = require('./mongo model/review.model');
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); 
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(csrf({ cookie: true }));
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
 
 const createAdminUser = async () => {          //     <------ Follow this style
   const adminUsername = 'admin';
@@ -270,8 +278,11 @@ let loggedInUser = null;
 app.post('/establishments/:id/reviews', async (req, res) => {
     const { rating, title, body } = req.body;
     const establishmentId = req.params.id;
-    // Additional validation can be added here
-
+    const csrfToken = req.body._csrf || req.headers['csrf-token'];
+    if (!csrfToken || !csurf.verify(csrfToken, req)) {
+            // If the CSRF token is missing or invalid, handle accordingly
+            return res.status(403).send('Invalid CSRF token');
+        }
     try {
         const newReview = new Review({
             establishment: establishmentId,

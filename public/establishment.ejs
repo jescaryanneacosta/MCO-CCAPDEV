@@ -55,9 +55,13 @@
                 </ul>
                 <h1>Popular Menu Items</h1>
                 <ul>
-                    <% establishment.popularitems.forEach(function(item) { %>
-                        <li><%= item %></li>
-                    <% }); %>
+                    <% if (establishment && establishment.popularItems && establishment.popularItems.length > 0) { %>
+                        <% establishment.popularItems.forEach(function(item) { %>
+                            <li><%= item %></li>
+                        <% }); %>
+                    <% } else { %>
+                        <li> </li>
+                    <% } %>
                 </ul>
                 <br>
                 <div class="res-rev-header">
@@ -65,10 +69,10 @@
                     <!-- Sort By Functionality (requires JavaScript implementation) -->
                 </div>
                 
-    <form id="reviewForm" action="/establishments/<%= establishment._id %>/reviews" method="POST">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <label for="rating">Rating:</label>
-        <select name="rating" id="rating" required>
+                <form id="reviewForm" action="/establishments/<%= establishment._id %>/reviews" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <label for="rating">Rating:</label>
+                    <select name="rating" id="rating" required>
                         <option value="5">5 Stars</option>
                         <option value="4">4 Stars</option>
                         <option value="3">3 Stars</option>
@@ -81,52 +85,38 @@
                     <textarea id="body" name="body" required></textarea>
                     <button type="submit">Submit Review</button>
                 </form>
-                <div class="reviews">
-                    <% reviews.forEach(function(review) { %>
-                        <div class="review">
-                            <h3><%= review.title %></h3>
-                            <p>Rating: <%= review.rating %></p>
-                            <p><%= review.body %></p>
-                        </div>
-                    <% }); %> 
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
-        document.getElementById('reviewForm').addEventListener('submit', function(event) {
-                            event.preventDefault();
-                            
-                            const form = event.target;
-                            const formData = new FormData(form);
-                            const actionUrl = form.getAttribute('action');
-                            
-                            fetch(actionUrl, {
-                                method: 'POST',
-                                body: formData,
-                                headers: {
-                                    'CSRF-Token': formData.get('_csrf') 
-                                },
-                                credentials: 'same-origin' 
-                            })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Server responded with an error');
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                console.log('Success:', data);
-                                refreshReviews();
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                            });
-                        });
-                    </script>
+       document.getElementById('reviewForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const actionUrl = form.getAttribute('action');
+
+    fetch(actionUrl, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'CSRF-Token': formData.get('_csrf'), // Update this line
+        },
+        credentials: 'same-origin',
+    })
+
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Server responded with an error');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        refreshReviews();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+    </script>
 </body>
-</html>
-
-
-
+</html>        
