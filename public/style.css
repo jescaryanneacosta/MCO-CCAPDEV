@@ -493,7 +493,8 @@ body{
 }
 
 .edit-review-modal{
-    width: 400px;
+    width: 50%;
+    height: 50%;
     background: var(--ttwhite);
     box-shadow: 0 0 0 100000px rgba(0,0,0,.4);
     border-radius: 10px;
@@ -519,6 +520,54 @@ body{
     padding: 18px 15px;
     font-family: "Gabarito", sans-serif;
     letter-spacing: 1px;
+}
+.edit-review-modal textarea{
+    width: 80%;
+    height: 130px;
+    background-color: #eaeaea;
+    outline: 0;
+    border: 0;
+    padding: 18px 15px;
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+.write-review{
+    font-family: "Gabarito", sans-serif;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.write-review option, select{ 
+    font-family: "Gabarito", sans-serif;
+}
+.rev-modal-top{
+    display: flex;
+    align-items: center;
+    margin: 10px 10px 20px 10px;
+    width: 80%;
+    flex-direction: row;
+    align-content: space-between;
+}
+.rev-modal-top div{
+    display: flex;
+    align-items: center;
+    margin: 10px 10px 20px 10px;
+    flex-direction: row;
+}
+.modal-button{
+    font-family: "Gabarito", sans-serif;
+    font-size: 20px;
+    border: 0;
+    background-color: #214e34;
+    color: #ffffff;
+    border-radius: 20px;
+    width: 20%;
+    height: 30px;
+}
+.modal-button:hover{
+    background-color: #193a27;
+    cursor: pointer;
 }
 .edit-password-modal input {
     width: 80%;

@@ -206,15 +206,28 @@
             </div>
         </div>
     </div>
-    <div class="review-button">
-        <i class="fi fi-rr-edit" onclick="openreviewmodal()"></i>
+    <div class="review-button"  onclick="openreviewmodal()">
+        <i class="fi fi-rr-edit"></i>
     </div>
     <div class="edit-review-modal" id="review-modal">
         <h1>Write a Review</h1>
-        <form action="/write-review" method="POST">
-            <input type="text" name="title" placeholder="Title">
-            <input type="text" name="title" placeholder="Review">
-            <input type="submit" id="close-review" value="Confirm">
+        <form action="/write-review" method="POST" class="write-review">
+            <div class="rev-modal-top">
+                <div>
+                    <label for="rating">Rating:   </label>
+                    <select name="rating" id="rating" required>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="2">2 Stars</option>
+                        <option value="1">1 Star</option>
+                    </select>
+                </div>
+                <input type="text" id="title" name="title" placeholder="Title" required>
+            </div>
+            
+            <textarea id="body" name="body" placeholder="Review"></textarea>
+            <button type="submit" class="modal-button" onclick="closereviewmodal()">Submit Review</button>
         </form>
     </div>
 </div>
