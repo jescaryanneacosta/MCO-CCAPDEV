@@ -415,7 +415,7 @@ app.post('/establishments/:id', async (req, res) => {
         loggedInUser.save();
 
         console.log(loggedInUser.likes)
-        res.render('/establishments/' + establishment._id, {establishment}); // Redirect back to establishment page
+        res.redirect(`/establishments/${establishment._id}`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error submitting review, Check if you are logged in');
@@ -426,12 +426,3 @@ mongoose.connect(url)
 app.listen(port, () =>
 {console.log("server is running at port" + port)}
 )
-
-
-/*import { connectToMongo } from "./mongo models/conn.js";
-
-import mongoose from 'mongoose';
-import User from './mongo models/user.model.js';
-import Resto from './mongo models/resto.model.js';
-import Review from './src/models/review.model.js';*/
-
