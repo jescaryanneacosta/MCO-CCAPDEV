@@ -78,7 +78,7 @@
                         </select>
                     </div>
                 </div>
-                
+                <%if (loggedInUser.role == 'User' && loggedInUser != 1){ %>
                 <form id="reviewForm" action="/establishments/<%= establishment._id %>" method="POST">
                     <label for="rating">Rating:</label>
                     <select name="rating" id="rating" required>
@@ -94,7 +94,7 @@
                     <textarea id="body" name="body" required></textarea>
                     <input type="submit" value="Submit Review">
                 </form>
-            
+                <%} %>
                 <div class="reviews-container">
                     <% reviews.forEach(function(review) { %>
                         <div class="res-page-review">

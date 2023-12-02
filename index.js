@@ -58,23 +58,29 @@ const storage = multer.diskStorage({
   },
 });
 
+const storage2 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/establishment/images/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
+});
+
 const upload = multer({ storage: storage });
+const upload2 = multer({storage : storage2});
 
 //ROUTINGS
 
 app.get('/useraccount', async (req, res) => {                                    // opens useraccount
-    //res.sendFile(path.join(__dirname, 'public', 'useraccount.html'));
-
     const reviews = await Review.find({ username: loggedInUser.username });
-
-
     res.render('useraccount' , { username : loggedInUser.username, avatar : loggedInUser.avatar, reviews });
 });
 
 app.get('/', async (req, res) => {
   try {
     const establishments = await Establishment.find();
-    res.render('feed-guest', { establishments });
+    res.render('feed-guest', { establishments, loggedInUser});
   } catch (error) {
     console.error('Error getting establishments:', error);
     res.status(500).send('Internal Server Error');
@@ -93,25 +99,18 @@ app.get('/adminpage', async (req, res) => {                                    /
 });
 
 app.get('/feed-admin', async (req, res) => {                                    // opens guest feed
-  //res.sendFile(path.join(__dirname, 'public', 'feed-guest.html'));
   const establishments = await Establishment.find();
-
   res.render('feed-admin', { username : loggedInUser.username, avatar : loggedInUser.avatar, establishments});
 });
 
 
 app.get('/signin', (req, res) => {                         
-    //res.sendFile(path.join(__dirname, 'public', 'signin.html'));
     res.render('signin');
-
 });
 
-app.get('/feed', async (req, res) => {                              // opens feed html  
-
+app.get('/feed', async (req, res) => {                              
   const establishments = await Establishment.find();
-
-
-    res.render('feed' , { username : loggedInUser.username, avatar : loggedInUser.avatar, establishments});
+  res.render('feed' , { username : loggedInUser.username, avatar : loggedInUser.avatar, establishments});
 });
 
 app.get('/establishments/:id/reviews', async (req, res) => {
@@ -136,6 +135,9 @@ app.get('/establishments/:id', async (req, res) => {
       const establishmentId = req.params.id;
       const establishment = await Establishment.findById(establishmentId);
       const reviews = await Review.find({ establishment: establishmentId });
+
+      if(loggedInUser == null)
+        loggedInUser = 1;
 
       res.render('establishment', {establishment, reviews, loggedInUser, baseUrl: '/MCO-CCAPDEV/public'});
   } catch (error) {
@@ -368,8 +370,6 @@ let loggedInUser = null;
       const newUser = new User({ username, email, password });
       await newUser.save();
   
-      // Redirect to the main page on successful signup
-      //res.redirect('/signin');
       res.render('signin');
       console.log(newUser);
     } catch (error) {
