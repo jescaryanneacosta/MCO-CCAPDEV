@@ -58,27 +58,10 @@ const storage = multer.diskStorage({
   },
 });
 
-const storage2 = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/establishment/images/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  },
-});
 
-const storage3 = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/establishments/images/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  },
-});
 
 const upload = multer({ storage: storage });
-const upload2 = multer({storage : storage2});
-const upload3 = multer({storage : storage3});
+
 
 //ROUTINGS
 
@@ -341,7 +324,7 @@ let loggedInUser = null;
     }
   });
 
-  app.post('/addestablishment', upload.single('avatar'), upload2.single('avatar'),upload3.single('avatar'), async (req,res) => {
+  app.post('/addestablishment', upload.single('avatar'), async (req,res) => {
 
     const {name, location, cuisine, popularitems, category, description} = req.body;
 
