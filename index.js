@@ -13,7 +13,7 @@ const url = "mongodb://localhost:27017/persons";
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('view engine', 'ejs'); // Set EJS as the view engine
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
 mongoose.connect(url, {})
