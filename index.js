@@ -67,8 +67,18 @@ const storage2 = multer.diskStorage({
   },
 });
 
+const storage3 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/establishments/images/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
+});
+
 const upload = multer({ storage: storage });
 const upload2 = multer({storage : storage2});
+const upload3 = multer({storage : storage3});
 
 //ROUTINGS
 
@@ -176,10 +186,14 @@ let loggedInUser = null;
 
       console.log("Logged in User:", loggedInUser, establishments);
       if(loggedInUser.role == 'User')
-        res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
+        res.redirect(`/feed`);
+
+        //res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
       else 
         if(loggedInUser.role == 'Admin')
-          res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
+          res.redirect(`/feed-admin`);
+
+          //res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -206,7 +220,9 @@ let loggedInUser = null;
       const establishments = await Establishment.find();
 
 
-      res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
+      //res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
+      res.redirect(`/adminpage`);
+
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -231,7 +247,9 @@ let loggedInUser = null;
       const users = await User.find();
       const establishments = await Establishment.find();
 
-      res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
+      //res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
+      res.redirect(`/adminpage`);
+
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -249,12 +267,18 @@ let loggedInUser = null;
 
       const reviews = await Review.find({ username: loggedInUser.username });
 
+      reviews.forEach(function(review) {
+        review.username = username;
+        review.save();
+      });
     
       loggedInUser.username = username;
       await loggedInUser.save();      
 
       console.log(loggedInUser)
-      res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar, reviews});
+      //res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar, reviews});
+      res.redirect(`/useraccount`);
+
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -281,9 +305,11 @@ let loggedInUser = null;
 
       console.log(loggedInUser)
       if (loggedInUser.role == 'User'){
-        res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+        //res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+        res.redirect(`/useraccount`);
       } else if (loggedInUser.role == 'Admin') {
-        res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+        //res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+        res.redirect(`/adminpage`);
       }
     } catch (error) {
       console.error(error);
@@ -315,7 +341,7 @@ let loggedInUser = null;
     }
   });
 
-  app.post('/addestablishment', upload.single('avatar'), async (req,res) => {
+  app.post('/addestablishment', upload.single('avatar'), upload2.single('avatar'),upload3.single('avatar'), async (req,res) => {
 
     const {name, location, cuisine, popularitems, category, description} = req.body;
 
