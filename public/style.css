@@ -1158,8 +1158,8 @@ label[for="restaurant-cuisine"] {
 
 .admin-functions2 {
     background-color: var(--ttgreen);
-    width: 400px;
-    height: 800px;
+    width: 1000px;
+    height: 1500px;
     margin-left: 320px;
     margin-top: 50px;
     border-radius: 20px;
@@ -1197,8 +1197,8 @@ label[for="restaurant-cuisine"] {
 }
 .admin-functions3 {
     background-color: var(--ttgreen);
-    width: 400px;
-    height: 900px;
+    width: 1000px;
+    height: 1500px;
     margin-left: 320px;
     margin-top: 50px;
     border-radius: 20px;
