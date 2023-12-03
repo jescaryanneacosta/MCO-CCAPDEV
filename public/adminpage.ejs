@@ -127,6 +127,50 @@
                         </section>
                     </div>  
                 </div>
+                <div class="admin-functions2">
+                    <div class="admin-functions-third"> 
+                        <section class="add-restaurant-section">
+                            <h3>Update a Restaurant</h3>
+                            <form id="add-restaurant-form" action = '/updateestablishment' method="POST" enctype="multipart/form-data">
+                                <div class="input-name">
+                                    <label for="restaurant-name">Name:</label>
+                                    <input type="text" id="restaurant-name" name="old_name" required placeholder="Input Restaurant Name">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-name">New Name:</label>
+                                    <input type="text" id="restaurant-name" name="new_name" required placeholder="Input Restaurant Name">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-location">Address:</label>
+                                    <input type="text" id="restaurant-location" name="location" required placeholder="Input Address">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-cuisine">Cuisine:</label>
+                                    <input type="text" id="restaurant-cuisine" name="cuisine" placeholder="Input Cuisine">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-popularitems">Popular Items:</label>
+                                    <input type="text" id="restaurant-popularitems" name="popularitems" placeholder="Input Popular Item">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-category">Category:</label>
+                                    <input type="text" id="restaurant-category" name="category" placeholder="Input category">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-description">Description:</label>
+                                    <input type="text" id="restaurant-description" name="description" placeholder="Input Description">
+                                </div>
+                                <div class="input-name">
+                                    <label for="restaurant-avatar">Avatar Image:</label>
+                                    <input type="file" id="restaurant-avatar" name="avatar" placeholder="Upload Image" accept="image/*">
+                                </div>
+                                <div class="admin-submit"> 
+                                    <input type="submit" value="Add Restaurant">
+                                </div>
+                            </form>
+                        </section>
+                    </div>  
+                </div>
             </div>
         </div>
     </div>

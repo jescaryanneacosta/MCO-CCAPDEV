@@ -350,6 +350,41 @@ let loggedInUser = null;
   }
   });
 
+  app.post('/updateestablishment', upload.single('avatar'), async (req,res) => {
+
+    const {old_name, new_name,  location, cuisine, popularitems, category, description} = req.body;
+
+    const avatar = 'images/' + req.file.filename;
+
+    try {
+
+     
+          const existingResto = await Establishment.updateOne({name : old_name}, {$set : {name: new_name,
+          popularitems: popularitems,
+          avatar: avatar,
+          images: [],
+          category: category,
+          cuisine: cuisine,
+          description: description,
+          location: location}});
+
+        if (existingResto.name == old_name) {
+          return res.send('Establishment does not exist');
+        }
+
+
+      const users = await User.find();
+      const establishments = await Establishment.find();
+
+      //res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
+      res.redirect('/adminpage');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+  }
+  });
+
+
   app.post('/signup', async (req, res) => {            //signup function
     const { username, email, password } = req.body;
   
