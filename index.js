@@ -186,7 +186,10 @@ let loggedInUser = null;
 
   
       if (!userToDelete) {
-        return res.send('User does not exist');
+        const users = await User.find();
+        const establishments = await Establishment.find();
+
+        return res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments, error: 'User does not exist'});
       }
       if (userToDelete && userToDelete.role == 'User') {
         await User.deleteOne({ _id: userToDelete._id });
@@ -214,7 +217,11 @@ let loggedInUser = null;
       console.log("User to delete:", establishmentToDelete);
   
       if (!establishmentToDelete) {
-        return res.send('Establishment does not exist');
+
+        const users = await User.find();
+        const establishments = await Establishment.find();
+
+        return res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments, error: 'Establishment does not exist'});
       }
       if (establishmentToDelete) {
         await Establishment.deleteOne({ _id: establishmentToDelete._id });
@@ -238,10 +245,17 @@ let loggedInUser = null;
     try {
       const existingUser = await User.findOne({username});  
       if (existingUser) {
-        return res.send('Username already exists');
+        const reviews = await Review.find({ username: loggedInUser.username });          
+              return res.render('useraccount', { 
+                  username: loggedInUser.username, 
+                  avatar: loggedInUser.avatar, 
+                  reviews,
+                  error: 'Username is already taken' 
+              });
       }
 
       const reviews = await Review.find({ username: loggedInUser.username });
+
 
       reviews.forEach(function(review) {
         review.username = username;
@@ -268,18 +282,33 @@ let loggedInUser = null;
     try {
         if (loggedInUser.password !== oldPassword) {
             const reviews = await Review.find({ username: loggedInUser.username });
-            return res.render('useraccount', { 
+            if (loggedInUser.role == 'User') {
+              return res.render('useraccount', { 
+                  username: loggedInUser.username, 
+                  avatar: loggedInUser.avatar, 
+                  reviews,
+                  error: 'Incorrect old password' 
+              });
+          } else if (loggedInUser.role == 'Admin') {
+            return res.render('adminpage', { 
                 username: loggedInUser.username, 
                 avatar: loggedInUser.avatar, 
                 reviews,
                 error: 'Incorrect old password' 
             });
+        } 
         }
 
         loggedInUser.password = newPassword;
         await loggedInUser.save();
 
-        res.redirect('/useraccount');
+        if (loggedInUser.role == 'User'){
+          //res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar, reviews});
+          res.redirect('/useraccount');
+        } else if (loggedInUser.role == 'Admin') {
+          //res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+          res.redirect(`/adminpage`);
+        }
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -356,9 +385,7 @@ let loggedInUser = null;
 
     const avatar = 'images/' + req.file.filename;
 
-    try {
-
-     
+    try {    
           const existingResto = await Establishment.updateOne({name : old_name}, {$set : {name: new_name,
           popularitems: popularitems,
           avatar: avatar,
@@ -368,8 +395,11 @@ let loggedInUser = null;
           description: description,
           location: location}});
 
-        if (existingResto.name == old_name) {
-          return res.send('Establishment does not exist');
+        if (!existingResto) {
+          const users = await User.find();
+          const establishments = await Establishment.find();
+          
+          return res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments, error: 'Establishment does not exist'});
         }
 
 
