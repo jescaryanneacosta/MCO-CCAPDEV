@@ -479,15 +479,8 @@ app.post('/establishments/:id', async (req, res) => {
 
         if (!establishment) {
             return res.status(404).send('Establishment not found');
-        }
-
-        if(!loggedInUser){
-          return res.status(404).send('You are not logged in');
-        }
-
-        if(loggedInUser.role == 'Admin') {
-          return res.status(404).send('Admins cannot make reviews');
-
+        } else {
+          const establishment = await Establishment.updateOne({_id : establishmentId}, {$inc : {rating : rating}});
         }
 
         const newReview = new Review({
@@ -505,7 +498,7 @@ app.post('/establishments/:id', async (req, res) => {
         loggedInUser.likes.push(newReview);
         loggedInUser.save();
 
-        console.log(loggedInUser.likes)
+        //console.log(loggedInUser.likes)
         res.redirect(`/establishments/${establishment._id}`);
     } catch (error) {
         console.error(error);

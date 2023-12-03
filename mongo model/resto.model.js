@@ -34,7 +34,8 @@ const establishmentSchema = new mongoose.Schema({
     required: true
   },
   rating: {
-    type: mongoose.Schema.Types.Decimal128
+    type: Number,
+    default: 0  
   }
 });
 
