@@ -36,6 +36,11 @@
                         <form action="/logout" method="POST" id="logoutForm">
                             <input type="submit" value="Logout">
                         </form>
+                        <% if (typeof error !== 'undefined') { %>
+                            <div class="error-message">
+                                <%= error %>
+                            </div>
+                        <% } %> 
                     </div>
                 </div>
                 <div class="edit-profilepic-modal" id="edit-profilepic-modal">
@@ -57,6 +62,7 @@
                     </form>
                     <button type="button" id="close-change-profilepic" onclick="closepasswordmodal()">Cancel</button>
                 </div>
+            </div>
                 <div class="admin-functions">
                     <div class="admin-functions-second">
                         <section class="ban-user-section">
