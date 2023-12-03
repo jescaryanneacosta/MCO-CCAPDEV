@@ -28,6 +28,11 @@
             <p id="edit-username-button" onclick="openusernamemodal()">Edit Username</p> 
             <p id="change-pic-button" onclick="openprofilepicmodal()">Change Profile Picture</p>
             <p id="change-password button" onclick="openpasswordmodal()">Change Password</p>
+            <% if (typeof error !== 'undefined') { %>
+                <div class="error-message">
+                    <%= error %>
+                </div>
+            <% } %>
             <form action="/logout" method="POST" id="logoutForm">
                 <input type="submit" value="Logout">
             </form>
