@@ -1283,14 +1283,14 @@ label[for="restaurant-cuisine"] {
 
 .admin-functions-second {
     background-color: var(--ttgreen);
-    height: 210px;
+    height: 240px;
+    width: 350px; 
     margin-left: 100px;
     margin-top: 50px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 19%; 
 }
 
 .admin-functions-third {
@@ -1307,14 +1307,17 @@ label[for="restaurant-cuisine"] {
 
 .admin-functions-fourth {
     background-color: var(--ttgreen);
-    height: 210px;
-    margin-left: 100px;
+    height: 240px;
+    width: 350px;
+    width: 21%;
+    margin-right: 900px;
     margin-top: 50px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 15%; 
+    transform: translate(-50%, -50%);
+     
 }
 
 .error-message {
