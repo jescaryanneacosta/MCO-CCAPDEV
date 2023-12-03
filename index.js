@@ -262,36 +262,29 @@ let loggedInUser = null;
   });
 
 
-  app.post('/changePassword', async (req, res) => {          //log in function
-    const { username, oldPassword, newPassword } = req.body;
-  
+  app.post('/changePassword', async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+
     try {
-  
-      if (loggedInUser.password !== oldPassword) {
-        return res.send('Incorrect password');
-      } else {
+        if (loggedInUser.password !== oldPassword) {
+            const reviews = await Review.find({ username: loggedInUser.username });
+            return res.render('useraccount', { 
+                username: loggedInUser.username, 
+                avatar: loggedInUser.avatar, 
+                reviews,
+                error: 'Incorrect old password' 
+            });
+        }
+
         loggedInUser.password = newPassword;
         await loggedInUser.save();
-      }
-    
-      const reviews = await Review.find({ username: loggedInUser.username });
 
-
-      console.log(loggedInUser)
-
-      console.log(loggedInUser)
-      if (loggedInUser.role == 'User'){
-        //res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar});
-        res.redirect(`/useraccount`);
-      } else if (loggedInUser.role == 'Admin') {
-        //res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
-        res.redirect(`/adminpage`);
-      }
+        res.redirect('/useraccount');
     } catch (error) {
-      console.error(error);
-      res.status(500).send('Internal Server Error');
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
-  });
+});
 
 
   app.post('/changeProfilePic', upload.single('profilePic'), async (req, res) => {
