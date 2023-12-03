@@ -149,38 +149,31 @@ let loggedInUser = null;
         res.redirect('/');
     });
 
-  app.post('/login', async (req, res) => {          //log in function
-    const { username, password } = req.body;
+  app.post('/login', async (req, res) => {
+      const { username, password } = req.body;
   
-    try {
-      const user = await User.findOne({ username });
+      try {
+          const user = await User.findOne({ username });
   
-      if (!user) {
-        return res.send('User does not exist');
+          if (!user) {
+              return res.render('signin', { error: 'User does not exist' });
+          }
+  
+          if (user.password !== password) {
+              return res.render('signin', { error: 'Incorrect password' });
+          }
+  
+          loggedInUser = user;
+          
+          // Redirect based on user role
+          if(loggedInUser.role == 'User')
+              res.redirect(`/feed`);
+          else if(loggedInUser.role == 'Admin')
+              res.redirect(`/feed-admin`);
+      } catch (error) {
+          console.error(error);
+          res.status(500).send('Internal Server Error');
       }
-  
-      if (user.password !== password) {
-        return res.send('Incorrect password');
-      }
-
-      loggedInUser = user; 
-      
-      const establishments = await Establishment.find();
-
-      console.log("Logged in User:", loggedInUser, establishments);
-      if(loggedInUser.role == 'User')
-        res.redirect(`/feed`);
-
-        //res.render('feed', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
-      else 
-        if(loggedInUser.role == 'Admin')
-          res.redirect(`/feed-admin`);
-
-          //res.render('feed-admin', {username : loggedInUser.username, avatar: loggedInUser.avatar, establishments});
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Internal Server Error');
-    }
   });
   
   app.post('/banuser', async (req, res) => {          //log in function
