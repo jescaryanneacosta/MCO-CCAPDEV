@@ -65,6 +65,7 @@ body{
     padding: 18px 15px;
     font-family: "Gabarito", sans-serif;
     letter-spacing: 1px;
+    
 }
 .log-btn{
     width: 100%;
@@ -586,13 +587,14 @@ body{
 }
 
 .input-name input {
-    width: 75%;
+    width: 100%;
     background-color: #eaeaea;
     outline: 0;
     border: 0;
     padding: 18px 15px;
     font-family: "Gabarito", sans-serif;
     letter-spacing: 1px;
+    border-radius: 10px;
 }
 
 .input-address p {
@@ -1111,6 +1113,9 @@ body{
     margin-left: 60px;
     margin-right: 60px;
     justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+
 }
 
 .admin-container .admin-submit button {
@@ -1119,16 +1124,19 @@ body{
     font-family: "Young Serif", serif;
     font-size: 15px;
     color: var(--ttwhite);
-    border-radius: 30px;
+    border-radius: 50%;
     margin-top: 30px;
     padding-left: 20px;
     padding-right: 20px;
     border: 0;
     outline: 0;
     cursor: pointer;
+    transition: background-color 0.3s;
+
 }
 
 .admin-container .admin-submit button:hover {
+    border-radius: 50%;
     background-color: #193a27;
 }
 
@@ -1150,8 +1158,8 @@ label[for="restaurant-cuisine"] {
 
 .admin-functions2 {
     background-color: var(--ttgreen);
-    width: 1000px;
-    height: 1000px;
+    width: 400px;
+    height: 800px;
     margin-left: 320px;
     margin-top: 50px;
     border-radius: 20px;
@@ -1159,7 +1167,6 @@ label[for="restaurant-cuisine"] {
     align-items: center;
     flex-direction: column;
 }
-
 .admin-functions2 p{
     color: var(--ttwhite);
     font-family: "Gabarito", sans-serif;
@@ -1176,6 +1183,46 @@ label[for="restaurant-cuisine"] {
 }
 
 .admin-functions2 button {
+    flex-basis: 45%;
+    height: 50px;
+    background: var(--ttwhite);
+    font-family: "Young Serif", serif;
+    font-size: 18px;
+    color: var(--ttgreen);
+    border-radius: 30px;
+    margin: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+.admin-functions3 {
+    background-color: var(--ttgreen);
+    width: 400px;
+    height: 900px;
+    margin-left: 320px;
+    margin-top: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.admin-functions3 p{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
+
+.admin-functions3 h3{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
+
+.admin-functions3 label{
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+}
+
+.admin-functions3 button {
     flex-basis: 45%;
     height: 50px;
     background: var(--ttwhite);
@@ -1236,38 +1283,38 @@ label[for="restaurant-cuisine"] {
 
 .admin-functions-second {
     background-color: var(--ttgreen);
-    height: 400px;
+    height: 210px;
     margin-left: 100px;
     margin-top: 50px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 20%; 
+    width: 19%; 
 }
 
 .admin-functions-third {
     background-color: var(--ttgreen);
     height: 400px;
-    margin-left: 100px;
+    margin-right: 35px;
     margin-top: 50px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 20%; 
+    width: 70%; 
 }
 
 .admin-functions-fourth {
     background-color: var(--ttgreen);
-    height: 400px;
+    height: 210px;
     margin-left: 100px;
     margin-top: 50px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 20%; 
+    width: 15%; 
 }
 
 .error-message {
