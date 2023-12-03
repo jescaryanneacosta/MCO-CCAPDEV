@@ -341,11 +341,26 @@ let loggedInUser = null;
     }
   });
 
-  app.post('/addestablishment', upload.single('avatar'), async (req,res) => {
+  app.post('/addestablishment', upload.fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'gallery1', maxCount: 1 },
+    { name: 'gallery2', maxCount: 1 },
+    { name: 'gallery3', maxCount: 1 },
+    { name: 'gallery4', maxCount: 1 },
+    { name: 'gallery5', maxCount: 1 },
+    { name: 'gallery6', maxCount: 1 }
+]), async (req,res) => {
 
-    const {name, location, cuisine, popularitems, category, description} = req.body;
+    const {name, location, cuisine, popularitems, category, description,gallery1,gallery2,gallery3,gallery4,gallery5,gallery6} = req.body;
 
-    const avatar = 'images/' + req.file.filename;
+    const avatar = 'images/' + req.files['avatar'][0].filename;
+    const agallery1 = 'establishment/images/' + req.files['gallery1'][0].filename;
+    const agallery2 = 'establishment/images/' + req.files['gallery2'][0].filename;
+    const agallery3 = 'establishment/images/' + req.files['gallery3'][0].filename;
+    const agallery4 = 'establishment/images/' + req.files['gallery4'][0].filename;
+    const agallery5 = 'establishment/images/' + req.files['gallery5'][0].filename;
+    const agallery6 = 'establishment/images/' + req.files['gallery6'][0].filename;
+
 
     try {
 
@@ -358,7 +373,7 @@ let loggedInUser = null;
         name: name,
         popularitems: popularitems,
         avatar: avatar,
-        images: [],
+        images: [agallery1, agallery2, agallery3, agallery4, agallery5, agallery6],
         category: category,
         cuisine: cuisine,
         description: description,
@@ -379,17 +394,30 @@ let loggedInUser = null;
   }
   });
 
-  app.post('/updateestablishment', upload.single('avatar'), async (req,res) => {
+  app.post('/updateestablishment', upload.fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'gallery1', maxCount: 1 },
+    { name: 'gallery2', maxCount: 1 },
+    { name: 'gallery3', maxCount: 1 },
+    { name: 'gallery4', maxCount: 1 },
+    { name: 'gallery5', maxCount: 1 },
+    { name: 'gallery6', maxCount: 1 }
+]), async (req,res) => {
 
-    const {old_name, new_name,  location, cuisine, popularitems, category, description} = req.body;
-
-    const avatar = 'images/' + req.file.filename;
+    const {name, location, cuisine, popularitems, category, description,gallery1,gallery2,gallery3,gallery4,gallery5,gallery6} = req.body;
+    const avatar = 'images/' + req.files['avatar'][0].filename;
+    const agallery1 = 'establishment/images/' + req.files['gallery1'][0].filename;
+    const agallery2 = 'establishment/images/' + req.files['gallery2'][0].filename;
+    const agallery3 = 'establishment/images/' + req.files['gallery3'][0].filename;
+    const agallery4 = 'establishment/images/' + req.files['gallery4'][0].filename;
+    const agallery5 = 'establishment/images/' + req.files['gallery5'][0].filename;
+    const agallery6 = 'establishment/images/' + req.files['gallery6'][0].filename;
 
     try {    
           const existingResto = await Establishment.updateOne({name : old_name}, {$set : {name: new_name,
           popularitems: popularitems,
           avatar: avatar,
-          images: [],
+          images: [agallery1, agallery2, agallery3, agallery4, agallery5, agallery6],
           category: category,
           cuisine: cuisine,
           description: description,
