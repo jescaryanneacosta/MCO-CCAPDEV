@@ -29,6 +29,11 @@
                 <input type="submit" value = "Sign-In">  <!--made also the button a submit type so it could work, i didnt do it to the other one since its just a change of page-->         
             </div>
         </form>
+        <% if (typeof error !== 'undefined') { %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+        <% } %>
         <div class="log-btn">
             <button type="button" class="disable-btn" onclick="signuppage()">Sign-up</button>
         </div>
