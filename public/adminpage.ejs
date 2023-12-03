@@ -64,14 +64,7 @@
                             <form action = "/banuser" method="POST">
                                 <div class="input-name"> 
                                     <label for="user-id">User ID:</label>
-                                    <input list="users" name = "user" placeholder="Choose user">
-                                        <datalist id="users">
-                                                <% users.forEach(function(user) { %>
-                                                    <% if (user.role == 'User') {%>
-                                                    <option value = "<%=user.username%>"></option>
-                                                    <% } %>
-                                                <% }); %>
-                                        </datalist>
+                                    <input type="text" id="username" name="user" required placeholder="Input username">
                                 <div class="admin-submit">
                                     <input type="submit" value="Ban User">
                                 </div>
@@ -85,12 +78,7 @@
                             <form id="add-restaurant-form" action = '/deleteestablishment' method="POST">
                                 <div class="input-name">
                                     <label for="name">Restaurants:</label>
-                                    <input list="restaurants" name = "name" placeholder="Choose Res">
-                                        <datalist id="restaurants">
-                                                <% establishments.forEach(function(establishment) { %>                                
-                                                    <option value = "<%=establishment.name%>"></option>
-                                                <% }); %>
-                                        </datalist>
+                                        <input type="text" id="restaurant-name" name="name" required placeholder="Input Restaurant Name">
                                         <div class="admin-submit"> 
                                             <input type="submit" value="Delete Restaurant">
                                         </div>

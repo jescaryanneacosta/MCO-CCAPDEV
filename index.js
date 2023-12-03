@@ -195,7 +195,7 @@ let loggedInUser = null;
       if (!userToDelete) {
         return res.send('User does not exist');
       }
-      if (userToDelete) {
+      if (userToDelete && userToDelete.role == 'User') {
         await User.deleteOne({ _id: userToDelete._id });
       }
 
@@ -314,9 +314,11 @@ let loggedInUser = null;
         const reviews = await Review.find({ username: loggedInUser.username });
         console.log(loggedInUser)
         if (loggedInUser.role == 'User'){
-          res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar, reviews});
+          //res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar, reviews});
+          res.redirect('/useraccount');
         } else if (loggedInUser.role == 'Admin') {
-          res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+          //res.render('adminpage', {username: loggedInUser.username, avatar: loggedInUser.avatar});
+          res.redirect(`/adminpage`);
         }
     } catch (error) {
         console.error(error);
@@ -354,7 +356,8 @@ let loggedInUser = null;
       const users = await User.find();
       const establishments = await Establishment.find();
 
-      res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
+      //res.render('adminpage',{avatar: loggedInUser.avatar, users, establishments});
+      res.redirect('/adminpage');
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
