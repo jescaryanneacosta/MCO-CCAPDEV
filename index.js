@@ -4,22 +4,37 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const multer = require('multer'); 
+require('dotenv').config();
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 //This file has all the functions corresponding to the mongodb and the html files, check the HTML and css for the changes
 
 const app = express();
-const port = 3000;
-const url = "mongodb://localhost:27017/persons";
+const port = process.env.PORT;
+const uri = process.env.MONGODB_URI;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
-mongoose.connect(url, {})
-    .then(result => console.log("database connected"))
-    .catch(err => console.log(err))
-
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+async function run() {
+  try {
+    await client.connect();
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
 const User = require('./mongo model/user.model')    
 const Establishment = require("./mongo model/resto.model")
@@ -58,10 +73,7 @@ const storage = multer.diskStorage({
   },
 });
 
-
-
 const upload = multer({ storage: storage });
-
 
 //ROUTINGS
 
@@ -318,7 +330,6 @@ let loggedInUser = null;
 
   app.post('/changeProfilePic', upload.single('profilePic'), async (req, res) => {
 
-    console.log('Uploaded File:', req.file);
 
     const avatar = 'images/' + req.file.filename;
     try {
@@ -506,7 +517,7 @@ app.post('/establishments/:id', async (req, res) => {
     }
   });
 
-mongoose.connect(url)
+mongoose.connect(uri)
 app.listen(port, () =>
 {console.log("server is running at port" + port)}
 )
