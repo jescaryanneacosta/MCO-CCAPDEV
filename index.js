@@ -2,8 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
+const { v4: uuidv4 } = require('uuid');
 const ejs = require('ejs');
 const multer = require('multer'); 
+const { Readable } = require('stream');
+const stream = require('stream'); 
 require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
@@ -64,14 +67,19 @@ const createAdminUser = async () => {          //     <------ Follow this style
 
 createAdminUser();
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/images/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  },
+
+const admin = require('firebase-admin');
+const serviceAccount = require('./taste-test-407107-firebase-adminsdk-plfuc-339705daef.json');
+const { Storage } = require('@google-cloud/storage');
+
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: 'gs://taste-test-407107.appspot.com', // Replace with your project's storage bucket URL
 });
+
+const bucket = admin.storage().bucket();
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage: storage });
 
@@ -96,7 +104,7 @@ app.get('/adminpage', async (req, res) => {                                    /
   try {
     const establishments = await Establishment.find();
     const users = await User.find();
-    res.render('adminpage', { establishments, users, username:loggedInUser.username,avatar:loggedInUser.avatar});
+    res.render('adminpage', { establishments, users, avatar:loggedInUser.avatar});
   } catch (error) {
     console.error('Error getting establishments:', error);
     res.status(500).send('Internal Server Error');
@@ -331,13 +339,26 @@ let loggedInUser = null;
   app.post('/changeProfilePic', upload.single('profilePic'), async (req, res) => {
 
 
-    const avatar = 'images/' + req.file.filename;
+    const avatar = req.file;
+    console.log('req.file:', req.file);
     try {
-        loggedInUser.avatar = avatar;
+
+      const remoteFilePath = `userAvatars/${loggedInUser._id}/${avatar.uniqueFileName}`;
+      console.log('remoteFilePath:', remoteFilePath);
+      await bucket.upload(avatar.path, { destination: remoteFilePath });
+
+        loggedInUser.avatar = `https://storage.googleapis.com/taste-test-407107.appspot.com/${remoteFilePath}`;
         await loggedInUser.save();
 
 
         const reviews = await Review.find({ username: loggedInUser.username });
+
+
+        reviews.forEach(function(review) {
+          review.userAvatar = loggedInUser.avatar;
+          review.save();
+        });
+        
         console.log(loggedInUser)
         if (loggedInUser.role == 'User'){
           //res.render('useraccount', {username: loggedInUser.username, avatar: loggedInUser.avatar, reviews});
@@ -364,14 +385,6 @@ let loggedInUser = null;
 
     const {name, location, cuisine, popularitems, category, description,gallery1,gallery2,gallery3,gallery4,gallery5,gallery6} = req.body;
 
-    const avatar = 'images/' + req.files['avatar'][0].filename;
-    const agallery1 = 'establishment/images/' + req.files['gallery1'][0].filename;
-    const agallery2 = 'establishment/images/' + req.files['gallery2'][0].filename;
-    const agallery3 = 'establishment/images/' + req.files['gallery3'][0].filename;
-    const agallery4 = 'establishment/images/' + req.files['gallery4'][0].filename;
-    const agallery5 = 'establishment/images/' + req.files['gallery5'][0].filename;
-    const agallery6 = 'establishment/images/' + req.files['gallery6'][0].filename;
-
 
     try {
 
@@ -380,11 +393,53 @@ let loggedInUser = null;
         return res.send('Establishment already exists');
       }
 
+      
+    const uploadImageToFirebase = async (file, remotePath) => {
+      const bucket = admin.storage().bucket();
+      const uniqueFileName = `${uuidv4()}`;
+      const fileBuffer = file.buffer;
+
+      try {
+        const fileStream = new Readable();
+        fileStream.push(fileBuffer);
+        fileStream.push(null);
+
+        const fileUpload = bucket.file(`${remotePath}/${uniqueFileName}`);
+        await fileStream.pipe(fileUpload.createWriteStream({
+          metadata: {
+            contentType: file.mimetype,
+          },
+        }));
+
+        const imageUrl = `https://storage.googleapis.com/${bucket.name}/${remotePath}/${uniqueFileName}`;
+        return imageUrl;
+      } catch (error) {
+        console.error('Error uploading to Firebase Storage:', error);
+        throw error;
+      }
+    };
+      
+    
+    const uploadPromises = [];
+
+    uploadPromises.push(uploadImageToFirebase(req.files['avatar'][0], 'establishment/images'));
+
+    for (let i = 1; i <= 6; i++) {
+        uploadPromises.push(uploadImageToFirebase(req.files[`gallery${i}`][0], 'establishment/images'));
+    }
+
+    const urls = await Promise.all(uploadPromises);
+
+    const avatarUrl = urls[0];
+    const galleryUrls = urls.slice(1);
+
+
+
       const newResto = new Establishment ({
         name: name,
         popularitems: popularitems,
-        avatar: avatar,
-        images: [agallery1, agallery2, agallery3, agallery4, agallery5, agallery6],
+        avatar: avatarUrl,
+        images: galleryUrls,
         category: category,
         cuisine: cuisine,
         description: description,
@@ -414,25 +469,56 @@ let loggedInUser = null;
     { name: 'gallery5', maxCount: 1 },
     { name: 'gallery6', maxCount: 1 }
 ]), async (req,res) => {
-
-    const {name, location, cuisine, popularitems, category, description,gallery1,gallery2,gallery3,gallery4,gallery5,gallery6} = req.body;
-    const avatar = 'images/' + req.files['avatar'][0].filename;
-    const agallery1 = 'establishment/images/' + req.files['gallery1'][0].filename;
-    const agallery2 = 'establishment/images/' + req.files['gallery2'][0].filename;
-    const agallery3 = 'establishment/images/' + req.files['gallery3'][0].filename;
-    const agallery4 = 'establishment/images/' + req.files['gallery4'][0].filename;
-    const agallery5 = 'establishment/images/' + req.files['gallery5'][0].filename;
-    const agallery6 = 'establishment/images/' + req.files['gallery6'][0].filename;
-
+    const {old_name, new_name,  location, cuisine, popularitems, category, description,gallery1,gallery2,gallery3,gallery4,gallery5,gallery6} = req.body;
     try {    
+
+        const uploadImageToFirebase = async (file, remotePath) => {
+          const bucket = admin.storage().bucket();
+          const uniqueFileName = `${uuidv4()}`;
+          const fileBuffer = file.buffer;
+    
+          try {
+            const fileStream = new Readable();
+            fileStream.push(fileBuffer);
+            fileStream.push(null);
+    
+            const fileUpload = bucket.file(`${remotePath}/${uniqueFileName}`);
+            await fileStream.pipe(fileUpload.createWriteStream({
+              metadata: {
+                contentType: file.mimetype,
+              },
+            }));
+    
+            const imageUrl = `https://storage.googleapis.com/${bucket.name}/${remotePath}/${uniqueFileName}`;
+            return imageUrl;
+          } catch (error) {
+            console.error('Error uploading to Firebase Storage:', error);
+            throw error;
+          }
+        };
+
+        const uploadPromises = [];
+
+        uploadPromises.push(uploadImageToFirebase(req.files['avatar'][0], 'establishment/images'));
+    
+        for (let i = 1; i <= 6; i++) {
+            uploadPromises.push(uploadImageToFirebase(req.files[`gallery${i}`][0], 'establishment/images'));
+        }
+    
+        const urls = await Promise.all(uploadPromises);
+    
+        const avatarUrl = urls[0];
+        const galleryUrls = urls.slice(1);
+        
+
           const existingResto = await Establishment.updateOne({name : old_name}, {$set : {name: new_name,
-          popularitems: popularitems,
-          avatar: avatar,
-          images: [agallery1, agallery2, agallery3, agallery4, agallery5, agallery6],
-          category: category,
-          cuisine: cuisine,
-          description: description,
-          location: location}});
+            popularitems: popularitems,
+            avatar: avatarUrl,
+            images: galleryUrls,
+            category: category,
+            cuisine: cuisine,
+            description: description,
+            location: location}});
 
         if (!existingResto) {
           const users = await User.find();
