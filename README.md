@@ -23,5 +23,27 @@ a review it must contain a title and a body along with a metric system using 5
 stars that are in the design of the DLSU star.</li>
 <h1>Running through node js<h1>
 <p>To run the website, open your command prompt firstly. Change the path to the main folder. After that run server file by inputting "node index.js". Make sure to install all the needed dependencies such as express, npm, and mongoose . This is found in the package.json file. The file should say that it has connected to the port and database with and admin user made. Then dont forget to install the premade json files with the starting restaurants called persons.establishment.json and upload it in the mongodb database. After that open the link "http://localhost:3000" to get started on the signin page<p>
+<p>Dependecies List:<p>
+<p>
+                "@google-cloud/storage": "^7.7.0",
+                "assert": "^2.1.0",
+                "body-parser": "^1.20.2",
+                "chai": "^4.3.10",
+                "cloudinary": "^1.41.0",
+                "dotenv": "^16.3.1",
+                "ejs": "^3.1.9",
+                "express": "^4.18.2",
+                "express-fileupload": "^1.4.2",
+                "express-session": "^1.17.3",
+                "firebase-admin": "^11.11.1",
+                "firebase-functions": "^4.5.0",
+                "mongo": "^0.1.0",
+                "mongodb": "^6.2.0",
+                "mongodb-memory-server": "^9.0.1",
+                "mongoose": "^8.0.0",
+                "multer": "^1.4.5-lts.1",
+                "path": "^0.12.7",
+                "uuid": "^9.0.1"
+<p>
 </ul>
 
