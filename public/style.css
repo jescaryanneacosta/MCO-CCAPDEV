@@ -257,17 +257,41 @@ body{
 }
 
 #close-edit-username {
+    margin-top: 5%;
     color: var(--ttgreen);
     font-family: "Gabarito", sans-serif;
     letter-spacing: 1px;
     cursor: pointer;
+    border-radius: 40px;
+}
+#close-edit-username:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adding a subtle shadow effect on hover */
 }
 
-#close-change-profilepic {
+#close-change-profilepic1 {
+    margin-top: 5%;
+    color: var(--ttwhite);
+    font-family: "Gabarito", sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 30px;
+    
+}
+#close-change-profilepic2:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adding a subtle shadow effect on hover */
+}
+#close-change-profilepic1:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adding a subtle shadow effect on hover */
+}
+
+#close-change-profilepic2 {
+    margin-top: 5%;
     color: var(--ttgreen);
     font-family: "Gabarito", sans-serif;
     letter-spacing: 1px;
     cursor: pointer;
+    border-radius: 30px;
+    
 }
 
 .admin-profile{
